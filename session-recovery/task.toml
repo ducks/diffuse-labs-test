@@ -1,0 +1,25 @@
+schema_version = "1.4"
+
+[task]
+name = "diffuse-labs-test/session-recovery"
+description = "Recover interrupted agent sessions without repeating committed tool effects."
+authors = [{ name = "Jake Goldsborough" }]
+
+[metadata]
+author_name = "Jake Goldsborough"
+difficulty = "hard"
+category = "software-engineering"
+tags = ["agents", "persistence", "recovery", "python"]
+
+[verifier]
+timeout_sec = 120.0
+environment_mode = "shared"
+
+[agent]
+timeout_sec = 1800.0
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 2
+memory_mb = 2048
+storage_mb = 4096

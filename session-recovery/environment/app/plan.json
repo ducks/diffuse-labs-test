@@ -1,0 +1,4 @@
+[
+  {"name": "deploy", "arguments": {"service": "api", "version": "v2"}},
+  {"name": "notify", "arguments": {"channel": "releases", "message": "api v2 deployed"}}
+]
