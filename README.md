@@ -1,18 +1,20 @@
 # Diffuse Labs take-home
 
 Five tasks are requested for the assignment. This repository currently contains
-**one implemented task**, starting with interrupted agent-session recovery.
+**two implemented tasks**: interrupted agent-session recovery and streaming inference failover.
 No claim is made yet that the full assignment is complete.
 
 | Task | Capability assessed | Failure modes | Success checks | Quality controls |
 | --- | --- | --- | --- | --- |
 | `session-recovery` | Recover durable agent state across process crashes and external effects | Duplicate actions; lost tool-call IDs/history; unpaired results; cross-session key reuse; repeated completion messages | Independent SQLite receipts, exact transcript pairing, nine deterministic crash cases, repeated crashes, completed-session replay, corrupt state, session identity, empty plans | Canonical solution and alternative idempotent-replay solution must pass; original code and two shortcuts must fail |
+| `streaming-gateway` | Safe provider failover and async resource ownership | Mixed-provider output, hidden partial failures, capacity leaks, buffering, oversubscription | 16 tests covering stream boundaries, cancellation, concurrent requests, payload/byte integrity, and real localhost HTTP | Canonical and priming-based solutions pass; original code plus four incorrect fixes fail |
 
 ## Local development
 
 ```sh
 nix-shell
 python scripts/validate.py
+python scripts/validate_gateway.py
 ```
 
 Or run `nix-shell --run 'python scripts/validate.py'`.
@@ -60,6 +62,10 @@ uv sync --frozen
 
 # Run real Harbor oracle and untouched-baseline trials and check their rewards.
 python scripts/validate_harbor.py
+
+# Streaming gateway: container controls and Harbor trials.
+python scripts/validate_gateway.py --container
+python scripts/validate_harbor.py --task streaming-gateway
 ```
 
 Harbor 0.25.0 and its dependency graph are pinned by `pyproject.toml` and
@@ -71,8 +77,8 @@ it does not change your global Docker settings.
 The package uses Harbor's `task.toml`, Docker environment, `/tests/test.sh`,
 `/solution/solve.sh`, and `/logs/verifier/reward.txt` conventions. Full Harbor
 trials are verified: oracle reward **1.0**, nop reward **0.0**, no trial errors.
-All five controls also produce their expected rewards through the container
-verifier entry point. See `session-recovery/QUALITY.md` for the scope of checks.
+All controls for both tasks produce their expected rewards through the container
+verifier entry points. Each task’s `QUALITY.md` records the scope.
 
 Harbor can exit zero even when a trial has an infrastructure error. The
 validation script checks completion, error counts, and rewards in the actual
@@ -103,3 +109,17 @@ The focus is recovery reasoning rather than implementing a storage engine.
 The short fixture is a starting difficulty calibration. Before submission,
 pilot with actual agent attempts and report observed failure modes and solve
 rates. Do not equate negative-control failures with proof the task is hard.
+
+## Streaming gateway design
+
+The second task is the async streaming core behind an inference HTTP gateway.
+It uses a public transport interface with scripted deterministic faults and a
+working localhost HTTP adapter. Byte delivery is the commit point: fallback is
+safe before the first non-empty chunk, but would corrupt the response afterward.
+Admission and cleanup are tested across overlapping requests on one event loop.
+
+The two valid control implementations use different strategies: track a commit
+flag while relaying, or prime the stream before leaving the retryable section.
+The latter confirms that grading does not depend on the reference code structure.
+The HTTP adapter is deliberately narrow (HTTP/1.0, no TLS or chunked transfer);
+this task tests the gateway core, not general HTTP compliance or a real model.

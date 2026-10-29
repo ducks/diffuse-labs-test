@@ -1,16 +1,21 @@
 """Run real Harbor oracle/nop trials and reject infrastructure failures."""
 from datetime import datetime, timezone
+import argparse
 import json
 from pathlib import Path
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
+parser = argparse.ArgumentParser()
+parser.add_argument("--task", choices=["session-recovery", "streaming-gateway"],
+                    default="session-recovery")
+args = parser.parse_args()
 stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%f")
 results = []
 for agent, expected in (("oracle", 1.0), ("nop", 0.0)):
-    name = f"session-recovery-{agent}-{stamp}"
+    name = f"{args.task}-{agent}-{stamp}"
     subprocess.run([
-        "uv", "run", "--frozen", "harbor", "run", "--path", "session-recovery",
+        "uv", "run", "--frozen", "harbor", "run", "--path", args.task,
         "--agent", agent, "--env", "docker", "--job-name", name,
         "--jobs-dir", "logs/harbor",
     ], cwd=ROOT, check=True)
@@ -26,4 +31,8 @@ for agent, expected in (("oracle", 1.0), ("nop", 0.0)):
     results.append({"agent": agent, "reward": expected, "errors": 0,
                     "result": str(path.relative_to(ROOT))})
     print(f"{agent}: expected reward {expected}, no infrastructure errors", flush=True)
-(ROOT / "logs/validation-harbor.json").write_text(json.dumps(results, indent=2) + "\n")
+filename = ("validation-harbor.json" if args.task == "session-recovery"
+            else f"{args.task}/validation-harbor.json")
+target = ROOT / "logs" / filename
+target.parent.mkdir(parents=True, exist_ok=True)
+target.write_text(json.dumps(results, indent=2) + "\n")
