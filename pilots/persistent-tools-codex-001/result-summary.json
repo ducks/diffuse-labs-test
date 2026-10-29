@@ -1,0 +1,35 @@
+{
+  "task": "persistent-tools",
+  "task_commit": "17a17009f10282542abd6035e319341be4623d24",
+  "task_checksum": "6710b4c56391be011f7706f456b2fa4f9f0aa3f62b31d29f9bd90f292b46793f",
+  "agent": "codex",
+  "agent_version": "0.164.0",
+  "model": "openai/gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "execution_limit_seconds": 600,
+  "web_search": false,
+  "attempts": 1,
+  "reward": 1.0,
+  "exception_type": null,
+  "agent_execution": {
+    "started_at": "2026-10-29T23:54:25.634700Z",
+    "finished_at": "2026-10-29T23:55:21.225638Z"
+  },
+  "agent_usage": {
+    "n_input_tokens": 73448,
+    "n_cache_tokens": 68480,
+    "n_output_tokens": 2770,
+    "cost_usd": 0.044484,
+    "model_usage": {
+      "openai/gpt-6.1-sol": {
+        "n_input_tokens": 73448,
+        "n_cache_tokens": 68480,
+        "n_output_tokens": 2770,
+        "cost_usd": 0.044484
+      }
+    },
+    "rollout_details": null,
+    "metadata": null
+  },
+  "source_result": "logs/pilots/persistent-tools-codex-pilot-001/persistent-tools__nTmGeFr/result.json"
+}

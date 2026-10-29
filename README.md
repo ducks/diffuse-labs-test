@@ -148,3 +148,7 @@ a tool passing a few examples is universally correct. Candidate execution is
 not a sandbox for hostile Python. See `persistent-tools/instruction.md`,
 `persistent-tools/DESIGN.md`, and `persistent-tools/QUALITY.md` for the contract,
 limits, and validation evidence.
+
+The first model-backed pilot passed `persistent-tools` in about 56 seconds.
+See `pilots/persistent-tools-codex-001/README.md`; this task is functionally
+validated, but its original hard-difficulty estimate is not established.

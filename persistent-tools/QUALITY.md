@@ -82,3 +82,12 @@ and failure modes. Two more tasks are still needed for the five-task assignment.
 Detailed control logs and result summaries are gitignored under
 `logs/persistent-tools/`; Harbor trials are under `logs/harbor/`. Nothing is
 uploaded by these scripts.
+
+## First model pilot
+
+A first independent Codex / `gpt-6.1-sol` attempt at low reasoning effort passed
+all 17 tests in **55.59 seconds** of agent execution, with no infrastructure
+errors. This result does not support treating the task as calibrated hard.
+The `hard` metadata remains the original, unvalidated design estimate.
+See `../pilots/persistent-tools-codex-001/README.md` for setup, submitted source,
+usage, and interpretation. A single success is not a reliable solve-rate estimate.
