@@ -159,3 +159,8 @@ The first independent `dataset-containment` Codex pilot also passed, in about
 84 seconds at low reasoning effort. See
 `pilots/dataset-containment-codex-001/README.md`. This port has not established
 hard difficulty; its results are separate from the original NixOS scenario.
+
+A subsequent six-attempt round passed **2/2 on each selected task**, with
+40–80 seconds of agent execution per attempt and no infrastructure errors.
+See `pilots/round-001/README.md` for settings, submitted patches, and limitations.
+These results do not support hard difficulty for this model/configuration.

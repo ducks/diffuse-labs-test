@@ -1,0 +1,21 @@
+test_all_busy_does_not_send_requests (__main__.GatewayTests.test_all_busy_does_not_send_requests) ... ok
+test_all_providers_fail_then_next_request_can_succeed (__main__.GatewayTests.test_all_providers_fail_then_next_request_can_succeed) ... ok
+test_cancellation_while_opening_releases_capacity (__main__.GatewayTests.test_cancellation_while_opening_releases_capacity) ... ok
+test_cancellation_while_reading_closes_response (__main__.GatewayTests.test_cancellation_while_reading_closes_response) ... ok
+test_clean_empty_response_is_success (__main__.GatewayTests.test_clean_empty_response_is_success) ... ok
+test_constructor_validation (__main__.GatewayTests.test_constructor_validation) ... ok
+test_early_generator_close_releases_only_its_own_slot (__main__.GatewayTests.test_early_generator_close_releases_only_its_own_slot) ... ok
+test_failure_before_body_falls_back (__main__.GatewayTests.test_failure_before_body_falls_back) ... ok
+test_first_chunk_does_not_wait_for_completion (__main__.GatewayTests.test_first_chunk_does_not_wait_for_completion) ... ok
+test_non_default_backend_names (__main__.GatewayTests.test_non_default_backend_names) ... ok
+test_open_failure_falls_back (__main__.GatewayTests.test_open_failure_falls_back) ... ok
+test_open_reservation_prevents_oversubscription (__main__.GatewayTests.test_open_reservation_prevents_oversubscription) ... ok
+test_partial_stream_error_is_visible_and_never_retried (__main__.GatewayTests.test_partial_stream_error_is_visible_and_never_retried) ... ok
+test_preserves_fragmented_sse_and_payload (__main__.GatewayTests.test_preserves_fragmented_sse_and_payload) ... ok
+test_programming_error_is_not_retried (__main__.GatewayTests.test_programming_error_is_not_retried) ... ok
+test_real_http_fallback_streams_before_server_finishes (__main__.GatewayTests.test_real_http_fallback_streams_before_server_finishes) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.043s
+
+OK

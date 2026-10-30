@@ -1,0 +1,19 @@
+test_containment_live_recovery_and_service_restarts (__main__.ContainmentTests.test_containment_live_recovery_and_service_restarts) ... /usr/local/lib/python3.12/subprocess.py:1127: ResourceWarning: subprocess 9886 is still running
+  _warn("subprocess %s is still running" % self.pid,
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.12/subprocess.py:1127: ResourceWarning: subprocess 10153 is still running
+  _warn("subprocess %s is still running" % self.pid,
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.12/subprocess.py:1127: ResourceWarning: subprocess 10335 is still running
+  _warn("subprocess %s is still running" % self.pid,
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_lost_acknowledgement_and_same_job_replay (__main__.ContainmentTests.test_lost_acknowledgement_and_same_job_replay) ... /usr/local/lib/python3.12/subprocess.py:1127: ResourceWarning: subprocess 10587 is still running
+  _warn("subprocess %s is still running" % self.pid,
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 29.225s
+
+OK

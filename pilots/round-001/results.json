@@ -1,0 +1,194 @@
+{
+  "plan": {
+    "commit": "eabc130a4cc9f5081f4b82a5ec982590ce1f7bf8",
+    "tasks": [
+      "session-recovery",
+      "streaming-gateway",
+      "dataset-containment"
+    ],
+    "attempts_per_task": 2,
+    "agent": "codex",
+    "agent_version": "0.164.0",
+    "model": "openai/gpt-6.1-sol",
+    "reasoning_effort": "low",
+    "execution_limit_seconds": 600,
+    "concurrency": 2,
+    "automatic_retries": 0,
+    "web_search": false,
+    "job": "selected-tasks-codex-round-001"
+  },
+  "trials": [
+    {
+      "task": "dataset-containment",
+      "trial": "dataset-containment__ocGGBV3",
+      "task_checksum": "d8e3d424a7e0ea6ca9ecbf67957a9ac0fea3b9c234e91f1daf99b3f95e17ae21",
+      "source_commit": "eabc130a4cc9f5081f4b82a5ec982590ce1f7bf8",
+      "outcome": "pass",
+      "reward": 1.0,
+      "exception_type": null,
+      "meaningful_inference_observed": true,
+      "agent_execution_seconds": 80.191234,
+      "agent_execution": {
+        "started_at": "2026-10-30T00:58:51.543205Z",
+        "finished_at": "2026-10-30T01:00:11.734439Z"
+      },
+      "usage": {
+        "n_input_tokens": 119513,
+        "n_cache_tokens": 95744,
+        "n_output_tokens": 3650,
+        "cost_usd": 0.0936124
+      },
+      "source_result": "logs/pilots/selected-tasks-codex-round-001/dataset-containment__ocGGBV3/result.json",
+      "source_result_sha256": "1dbd52a94a1b17d76cc4d5b2fc7d5e921728be0cea8c05780f588f657792f8ca",
+      "submission_sha256": {
+        "repair.py": "8298aa06ff7cf88e10c863f5cdd24f5529249c8643eeef91fc8665c2f02709b8",
+        "service.py": "ba287edf911380dc17272112ae4c0f4e82629485568ca8cb82ff6d40f235e2ce"
+      },
+      "observable_tool_calls": 5
+    },
+    {
+      "task": "dataset-containment",
+      "trial": "dataset-containment__uD5S5wg",
+      "task_checksum": "d8e3d424a7e0ea6ca9ecbf67957a9ac0fea3b9c234e91f1daf99b3f95e17ae21",
+      "source_commit": "eabc130a4cc9f5081f4b82a5ec982590ce1f7bf8",
+      "outcome": "pass",
+      "reward": 1.0,
+      "exception_type": null,
+      "meaningful_inference_observed": true,
+      "agent_execution_seconds": 42.027203,
+      "agent_execution": {
+        "started_at": "2026-10-30T01:04:05.242502Z",
+        "finished_at": "2026-10-30T01:04:47.269705Z"
+      },
+      "usage": {
+        "n_input_tokens": 87705,
+        "n_cache_tokens": 75904,
+        "n_output_tokens": 2639,
+        "cost_usd": 0.05758239999999999
+      },
+      "source_result": "logs/pilots/selected-tasks-codex-round-001/dataset-containment__uD5S5wg/result.json",
+      "source_result_sha256": "63e07bc7f224da19730226deee4e149c8a5cddfd9a750a598bb7f4889f349630",
+      "submission_sha256": {
+        "repair.py": "33182d6d4342d584c510d3f0ae5448ebc39a4024b12d50c78aee19ab25145980",
+        "service.py": "afe0acb783aba6a5dd250b8dd9eebe132b3bc6c24a54c6b115d0532702904e53"
+      },
+      "observable_tool_calls": 4
+    },
+    {
+      "task": "session-recovery",
+      "trial": "session-recovery__UX6kZ9F",
+      "task_checksum": "628bcaae1ec4b1738c388c4d5f3317f65b295e2f55d94545aa8e9f078326d2e4",
+      "source_commit": "eabc130a4cc9f5081f4b82a5ec982590ce1f7bf8",
+      "outcome": "pass",
+      "reward": 1.0,
+      "exception_type": null,
+      "meaningful_inference_observed": true,
+      "agent_execution_seconds": 43.022202,
+      "agent_execution": {
+        "started_at": "2026-10-30T00:55:30.733876Z",
+        "finished_at": "2026-10-30T00:56:13.756078Z"
+      },
+      "usage": {
+        "n_input_tokens": 55359,
+        "n_cache_tokens": 48768,
+        "n_output_tokens": 1689,
+        "cost_usd": 0.0349488
+      },
+      "source_result": "logs/pilots/selected-tasks-codex-round-001/session-recovery__UX6kZ9F/result.json",
+      "source_result_sha256": "18b42671c4b4a333aa30eae657855cd783bfb760ba0652e71b68a8de3e921aa1",
+      "submission_sha256": {
+        "runner.py": "350685061c36052e8e8ca35df33a341b919f93d18e1a7da9f54b203fe585addf"
+      },
+      "observable_tool_calls": 3
+    },
+    {
+      "task": "session-recovery",
+      "trial": "session-recovery__wYqYu9Q",
+      "task_checksum": "628bcaae1ec4b1738c388c4d5f3317f65b295e2f55d94545aa8e9f078326d2e4",
+      "source_commit": "eabc130a4cc9f5081f4b82a5ec982590ce1f7bf8",
+      "outcome": "pass",
+      "reward": 1.0,
+      "exception_type": null,
+      "meaningful_inference_observed": true,
+      "agent_execution_seconds": 41.438093,
+      "agent_execution": {
+        "started_at": "2026-10-30T00:59:28.207584Z",
+        "finished_at": "2026-10-30T01:00:09.645677Z"
+      },
+      "usage": {
+        "n_input_tokens": 55578,
+        "n_cache_tokens": 51328,
+        "n_output_tokens": 1807,
+        "cost_usd": 0.031702799999999996
+      },
+      "source_result": "logs/pilots/selected-tasks-codex-round-001/session-recovery__wYqYu9Q/result.json",
+      "source_result_sha256": "3acb033430014a4d495d0139ba12b156c6b59d8decb6fb40c5914e18406266c8",
+      "submission_sha256": {
+        "runner.py": "1282837f0487ecc94cdd3cd79d636fa0c49f6f81f2dafb8ccde353e418440e0f"
+      },
+      "observable_tool_calls": 3
+    },
+    {
+      "task": "streaming-gateway",
+      "trial": "streaming-gateway__9v8cKud",
+      "task_checksum": "54267b0823dc5c1dcfdb1db697af92d492663e6f0ee9352dcff012e1a990fc1e",
+      "source_commit": "eabc130a4cc9f5081f4b82a5ec982590ce1f7bf8",
+      "outcome": "pass",
+      "reward": 1.0,
+      "exception_type": null,
+      "meaningful_inference_observed": true,
+      "agent_execution_seconds": 50.599989,
+      "agent_execution": {
+        "started_at": "2026-10-30T00:55:52.652478Z",
+        "finished_at": "2026-10-30T00:56:43.252467Z"
+      },
+      "usage": {
+        "n_input_tokens": 55535,
+        "n_cache_tokens": 45824,
+        "n_output_tokens": 2273,
+        "cost_usd": 0.046734399999999995
+      },
+      "source_result": "logs/pilots/selected-tasks-codex-round-001/streaming-gateway__9v8cKud/result.json",
+      "source_result_sha256": "0d8392b4877e706786a8e5a2829b7720662a7795757dd2f7cd629060a5aabe0c",
+      "submission_sha256": {
+        "gateway.py": "72b2ad636beb7b437e7045bb039cc12bafa72f83e6a3d36a6fd24b93cef9b290"
+      },
+      "observable_tool_calls": 3
+    },
+    {
+      "task": "streaming-gateway",
+      "trial": "streaming-gateway__jdgtFQq",
+      "task_checksum": "54267b0823dc5c1dcfdb1db697af92d492663e6f0ee9352dcff012e1a990fc1e",
+      "source_commit": "eabc130a4cc9f5081f4b82a5ec982590ce1f7bf8",
+      "outcome": "pass",
+      "reward": 1.0,
+      "exception_type": null,
+      "meaningful_inference_observed": true,
+      "agent_execution_seconds": 40.114814,
+      "agent_execution": {
+        "started_at": "2026-10-30T01:03:30.701369Z",
+        "finished_at": "2026-10-30T01:04:10.816183Z"
+      },
+      "usage": {
+        "n_input_tokens": 55250,
+        "n_cache_tokens": 51072,
+        "n_output_tokens": 1977,
+        "cost_usd": 0.0332332
+      },
+      "source_result": "logs/pilots/selected-tasks-codex-round-001/streaming-gateway__jdgtFQq/result.json",
+      "source_result_sha256": "d5321cc9190a139b6c412f858516840c974c5a0f5f1897dc5bcb8de18720e6e9",
+      "submission_sha256": {
+        "gateway.py": "a27de251c01fa20ad87559b59011291bc4e5aabd5f32bfef0eec7f6faf645ad6"
+      },
+      "observable_tool_calls": 3
+    }
+  ],
+  "counts": {
+    "pass": 6,
+    "fail": 0,
+    "attempt-error": 0,
+    "unavailable": 0
+  },
+  "reported_cost_usd_sum": 0.29781399999999997,
+  "reported_cost_known_for": 6
+}

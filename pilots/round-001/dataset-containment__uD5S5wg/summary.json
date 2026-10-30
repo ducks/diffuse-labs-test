@@ -1,0 +1,28 @@
+{
+  "task": "dataset-containment",
+  "trial": "dataset-containment__uD5S5wg",
+  "task_checksum": "d8e3d424a7e0ea6ca9ecbf67957a9ac0fea3b9c234e91f1daf99b3f95e17ae21",
+  "source_commit": "eabc130a4cc9f5081f4b82a5ec982590ce1f7bf8",
+  "outcome": "pass",
+  "reward": 1.0,
+  "exception_type": null,
+  "meaningful_inference_observed": true,
+  "agent_execution_seconds": 42.027203,
+  "agent_execution": {
+    "started_at": "2026-10-30T01:04:05.242502Z",
+    "finished_at": "2026-10-30T01:04:47.269705Z"
+  },
+  "usage": {
+    "n_input_tokens": 87705,
+    "n_cache_tokens": 75904,
+    "n_output_tokens": 2639,
+    "cost_usd": 0.05758239999999999
+  },
+  "source_result": "logs/pilots/selected-tasks-codex-round-001/dataset-containment__uD5S5wg/result.json",
+  "source_result_sha256": "63e07bc7f224da19730226deee4e149c8a5cddfd9a750a598bb7f4889f349630",
+  "submission_sha256": {
+    "repair.py": "33182d6d4342d584c510d3f0ae5448ebc39a4024b12d50c78aee19ab25145980",
+    "service.py": "afe0acb783aba6a5dd250b8dd9eebe132b3bc6c24a54c6b115d0532702904e53"
+  },
+  "observable_tool_calls": 4
+}

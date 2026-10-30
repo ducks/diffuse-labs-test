@@ -1,0 +1,12 @@
+test_clean_and_completed_resume (__main__.RecoveryTests.test_clean_and_completed_resume) ... ok
+test_corrupt_state_is_not_overwritten (__main__.RecoveryTests.test_corrupt_state_is_not_overwritten) ... ok
+test_crash_boundaries (__main__.RecoveryTests.test_crash_boundaries) ... ok
+test_distinct_sessions_share_service (__main__.RecoveryTests.test_distinct_sessions_share_service) ... ok
+test_empty_plan (__main__.RecoveryTests.test_empty_plan) ... ok
+test_repeated_crashes (__main__.RecoveryTests.test_repeated_crashes) ... ok
+test_wrong_session_id_is_rejected (__main__.RecoveryTests.test_wrong_session_id_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 1.999s
+
+OK
