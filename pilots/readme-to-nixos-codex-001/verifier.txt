@@ -1,0 +1,9 @@
+(finished: subtest: fresh alpha boot, runtime credential, and authenticated report, in 21.93 seconds)
+(finished: subtest: queued work survives loss of Redis wake-up data and backend restarts, in 4.23 seconds)
+(finished: subtest: supervisor replaces a killed worker, in 4.41 seconds)
+(finished: subtest: full guest reboot preserves original data and reports, in 21.19 seconds)
+(finished: subtest: same module creates a genuinely separate clean deployment, in 21.42 seconds)
+(finished: subtest: public API works cross-machine, backend services stay private, in 8.39 seconds)
+DOCMILL_DEPLOYMENT_VERIFIED
+test script finished in 81.65s
+/nix/store/frmsbcwm81p4wg7iwnab9jy23flblvdm-vm-test-run-readme-to-nixos-docmill

@@ -1,0 +1,10 @@
+{
+  "source_commit": "80f98dbe489d1d2cd1754c299fba99d531b19c0a",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "agent_timeout_seconds": 600,
+  "attempts": 1,
+  "retries": 0,
+  "isolation": "Docker; public workspace only; private Nix store; no host daemon socket or host home mounts",
+  "verification": "Native private two-VM NixOS tests after submission; no feedback or retry"
+}

@@ -37,11 +37,18 @@ host-side dependency builds can still download pinned Nix inputs.
 
 ## Limits
 
-These controls establish useful grading behavior, not model difficulty. No model
-has attempted this task yet. There is no Harbor integration or isolated agent
-runner; evaluating arbitrary submitted Nix code needs an appropriately isolated
-builder. The public workspace exporter excludes evaluator and reference files,
-but is not itself a security boundary.
+These controls establish useful grading behavior, not model difficulty. The
+[first model pilot](../pilots/readme-to-nixos-codex-001/README.md) passed all six
+phases in one attempt after 264.94 seconds of agent execution, using Codex
+0.164.0 and GPT-6.1 Sol at low reasoning effort. The pilot used a separate Docker
+filesystem and Nix database; only its submitted module reached the native grader.
+Its setup and optional archive issues are recorded separately in the report.
+One pass does not establish a solve rate or hard difficulty.
+
+There is no Harbor integration or packaged isolated agent runner; evaluating
+arbitrary submitted Nix code needs an appropriately isolated builder. The public
+workspace exporter excludes evaluator and reference files, but is not itself a
+security boundary.
 
 The fixture uses local PostgreSQL and Redis, synthetic reports, two 1 GiB guests,
 and bounded recovery deadlines. It does not evaluate production sizing, TLS,

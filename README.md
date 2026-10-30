@@ -10,8 +10,9 @@ retained for reference, but are set aside from the selected task set.
 A new [README → NixOS prototype](readme-to-nixos/README.md) asks an agent to
 inspect a working application and deploy it declaratively. Native two-VM checks
 exercise boot, runtime secrets, reports, persistence, recovery, and network
-boundaries. It has reference/control validation, but no model pilot or Harbor
-packaging yet; it is a candidate rather than another completed assignment task.
+boundaries. It has reference/control validation and one successful model pilot,
+but no Harbor packaging yet; it is a candidate rather than another completed
+assignment task. See [the pilot results](pilots/readme-to-nixos-codex-001/README.md).
 
 | Task | Capability assessed | Failure modes | Success checks | Quality controls |
 | --- | --- | --- | --- | --- |

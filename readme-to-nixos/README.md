@@ -60,5 +60,6 @@ network reachability. See `QUALITY.md` for actual validation results once run.
 This is a **native NixOS task prototype**, not a packaged Harbor Docker task.
 A model pilot must receive only `instruction.md`, the application repository,
 and the starting module. Keep the verifier and reference module outside that
-workspace. Agent isolation/Harbor integration and measured solve difficulty are
-separate follow-up work; none is claimed by a passing reference deployment.
+workspace. The [first isolated model pilot](../pilots/readme-to-nixos-codex-001/README.md)
+passed all private checks in one attempt, with 264.94 seconds of agent execution.
+Harbor integration and broader difficulty calibration remain follow-up work.
