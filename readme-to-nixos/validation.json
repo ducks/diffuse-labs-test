@@ -1,0 +1,99 @@
+{
+  "directory": "logs/readme-to-nixos/20261030T044057103078",
+  "results": [
+    {
+      "control": "canonical",
+      "expected_pass": true,
+      "passed": true,
+      "result_store_path": "/nix/store/l8g17cf714l9a9drgisbss3sbsfb0m8p-vm-test-run-readme-to-nixos-docmill",
+      "failure_in_expected_phase": null,
+      "expectation_met": true,
+      "wall_seconds": 115.68
+    },
+    {
+      "control": "alternative-renderer-wrapper",
+      "expected_pass": true,
+      "passed": true,
+      "result_store_path": "/nix/store/b0qj3ls0b1dbx8d34kf7x60bkcbfq9az-vm-test-run-readme-to-nixos-docmill",
+      "failure_in_expected_phase": null,
+      "expectation_met": true,
+      "wall_seconds": 93.18
+    },
+    {
+      "control": "empty-deployment",
+      "expected_pass": false,
+      "passed": false,
+      "result_store_path": null,
+      "failure_in_expected_phase": true,
+      "expectation_met": true,
+      "wall_seconds": 37.7
+    },
+    {
+      "control": "missing-renderer",
+      "expected_pass": false,
+      "passed": false,
+      "result_store_path": null,
+      "failure_in_expected_phase": true,
+      "expectation_met": true,
+      "wall_seconds": 70.82
+    },
+    {
+      "control": "no-worker-at-boot",
+      "expected_pass": false,
+      "passed": false,
+      "result_store_path": null,
+      "failure_in_expected_phase": true,
+      "expectation_met": true,
+      "wall_seconds": 40.7
+    },
+    {
+      "control": "ephemeral-report-storage",
+      "expected_pass": false,
+      "passed": false,
+      "result_store_path": null,
+      "failure_in_expected_phase": true,
+      "expectation_met": true,
+      "wall_seconds": 67.66
+    },
+    {
+      "control": "no-worker-supervision",
+      "expected_pass": false,
+      "passed": false,
+      "result_store_path": null,
+      "failure_in_expected_phase": true,
+      "expectation_met": true,
+      "wall_seconds": 74.66
+    }
+  ],
+  "scope": "Native NixOS/KVM controls; no model pilot or Harbor execution",
+  "source_manifest": {
+    "README.md": "8e0b6e4226cb916d08fb927c14352215905e60230210ada6efcc1e086d0bbfec",
+    "default.nix": "8c9c09bb8cc6e1fe06f424a0b5fa3e6c76432a7a36d6bf5b2917f732cc593d63",
+    "deployment.nix": "c4d937ab2285c195eb5ea34c7b0e3733eafbbd1fb2823cbb1e8c8af396d94339",
+    "instruction.md": "7f7e940f3ac7f358c34f1ba7a7a37fc6f963fd19beaf23291ba5366d9bdc483d",
+    "nixpkgs.nix": "cd3b830f19c897d207c383b4618bb1422fa92e50ace47dba4ae2f1c52cd58c4b",
+    "repository/README.md": "e324dc287621b451fa3b51bb75de880073b37602d525fcc4203e1523ec7dce0e",
+    "repository/docmill/__init__.py": "1fdaca9489799c32621a012816b5ff6b53fc19260ec2359f5510f7c820e61477",
+    "repository/docmill/__main__.py": "8ba1cad6b1ea708f20a7c115cf1aeaffc75188f30a8b71141713bfc949ca30ff",
+    "repository/docmill/schema.sql": "deb23ef55248d292c16210d2c43cfbd03e7c5cd359034a6b48d0e53465751035",
+    "repository/nixpkgs.nix": "cd3b830f19c897d207c383b4618bb1422fa92e50ace47dba4ae2f1c52cd58c4b",
+    "repository/requirements.txt": "0f0bd6c7b8ad35cde17e34147774bfcdcde314c0947774654af4d91426891683",
+    "repository/shell.nix": "adad29737a3fa4833d92e7c90ccbd4b83dd1f298365652b80626e51371d1a121",
+    "solution/deployment.nix": "c7d2e98121c26e2889398537c303eade6a5935d091feea65f0340ac6c0ba988f",
+    "source.nix": "d80150ab0848b16c4399ed8a23e4a79feeb1d951c886f1e5ca36624a2a3378b4",
+    "tests/verify.py": "d35cea0a50e2e5bf03c51f2bc4f0438931f907cc73fce183967b048b383dd0c8",
+    "vm.nix": "1b650bed08341a50d540732965480656ea440759c30fa378d65cc3dc1b60a176"
+  },
+  "final_network_restriction_check": {
+    "passed": true,
+    "result_store_path": "/nix/store/2iq59q5bk1bxdz71rj6q93scp20c24nx-vm-test-run-readme-to-nixos-docmill",
+    "log": "/tmp/docmill-offline-reference.log",
+    "change_since_control_snapshot": "Force virtualisation.restrictNetwork=true in grading and public VMs; canonical reference rerun passed all six subtests.",
+    "source_sha256": {
+      "default.nix": "b00c864fea50632a5b1ff7cdc8ed97d79f66ec555b7f046ac865be45161e085f",
+      "vm.nix": "6b5f3b9e8a0538e83807c04b0e8389095f13184def41f0b1172800fa85f04256",
+      "tests/verify.py": "d35cea0a50e2e5bf03c51f2bc4f0438931f907cc73fce183967b048b383dd0c8",
+      "solution/deployment.nix": "c7d2e98121c26e2889398537c303eade6a5935d091feea65f0340ac6c0ba988f"
+    }
+  }
+}

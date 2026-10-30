@@ -7,6 +7,12 @@ failover, and dataset-worker incident containment. The assignment is incomplete.
 The earlier `persistent-tools` prototype and its successful model pilot are
 retained for reference, but are set aside from the selected task set.
 
+A new [README → NixOS prototype](readme-to-nixos/README.md) asks an agent to
+inspect a working application and deploy it declaratively. Native two-VM checks
+exercise boot, runtime secrets, reports, persistence, recovery, and network
+boundaries. It has reference/control validation, but no model pilot or Harbor
+packaging yet; it is a candidate rather than another completed assignment task.
+
 | Task | Capability assessed | Failure modes | Success checks | Quality controls |
 | --- | --- | --- | --- | --- |
 | `session-recovery` | Recover durable agent state across crashes and external effects | Duplicate actions, lost calls/history, cross-session reuse | Independent receipts, transcript pairing, explicit crash boundaries | Canonical and alternate solutions; baseline and incorrect fixes |

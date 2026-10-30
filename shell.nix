@@ -3,7 +3,7 @@
     sha256 = "sha256-cV5xEJJK3BvhU8rEd4mC9UsmDi5qscv/kzGPhBRC5WA=";
   }) {} }:
 pkgs.mkShell {
-  packages = [ pkgs.python3 pkgs.git pkgs.uv pkgs.docker-client ];
+  packages = [ pkgs.python3 pkgs.git pkgs.uv pkgs.docker-client pkgs.nix ];
   UV_PYTHON_DOWNLOADS = "never";
   UV_PYTHON = "${pkgs.python3}/bin/python3";
   # Avoid host Docker plugins overriding the matching Nix-provided versions.
