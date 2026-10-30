@@ -1,0 +1,24 @@
+schema_version = "1.4"
+
+[task]
+name = "diffuse-labs-test/dataset-containment"
+description = "Contain a dataset-worker incident while preserving client access and exactly-once outputs."
+authors = [{ name = "Jake Goldsborough" }]
+
+[metadata]
+difficulty = "hard"
+category = "software-engineering"
+tags = ["security-response", "recovery", "services", "credentials"]
+
+[agent]
+timeout_sec = 1800.0
+
+[verifier]
+timeout_sec = 180.0
+environment_mode = "shared"
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 2
+memory_mb = 2048
+storage_mb = 4096

@@ -1,15 +1,17 @@
 # Diffuse Labs take-home
 
-Five tasks are requested for the assignment. This repository currently contains
-**three implemented tasks**: interrupted agent-session recovery, streaming
-inference failover, and persistent capability acquisition.
-No claim is made yet that the full assignment is complete.
+Five tasks are requested for the assignment. Three implemented tasks are
+currently selected: interrupted agent-session recovery, streaming inference
+failover, and dataset-worker incident containment. The assignment is incomplete.
+
+The earlier `persistent-tools` prototype and its successful model pilot are
+retained for reference, but are set aside from the selected task set.
 
 | Task | Capability assessed | Failure modes | Success checks | Quality controls |
 | --- | --- | --- | --- | --- |
-| `session-recovery` | Recover durable agent state across process crashes and external effects | Duplicate actions; lost tool-call IDs/history; unpaired results; cross-session key reuse; repeated completion messages | Independent SQLite receipts, exact transcript pairing, nine deterministic crash cases, repeated crashes, completed-session replay, corrupt state, session identity, empty plans | Canonical solution and alternative idempotent-replay solution must pass; original code and two shortcuts must fail |
-| `streaming-gateway` | Safe provider failover and async resource ownership | Mixed-provider output, hidden partial failures, capacity leaks, buffering, oversubscription | 16 tests covering stream boundaries, cancellation, concurrent requests, payload/byte integrity, and real localhost HTTP | Canonical and priming-based solutions pass; original code plus four incorrect fixes fail |
-| `persistent-tools` | Validate and retain generated tools across sessions | Premature promotion, forgotten state, overwritten working tools, invalid artifacts, crashes during publication | 17 tests covering separate processes, independent tool versions, validation failures, corruption, injected executors, bounds, and four deterministic crash seams | Canonical and alternative private-staging solutions pass; original code plus six incorrect fixes fail |
+| `session-recovery` | Recover durable agent state across crashes and external effects | Duplicate actions, lost calls/history, cross-session reuse | Independent receipts, transcript pairing, explicit crash boundaries | Canonical and alternate solutions; baseline and incorrect fixes |
+| `streaming-gateway` | Safe provider failover and async resource ownership | Mixed-provider output, capacity leaks, buffering, oversubscription | 16 tests including real localhost HTTP | Two valid solutions; baseline and four incorrect fixes |
+| `dataset-containment` | Contain a credential/file-boundary incident while retaining service and output correctness | Refresh-based access, recurring exports, duplicate outputs, lost backlog, collateral outages | Live HTTP traffic, independent ledgers and publication provenance, lost acknowledgements, actual worker restarts | Canonical and code-level loader-policy repairs; baseline and eight partial/incorrect repairs |
 
 ## Local development
 
@@ -17,7 +19,7 @@ No claim is made yet that the full assignment is complete.
 nix-shell
 python scripts/validate.py
 python scripts/validate_gateway.py
-python scripts/validate_tools.py
+python scripts/validate_containment.py
 ```
 
 Or run `nix-shell --run 'python scripts/validate.py'`.
@@ -70,9 +72,9 @@ python scripts/validate_harbor.py
 python scripts/validate_gateway.py --container
 python scripts/validate_harbor.py --task streaming-gateway
 
-# Persistent tool acquisition: container controls and Harbor trials.
-python scripts/validate_tools.py --container
-python scripts/validate_harbor.py --task persistent-tools
+# Dataset incident containment: container controls and Harbor trials.
+python scripts/validate_containment.py --container
+python scripts/validate_harbor.py --task dataset-containment
 ```
 
 Harbor 0.25.0 and its dependency graph are pinned by `pyproject.toml` and
@@ -84,8 +86,7 @@ it does not change your global Docker settings.
 The package uses Harbor's `task.toml`, Docker environment, `/tests/test.sh`,
 `/solution/solve.sh`, and `/logs/verifier/reward.txt` conventions. Full Harbor
 trials are verified: oracle reward **1.0**, nop reward **0.0**, no trial errors.
-All controls for all three tasks produce their expected rewards through the container
-verifier entry points. Each task’s `QUALITY.md` records the scope.
+Each implemented task has its own control and Harbor validation record. Each task’s `QUALITY.md` records the scope.
 
 Harbor can exit zero even when a trial has an infrastructure error. The
 validation script checks completion, error counts, and rewards in the actual
@@ -131,24 +132,25 @@ The latter confirms that grading does not depend on the reference code structure
 The HTTP adapter is deliberately narrow (HTTP/1.0, no TLS or chunked transfer);
 this task tests the gateway core, not general HTTP compliance or a real model.
 
-## Persistent tool acquisition design
+## Dataset incident containment
 
-The third task repairs a registry for tools generated by an agent. Candidates
-are deterministic JSON-in/JSON-out Python programs. A provided executor bounds
-time, input, output, and process-group lifetime; no model calls are needed.
-The repaired harness must validate every supplied example before publishing an
-immutable source version through a durable manifest. Later processes discover
-and invoke the actual saved source without prior conversation history.
+This task adapts the v4 dataset-worker incident on Replaybook Infra's
+`feature/dataset-worker-containment` branch, pinned at `f8e2936`.
+The agent patches worker code and writes a reusable deployment repair procedure.
+During grading, real HTTP services keep handling client reads and preview jobs
+while that procedure closes the file boundary, revokes compromised capabilities,
+removes unauthorized persistence, and recovers previously published outputs.
 
-The verifier exercises failed replacements, independent tools, corrupt state,
-fresh processes, injected execution, and SIGKILL at four explicit publication
-seams. Reference and private-staging alternatives both pass. The task addresses
-validation and durable capability retention, not model training or proof that
-a tool passing a few examples is universally correct. Candidate execution is
-not a sandbox for hostile Python. See `persistent-tools/instruction.md`,
-`persistent-tools/DESIGN.md`, and `persistent-tools/QUALITY.md` for the contract,
-limits, and validation evidence.
+Verification checks actual retained state, fresh work, publication provenance,
+continued legitimate reporting and client access, acknowledgement failures, and
+recovery after worker-process restarts and recreated core HTTP servers. It does not claim the original NixOS
+scenario's full host-reboot or VM-isolation guarantees. Source provenance and
+all adaptation limits are in `dataset-containment/PROVENANCE.md`.
 
-The first model-backed pilot passed `persistent-tools` in about 56 seconds.
-See `pilots/persistent-tools-codex-001/README.md`; this task is functionally
-validated, but its original hard-difficulty estimate is not established.
+## Set-aside tool-storage prototype
+
+`persistent-tools` and `scripts/validate_tools.py` remain available as an
+exploratory prototype. Its first independent Codex pilot passed all tests in
+about 56 seconds. See `pilots/persistent-tools-codex-001/README.md`. Its original
+hard-difficulty estimate is not established, and it is currently excluded from
+the selected assignment tasks.
