@@ -154,3 +154,8 @@ exploratory prototype. Its first independent Codex pilot passed all tests in
 about 56 seconds. See `pilots/persistent-tools-codex-001/README.md`. Its original
 hard-difficulty estimate is not established, and it is currently excluded from
 the selected assignment tasks.
+
+The first independent `dataset-containment` Codex pilot also passed, in about
+84 seconds at low reasoning effort. See
+`pilots/dataset-containment-codex-001/README.md`. This port has not established
+hard difficulty; its results are separate from the original NixOS scenario.

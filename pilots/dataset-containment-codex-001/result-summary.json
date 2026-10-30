@@ -1,0 +1,35 @@
+{
+  "task": "dataset-containment",
+  "task_commit": "db6edadc85c698c5cbbee7777d288b54b9876611",
+  "task_checksum": "41a5a2d4e497688b2651b5ce5ce57b192e3b4adceb4a9c360395fb708e41ee7d",
+  "agent": "codex",
+  "agent_version": "0.164.0",
+  "model": "openai/gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "execution_limit_seconds": 600,
+  "web_search": false,
+  "attempts": 1,
+  "reward": 1.0,
+  "exception_type": null,
+  "agent_execution": {
+    "started_at": "2026-10-30T00:39:07.751510Z",
+    "finished_at": "2026-10-30T00:40:31.665182Z"
+  },
+  "agent_usage": {
+    "n_input_tokens": 113687,
+    "n_cache_tokens": 101376,
+    "n_output_tokens": 3880,
+    "cost_usd": 0.07355959999999999,
+    "model_usage": {
+      "openai/gpt-6.1-sol": {
+        "n_input_tokens": 113687,
+        "n_cache_tokens": 101376,
+        "n_output_tokens": 3880,
+        "cost_usd": 0.07355959999999999
+      }
+    },
+    "rollout_details": null,
+    "metadata": null
+  },
+  "source_result": "logs/pilots/dataset-containment-codex-pilot-001/dataset-containment__LuUSoaN/result.json"
+}

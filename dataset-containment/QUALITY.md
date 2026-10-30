@@ -81,3 +81,13 @@ The `hard` metadata is provisional. A new model pilot must be reported against
 this port's task snapshot, not combined with the original scenario's pilot.
 Full control logs and Harbor result JSON remain gitignored under
 `logs/dataset-containment/` and `logs/harbor/`. Nothing is uploaded.
+
+## First model pilot
+
+A Codex CLI 0.164.0 / `gpt-6.1-sol` pilot at low reasoning effort passed both
+end-to-end tests in **83.91 seconds** of agent execution, reward **1.0**, with
+no infrastructure errors. The collected patch is a genuine receipt-reconciling,
+credential-rotating repair. This does not establish hard difficulty. The
+tracked report and submitted source are in
+`../pilots/dataset-containment-codex-001/`. Original Replaybook pilot results
+remain separate.
