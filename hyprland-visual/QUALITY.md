@@ -74,3 +74,8 @@ continuous context with the 200-round allowance. It timed out without edits,
 with 34 rounds recorded at the final checkpoint, and failed visual grading.
 It had initial screenshots but no live preview feedback during the attempt.
 The later Hyprland-first/working-draft prompt change was not tested by that run.
+
+The [revised-prompt pilot](../pilots/hyprland-claux-004/README.md) then tested that
+opening with the same ten-minute/200-round settings. It also timed out without
+saved edits, recording 31 rounds at its final checkpoint, and failed private
+visual matching. This is one observation, not a general causal comparison.

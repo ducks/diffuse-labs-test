@@ -1,0 +1,18 @@
+{
+  "source_commit": "78815b1be9a75fd26a1cc8d2006697ffe05d7b2d",
+  "prompt_change": "Explicit Hyprland 0.56.2 goal, named component configs, and save-working-draft-before-refinement instruction.",
+  "command": [
+    "python",
+    "scripts/pilot_hyprland_claux.py",
+    "--model",
+    "deepseek/deepseek-v4-flash-vision-exp",
+    "--binary",
+    "/home/urho/dev/claux/target/debug/claux",
+    "--rounds",
+    "1",
+    "--model-rounds",
+    "200",
+    "--seconds-per-round",
+    "600"
+  ]
+}
