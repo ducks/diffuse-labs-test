@@ -1,0 +1,673 @@
+{
+  "terraform": {
+    "required_version": "= 1.15.9",
+    "required_providers": {
+      "kubernetes": {
+        "source": "hashicorp/kubernetes",
+        "version": "3.2.1"
+      }
+    }
+  },
+  "provider": {
+    "kubernetes": {
+      "config_path": "${var.kubeconfig_path}"
+    }
+  },
+  "variable": {
+    "namespace": {
+      "type": "string"
+    },
+    "kubeconfig_path": {
+      "type": "string"
+    },
+    "credential_secret_name": {
+      "type": "string",
+      "default": "runtime-credentials"
+    },
+    "api_node_port": {
+      "type": "number"
+    }
+  },
+  "resource": {
+    "kubernetes_persistent_volume_claim_v1": {
+      "postgres_data": {
+        "metadata": {
+          "name": "postgres-data",
+          "namespace": "${var.namespace}"
+        },
+        "wait_until_bound": false,
+        "spec": {
+          "access_modes": [
+            "ReadWriteOnce"
+          ],
+          "storage_class_name": "local-path",
+          "resources": {
+            "requests": {
+              "storage": "1Gi"
+            }
+          }
+        }
+      },
+      "reports": {
+        "metadata": {
+          "name": "reports",
+          "namespace": "${var.namespace}"
+        },
+        "wait_until_bound": false,
+        "spec": {
+          "access_modes": [
+            "ReadWriteOnce"
+          ],
+          "storage_class_name": "local-path",
+          "resources": {
+            "requests": {
+              "storage": "1Gi"
+            }
+          }
+        }
+      }
+    },
+    "kubernetes_deployment_v1": {
+      "postgres": {
+        "metadata": {
+          "name": "postgres",
+          "namespace": "${var.namespace}"
+        },
+        "spec": {
+          "replicas": 1,
+          "selector": {
+            "match_labels": {
+              "app": "postgres"
+            }
+          },
+          "strategy": {
+            "type": "Recreate"
+          },
+          "template": {
+            "metadata": {
+              "labels": {
+                "app": "postgres"
+              }
+            },
+            "spec": {
+              "security_context": {
+                "run_as_user": 1000,
+                "run_as_group": 1000,
+                "fs_group": 1000,
+                "fs_group_change_policy": "OnRootMismatch"
+              },
+              "container": [
+                {
+                  "name": "postgres",
+                  "image": "docmill-postgres:spike",
+                  "image_pull_policy": "Never",
+                  "resources": {
+                    "requests": {
+                      "cpu": "10m",
+                      "memory": "32Mi"
+                    },
+                    "limits": {
+                      "memory": "256Mi"
+                    }
+                  },
+                  "volume_mount": [
+                    {
+                      "name": "tmp",
+                      "mount_path": "/tmp"
+                    },
+                    {
+                      "name": "database",
+                      "mount_path": "/data"
+                    },
+                    {
+                      "name": "credentials",
+                      "mount_path": "/run/credentials",
+                      "read_only": true
+                    }
+                  ],
+                  "readiness_probe": {
+                    "exec": {
+                      "command": [
+                        "pg_isready",
+                        "-h",
+                        "127.0.0.1",
+                        "-U",
+                        "docmill",
+                        "-d",
+                        "docmill"
+                      ]
+                    },
+                    "period_seconds": 2,
+                    "timeout_seconds": 2,
+                    "failure_threshold": 30
+                  }
+                }
+              ],
+              "volume": [
+                {
+                  "name": "tmp",
+                  "empty_dir": {}
+                },
+                {
+                  "name": "database",
+                  "persistent_volume_claim": {
+                    "claim_name": "${kubernetes_persistent_volume_claim_v1.postgres_data.metadata[0].name}"
+                  }
+                },
+                {
+                  "name": "credentials",
+                  "secret": {
+                    "secret_name": "${var.credential_secret_name}",
+                    "default_mode": "0440",
+                    "items": [
+                      {
+                        "key": "db-password",
+                        "path": "db-password"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "timeouts": {
+          "create": "4m",
+          "update": "4m",
+          "delete": "2m"
+        }
+      },
+      "redis": {
+        "metadata": {
+          "name": "redis",
+          "namespace": "${var.namespace}"
+        },
+        "spec": {
+          "replicas": 1,
+          "selector": {
+            "match_labels": {
+              "app": "redis"
+            }
+          },
+          "strategy": {
+            "type": "Recreate"
+          },
+          "template": {
+            "metadata": {
+              "labels": {
+                "app": "redis"
+              }
+            },
+            "spec": {
+              "security_context": {
+                "run_as_user": 1000,
+                "run_as_group": 1000,
+                "fs_group": 1000
+              },
+              "container": [
+                {
+                  "name": "redis",
+                  "image": "docmill-redis:spike",
+                  "image_pull_policy": "Never",
+                  "resources": {
+                    "requests": {
+                      "cpu": "10m",
+                      "memory": "32Mi"
+                    },
+                    "limits": {
+                      "memory": "256Mi"
+                    }
+                  },
+                  "volume_mount": [
+                    {
+                      "name": "tmp",
+                      "mount_path": "/tmp"
+                    }
+                  ],
+                  "readiness_probe": {
+                    "exec": {
+                      "command": [
+                        "redis-cli",
+                        "ping"
+                      ]
+                    },
+                    "period_seconds": 2
+                  }
+                }
+              ],
+              "volume": [
+                {
+                  "name": "tmp",
+                  "empty_dir": {}
+                }
+              ]
+            }
+          }
+        },
+        "timeouts": {
+          "create": "4m",
+          "update": "4m",
+          "delete": "2m"
+        }
+      },
+      "api": {
+        "metadata": {
+          "name": "api",
+          "namespace": "${var.namespace}"
+        },
+        "spec": {
+          "replicas": 1,
+          "selector": {
+            "match_labels": {
+              "app": "api"
+            }
+          },
+          "strategy": {
+            "type": "Recreate"
+          },
+          "template": {
+            "metadata": {
+              "labels": {
+                "app": "api"
+              }
+            },
+            "spec": {
+              "security_context": {
+                "run_as_user": 1000,
+                "run_as_group": 1000,
+                "fs_group": 1000
+              },
+              "container": [
+                {
+                  "name": "api",
+                  "image": "docmill-app:spike",
+                  "image_pull_policy": "Never",
+                  "resources": {
+                    "requests": {
+                      "cpu": "10m",
+                      "memory": "32Mi"
+                    },
+                    "limits": {
+                      "memory": "256Mi"
+                    }
+                  },
+                  "volume_mount": [
+                    {
+                      "name": "tmp",
+                      "mount_path": "/tmp"
+                    },
+                    {
+                      "name": "reports",
+                      "mount_path": "/reports"
+                    },
+                    {
+                      "name": "credentials",
+                      "mount_path": "/run/credentials",
+                      "read_only": true
+                    }
+                  ],
+                  "command": [
+                    "python",
+                    "-m",
+                    "docmill",
+                    "api"
+                  ],
+                  "env": [
+                    {
+                      "name": "DATABASE_URL",
+                      "value": "postgresql://docmill@postgres:5432/docmill"
+                    },
+                    {
+                      "name": "PGPASSWORD",
+                      "value_from": {
+                        "secret_key_ref": {
+                          "name": "${var.credential_secret_name}",
+                          "key": "db-password"
+                        }
+                      }
+                    },
+                    {
+                      "name": "REDIS_URL",
+                      "value": "redis://redis:6379/0"
+                    },
+                    {
+                      "name": "DOCMILL_STORAGE",
+                      "value": "/reports"
+                    },
+                    {
+                      "name": "DOCMILL_TOKEN_FILE",
+                      "value": "/run/credentials/api-token"
+                    },
+                    {
+                      "name": "DOCMILL_BIND",
+                      "value": "0.0.0.0"
+                    }
+                  ],
+                  "port": [
+                    {
+                      "container_port": 8080
+                    }
+                  ],
+                  "readiness_probe": {
+                    "http_get": {
+                      "path": "/health",
+                      "port": 8080
+                    },
+                    "period_seconds": 2,
+                    "timeout_seconds": 2,
+                    "failure_threshold": 30
+                  }
+                }
+              ],
+              "volume": [
+                {
+                  "name": "tmp",
+                  "empty_dir": {}
+                },
+                {
+                  "name": "reports",
+                  "persistent_volume_claim": {
+                    "claim_name": "${kubernetes_persistent_volume_claim_v1.reports.metadata[0].name}"
+                  }
+                },
+                {
+                  "name": "credentials",
+                  "secret": {
+                    "secret_name": "${var.credential_secret_name}",
+                    "default_mode": "0440",
+                    "items": [
+                      {
+                        "key": "api-token",
+                        "path": "api-token"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "timeouts": {
+          "create": "4m",
+          "update": "4m",
+          "delete": "2m"
+        },
+        "depends_on": [
+          "kubernetes_job_v1.migrate",
+          "kubernetes_deployment_v1.redis"
+        ]
+      },
+      "worker": {
+        "metadata": {
+          "name": "worker",
+          "namespace": "${var.namespace}"
+        },
+        "spec": {
+          "replicas": 1,
+          "selector": {
+            "match_labels": {
+              "app": "worker"
+            }
+          },
+          "strategy": {
+            "type": "Recreate"
+          },
+          "template": {
+            "metadata": {
+              "labels": {
+                "app": "worker"
+              }
+            },
+            "spec": {
+              "security_context": {
+                "run_as_user": 1000,
+                "run_as_group": 1000,
+                "fs_group": 1000
+              },
+              "container": [
+                {
+                  "name": "worker",
+                  "image": "docmill-app:spike",
+                  "image_pull_policy": "Never",
+                  "resources": {
+                    "requests": {
+                      "cpu": "10m",
+                      "memory": "32Mi"
+                    },
+                    "limits": {
+                      "memory": "256Mi"
+                    }
+                  },
+                  "volume_mount": [
+                    {
+                      "name": "tmp",
+                      "mount_path": "/tmp"
+                    },
+                    {
+                      "name": "reports",
+                      "mount_path": "/reports"
+                    }
+                  ],
+                  "command": [
+                    "python",
+                    "-m",
+                    "docmill",
+                    "worker"
+                  ],
+                  "env": [
+                    {
+                      "name": "DATABASE_URL",
+                      "value": "postgresql://docmill@postgres:5432/docmill"
+                    },
+                    {
+                      "name": "PGPASSWORD",
+                      "value_from": {
+                        "secret_key_ref": {
+                          "name": "${var.credential_secret_name}",
+                          "key": "db-password"
+                        }
+                      }
+                    },
+                    {
+                      "name": "REDIS_URL",
+                      "value": "redis://redis:6379/0"
+                    },
+                    {
+                      "name": "DOCMILL_STORAGE",
+                      "value": "/reports"
+                    },
+                    {
+                      "name": "DOCMILL_TOKEN_FILE",
+                      "value": "/run/credentials/api-token"
+                    },
+                    {
+                      "name": "DOCMILL_BIND",
+                      "value": "0.0.0.0"
+                    }
+                  ]
+                }
+              ],
+              "volume": [
+                {
+                  "name": "tmp",
+                  "empty_dir": {}
+                },
+                {
+                  "name": "reports",
+                  "persistent_volume_claim": {
+                    "claim_name": "${kubernetes_persistent_volume_claim_v1.reports.metadata[0].name}"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "timeouts": {
+          "create": "4m",
+          "update": "4m",
+          "delete": "2m"
+        },
+        "depends_on": [
+          "kubernetes_job_v1.migrate",
+          "kubernetes_deployment_v1.redis"
+        ]
+      }
+    },
+    "kubernetes_service_v1": {
+      "postgres": {
+        "metadata": {
+          "name": "postgres",
+          "namespace": "${var.namespace}"
+        },
+        "spec": {
+          "selector": {
+            "app": "postgres"
+          },
+          "port": [
+            {
+              "port": 5432,
+              "target_port": 5432
+            }
+          ],
+          "type": "ClusterIP"
+        }
+      },
+      "redis": {
+        "metadata": {
+          "name": "redis",
+          "namespace": "${var.namespace}"
+        },
+        "spec": {
+          "selector": {
+            "app": "redis"
+          },
+          "port": [
+            {
+              "port": 6379,
+              "target_port": 6379
+            }
+          ],
+          "type": "ClusterIP"
+        }
+      },
+      "api": {
+        "metadata": {
+          "name": "api",
+          "namespace": "${var.namespace}"
+        },
+        "spec": {
+          "selector": {
+            "app": "api"
+          },
+          "port": [
+            {
+              "port": 8080,
+              "target_port": 8080,
+              "node_port": "${var.api_node_port}"
+            }
+          ],
+          "type": "NodePort"
+        }
+      }
+    },
+    "kubernetes_job_v1": {
+      "migrate": {
+        "metadata": {
+          "name": "migrate",
+          "namespace": "${var.namespace}"
+        },
+        "spec": {
+          "backoff_limit": 5,
+          "template": {
+            "metadata": {
+              "labels": {
+                "app": "migrate"
+              }
+            },
+            "spec": {
+              "security_context": {
+                "run_as_user": 1000,
+                "run_as_group": 1000,
+                "fs_group": 1000
+              },
+              "container": [
+                {
+                  "name": "migrate",
+                  "image": "docmill-app:spike",
+                  "image_pull_policy": "Never",
+                  "resources": {
+                    "requests": {
+                      "cpu": "10m",
+                      "memory": "32Mi"
+                    },
+                    "limits": {
+                      "memory": "256Mi"
+                    }
+                  },
+                  "volume_mount": [
+                    {
+                      "name": "tmp",
+                      "mount_path": "/tmp"
+                    }
+                  ],
+                  "command": [
+                    "python",
+                    "-m",
+                    "docmill",
+                    "migrate"
+                  ],
+                  "env": [
+                    {
+                      "name": "DATABASE_URL",
+                      "value": "postgresql://docmill@postgres:5432/docmill"
+                    },
+                    {
+                      "name": "PGPASSWORD",
+                      "value_from": {
+                        "secret_key_ref": {
+                          "name": "${var.credential_secret_name}",
+                          "key": "db-password"
+                        }
+                      }
+                    },
+                    {
+                      "name": "REDIS_URL",
+                      "value": "redis://redis:6379/0"
+                    },
+                    {
+                      "name": "DOCMILL_STORAGE",
+                      "value": "/reports"
+                    },
+                    {
+                      "name": "DOCMILL_TOKEN_FILE",
+                      "value": "/run/credentials/api-token"
+                    },
+                    {
+                      "name": "DOCMILL_BIND",
+                      "value": "0.0.0.0"
+                    }
+                  ]
+                }
+              ],
+              "volume": [
+                {
+                  "name": "tmp",
+                  "empty_dir": {}
+                }
+              ],
+              "restart_policy": "OnFailure"
+            }
+          }
+        },
+        "wait_for_completion": true,
+        "timeouts": {
+          "create": "4m",
+          "delete": "2m"
+        },
+        "depends_on": [
+          "kubernetes_deployment_v1.postgres"
+        ]
+      }
+    }
+  }
+}

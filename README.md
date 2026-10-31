@@ -19,6 +19,12 @@ desktop configuration task with real keyboard checks, cold-boot verification,
 and fixed-renderer visual scoring. A separate Claux/OpenRouter screenshot loop
 supports vision-model pilots. It is also a native prototype without Harbor packaging.
 
+The [Terraform/Kubernetes spike](terraform-k8s/README.md) reuses Docmill in an
+offline single-node K3s VM. Terraform deploys the application stack; native
+lifecycle checks exercise an acknowledged worker interruption, cache loss,
+persistence, namespace isolation, no-drift planning, and resource cleanup.
+It is an integration prototype, not a calibrated model task or Harbor package.
+
 | Task | Capability assessed | Failure modes | Success checks | Quality controls |
 | --- | --- | --- | --- | --- |
 | `session-recovery` | Recover durable agent state across crashes and external effects | Duplicate actions, lost calls/history, cross-session reuse | Independent receipts, transcript pairing, explicit crash boundaries | Canonical and alternate solutions; baseline and incorrect fixes |

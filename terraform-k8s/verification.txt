@@ -1,0 +1,8 @@
+(finished: subtest: offline cluster and fresh Terraform deployment, in 88.33 seconds)
+(finished: subtest: worker is replaced at an acknowledged render barrier, in 5.60 seconds)
+(finished: subtest: database and cache pod replacement retains reports, in 6.81 seconds)
+(finished: subtest: cold boot retains data and Terraform converges without drift, in 131.05 seconds)
+(finished: subtest: same configuration deploys independent namespace and credentials, in 25.96 seconds)
+(finished: subtest: Terraform destroy cleans resources without harming another deployment, in 76.49 seconds)
+TERRAFORM_K8S_SPIKE_VERIFIED {"phases": ["fresh-deployment", "acknowledged-worker-loss", "backend-replacement", "cold-boot-and-no-drift", "namespace-isolation", "destroy-and-volume-cleanup"], "reports_checked": 9, "passed": true}
+test script finished in 334.49s

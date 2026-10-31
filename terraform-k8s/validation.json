@@ -1,0 +1,72 @@
+{
+  "scope": "Native reference integration spike; no model pilot or calibrated negative-control suite.",
+  "versions": {
+    "terraform": "1.15.9",
+    "kubernetes_provider": "3.2.1",
+    "k3s": "1.35.7+k3s1",
+    "postgresql": "17.11"
+  },
+  "reference": {
+    "passed": true,
+    "result_store_path": "/nix/store/qzyh8q8ycl9jgrjjrv4ya16kjm358f1g-vm-test-run-terraform-k8s-docmill-spike",
+    "test_script_seconds": 334.49,
+    "result": {
+      "phases": [
+        "fresh-deployment",
+        "acknowledged-worker-loss",
+        "backend-replacement",
+        "cold-boot-and-no-drift",
+        "namespace-isolation",
+        "destroy-and-volume-cleanup"
+      ],
+      "reports_checked": 9,
+      "passed": true
+    },
+    "log_sha256": "a81677d3fa9ec4aec542bffcd9af4b35af9b67627860f6d3b83746a99caf2e3e"
+  },
+  "cluster_smoke": {
+    "passed": true,
+    "result_store_path": "/nix/store/50kq64js29s0lq8v6i89s9ccz58zvm12-vm-test-run-terraform-k3s-smoke"
+  },
+  "database_container_smoke": {
+    "passed": true,
+    "image_archive": "/nix/store/gzwgwphb07852zwnfgkpajqyh52g849y-docker-image-docmill-postgres.tar.gz",
+    "temporary_container_removed": true
+  },
+  "public_development_driver": {
+    "evaluated": true,
+    "boot_and_deploy_trial": false
+  },
+  "observed_pre_fix_failure": {
+    "phase": "cold boot retains data and Terraform converges without drift",
+    "reason": "PostgreSQL rejected remounted data-directory permissions. Reference fsGroupChangePolicy was changed to OnRootMismatch; all checks then passed.",
+    "log_sha256": "de59b025fcdc730399fb6e07cdb3c6cc3d6d67dc4074759db050a6ec4e3fb002",
+    "classification": "development observation, not a calibrated final-version control"
+  },
+  "raw_logs_directory": "logs/terraform-k8s/final-validation",
+  "source_sha256": {
+    ".gitignore": "7b0654d033df63ae52ad1b534c6bafa5ded3db8358a986c1d637f2b8ddef4563",
+    "PROVENANCE.md": "add35a26932abca884daabd1b3080cc1e57dc59bdfac74d561508608b15e62c3",
+    "README.md": "bc442121a9e66b37fd93bad6143bf31dfe4517fcd013132984c80a711a125565",
+    "base.nix": "624020c6abca2b06f1cdc1637808556dfc76fde4f06d9df9766d14f48930e14e",
+    "default.nix": "64a01d1ddc27d5986347ed54fa2308c8fcad0d6f34ac1d97f47bf3810b059002",
+    "deployment/.terraform.lock.hcl": "e7085a0fffdebb93bfbf9273977f01bf66161ed8ab0c9d6d9ad596c4f8b01ec8",
+    "deployment/main.tf.json": "58cc5a51bc06cb454c1d08a525d6ec46ae00ef1a4fa1036d485a01724cc53ab3",
+    "images.nix": "7413d1f1c0d68d81a7c28056e06021cba83b52a88d32fd7db7d5c88cd5179d75",
+    "instruction.md": "52b261fd478b0490cf10aaf740183442d31d214fea4ee633b9c5fe6efb9988f6",
+    "nixpkgs.nix": "cd3b830f19c897d207c383b4618bb1422fa92e50ace47dba4ae2f1c52cd58c4b",
+    "repository/README.md": "e324dc287621b451fa3b51bb75de880073b37602d525fcc4203e1523ec7dce0e",
+    "repository/docmill/__init__.py": "1fdaca9489799c32621a012816b5ff6b53fc19260ec2359f5510f7c820e61477",
+    "repository/docmill/__main__.py": "8ba1cad6b1ea708f20a7c115cf1aeaffc75188f30a8b71141713bfc949ca30ff",
+    "repository/docmill/schema.sql": "deb23ef55248d292c16210d2c43cfbd03e7c5cd359034a6b48d0e53465751035",
+    "repository/nixpkgs.nix": "cd3b830f19c897d207c383b4618bb1422fa92e50ace47dba4ae2f1c52cd58c4b",
+    "repository/requirements.txt": "0f0bd6c7b8ad35cde17e34147774bfcdcde314c0947774654af4d91426891683",
+    "repository/shell.nix": "adad29737a3fa4833d92e7c90ccbd4b83dd1f298365652b80626e51371d1a121",
+    "shell.nix": "03ddb59b4076c74b7078ff9bd621b3dc3e18b86c672cfe89bd7fe80a3b8e9b15",
+    "solution/.terraform.lock.hcl": "e7085a0fffdebb93bfbf9273977f01bf66161ed8ab0c9d6d9ad596c4f8b01ec8",
+    "solution/main.tf.json": "45fb76ca0f546fd19be1a12862c5ca857ef9f195dbe6857c7cbba0a16fdc9774",
+    "tests/verify.py": "63e985788da7ef77caab3e1a13dd2d5b80f961e306891d0ac86ba2291c3e93fb",
+    "toolchain.nix": "0e18c20756a2ebea3e1cef93ea2fa2333c0e4aff887090e5b65508b4b8d788c0",
+    "vm.nix": "8489fd451096e345c4bb66ef8f9fe45ea8089cbaf7be8fd3b39f764a441db356"
+  }
+}
