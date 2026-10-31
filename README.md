@@ -14,6 +14,11 @@ boundaries. It has reference/control validation and one successful model pilot,
 but no Harbor packaging yet; it is a candidate rather than another completed
 assignment task. See [the pilot results](pilots/readme-to-nixos-codex-001/README.md).
 
+The [Hyprland visual prototype](hyprland-visual/README.md) adds a screenshot-led
+desktop configuration task with real keyboard checks, cold-boot verification,
+and fixed-renderer visual scoring. A separate Claux/OpenRouter screenshot loop
+supports vision-model pilots. It is also a native prototype without Harbor packaging.
+
 | Task | Capability assessed | Failure modes | Success checks | Quality controls |
 | --- | --- | --- | --- | --- |
 | `session-recovery` | Recover durable agent state across crashes and external effects | Duplicate actions, lost calls/history, cross-session reuse | Independent receipts, transcript pairing, explicit crash boundaries | Canonical and alternate solutions; baseline and incorrect fixes |

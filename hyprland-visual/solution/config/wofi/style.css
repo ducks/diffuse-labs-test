@@ -1,0 +1,8 @@
+* { font-family: "DejaVu Sans Mono"; font-size: 16px; }
+window { background-color: #282828; color: #ebdbb2; border: 3px solid #d79921; border-radius: 14px; }
+#outer-box { padding: 16px; }
+#input { background-color: #3c3836; color: #ebdbb2; border: none; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+#inner-box { background-color: transparent; }
+#entry { padding: 12px; border-radius: 8px; }
+#entry:selected { background-color: #504945; }
+#text:selected { color: #fabd2f; }

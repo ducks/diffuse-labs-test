@@ -1,0 +1,9 @@
+{
+  "layer":"top", "position":"top", "height":40,
+  "margin-top":12, "margin-left":24, "margin-right":24,
+  "modules-left":["hyprland/workspaces"],
+  "modules-center":["custom/title"], "modules-right":["custom/lab"],
+  "hyprland/workspaces":{"format":"{name}","persistent-workspaces":{"*":[1,2,3]},"on-click":"activate"},
+  "custom/title":{"format":"HYPRLAND / FIELD NOTES"},
+  "custom/lab":{"format":"LOCAL  •  READY"}
+}

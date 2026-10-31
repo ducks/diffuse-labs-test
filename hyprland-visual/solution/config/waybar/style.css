@@ -1,0 +1,7 @@
+* { font-family: "DejaVu Sans Mono"; font-size: 13px; border: none; border-radius: 0; min-height: 0; }
+window#waybar { background: #282828; color: #ebdbb2; border-radius: 12px; }
+#workspaces { margin: 6px 8px; }
+#workspaces button { color: #a89984; padding: 0 14px; margin: 0 2px; border-radius: 8px; background: transparent; }
+#workspaces button.active { background: #d79921; color: #1d2021; }
+#custom-title { color: #83a598; }
+#custom-lab { color: #b8bb26; padding: 0 18px; }
