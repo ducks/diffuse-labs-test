@@ -118,7 +118,10 @@ try:
         raise RuntimeError('Starting public preview failed: '+feedback)
     previous_answer = ''
     for index in range(1, args.rounds+1):
-        prompt = f'''Implement instruction.md by editing only the six files under config/.
+        prompt = f'''Configure the supplied Hyprland 0.56.2 desktop to match the three
+target screenshots. Read instruction.md for the full contract. Edit only the
+six config files under config/ for Hyprland, Waybar, Foot, and Wofi.
+Get a working first draft saved, then refine it.
 You are visual iteration {index} of {args.rounds}. The first three attached images
 are the targets in order: empty, tiled, launcher. The next three are the current
 desktop in the same order. Inspect the existing config and adjust it to match.
@@ -129,6 +132,7 @@ edits and briefly describe them. There is no private grader feedback.
 Previous iteration's answer: {previous_answer[-2500:]}
 Public preview status: {feedback or 'all three scenes captured successfully'}
 '''
+        (run/f'prompt-{index}.txt').write_text(prompt)
         command = bound+['--', '/claux', '--config', '/agent-home/config.toml', '-p', prompt,
                          '--output-format', 'json', '--transcript', f'/artifacts/round-{index}.json']
         for folder in ['targets', 'current']:

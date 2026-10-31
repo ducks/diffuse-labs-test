@@ -68,3 +68,9 @@ with checkpoints recording 13 and 22 rounds. Functional checks passed on the
 unchanged starter, but private visual grading failed. The round limit was not
 reached. This remains a time-bounded exploratory result, not a hard-difficulty
 claim; the fresh-context screenshot loop also limits its interpretation.
+
+The [single ten-minute pilot](../pilots/hyprland-claux-003/README.md) used one
+continuous context with the 200-round allowance. It timed out without edits,
+with 34 rounds recorded at the final checkpoint, and failed visual grading.
+It had initial screenshots but no live preview feedback during the attempt.
+The later Hyprland-first/working-draft prompt change was not tested by that run.

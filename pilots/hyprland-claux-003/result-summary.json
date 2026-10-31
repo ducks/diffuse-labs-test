@@ -1,0 +1,70 @@
+{
+  "status": "evaluated_failure",
+  "passed": false,
+  "rounds": [
+    {
+      "round": 1,
+      "timed_out": true,
+      "wall_seconds": 600.1,
+      "public_preview_store": "/nix/store/0igbn232v4lffgg64z4ibhq5q19p28mc-vm-test-run-hyprland-visual-preview",
+      "checkpoint_usage": {
+        "rounds": 34,
+        "tool_calls": 43,
+        "input_tokens": 141397,
+        "output_tokens": 59655,
+        "cache_read_tokens": 2581888,
+        "cache_creation_tokens": 0,
+        "cost_usd": 0.17710571199999997,
+        "cost_source": "provider"
+      },
+      "checkpoint_tool_calls": 43,
+      "tool_errors": 4
+    }
+  ],
+  "verifier_exit_code": 1,
+  "model": "deepseek/deepseek-v4-flash-vision-exp",
+  "visual_iterations": 1,
+  "max_model_rounds_per_invocation": 200,
+  "seconds_per_iteration": 600,
+  "submitted_files_unchanged": true,
+  "submission_sha256": {
+    "foot/foot.ini": "0fe4bba47db75bf4907d5df5c12bb371d3a7ae28697d8d5fe81e29b237eb9763",
+    "hypr/hyprland.lua": "068da296218fa6591f03b34b442898ab5e09140e1cca4aab66d13f25e3c26f4f",
+    "waybar/config.jsonc": "fb0ff44b35853198d65524743005a0aa559081de13a91c78b800ec1e72f6a5af",
+    "waybar/style.css": "64c2e496399157cb2aa005291405873b5e2f214ba8380d309c73f4c4a2f413ec",
+    "wofi/config": "b591e4b403e8ab88c1457212b2858e2a5b426eaeec5843f65dc26b4ab8b10259",
+    "wofi/style.css": "141c033c0f0edf90bb2471559d7ddb226f530cc6e81e4a48c712bd376125936f"
+  },
+  "reason": "The single continuous context reached its 600-second wall-clock limit without saving a configuration edit. The unchanged starter failed private visual grading.",
+  "checkpoint_reported_cost_usd": 0.17710571199999997,
+  "cost_complete": false,
+  "cost_note": "Checkpoint usage may omit an in-flight request interrupted at timeout; not an exact total charge.",
+  "raw_directory": "logs/pilots/hyprland-claux-20261031T191446906863",
+  "verifier_sha256": "1787669075d6ab22cd7af46e4ed02a93c3d30fc4fb033f27bbbfbe25b7017e74",
+  "checkpoint_sha256": "5776ee92842523eec19565a655f904b86d66ffba5eebf68464357fcc14738e8b",
+  "visual_region_errors": {
+    "empty/bar": 0.058201149703302375,
+    "empty/background": 0.05620915032679739,
+    "reboot-empty/bar": 0.058201149703302375,
+    "reboot-empty/background": 0.05620915032679739,
+    "tiled/bar": 0.05239420740884073,
+    "tiled/left": 0.02908650919518134,
+    "tiled/right": 0.03441577291319578,
+    "tiled/left-edge": 0.051708405170314525,
+    "tiled/right-edge": 0.07694360737089229,
+    "reboot-tiled/bar": 0.05239420740884073,
+    "reboot-tiled/left": 0.02908650919518134,
+    "reboot-tiled/right": 0.03441577291319578,
+    "reboot-tiled/left-edge": 0.051708405170314525,
+    "reboot-tiled/right-edge": 0.07694360737089229,
+    "launcher/bar": 0.05239420740884073,
+    "launcher/menu": 0.1312246916866294,
+    "launcher/outside": 0.03761274967503341,
+    "reboot-launcher/bar": 0.05239420740884073,
+    "reboot-launcher/menu": 0.1312246916866294,
+    "reboot-launcher/outside": 0.03761274967503341
+  },
+  "feedback_scope": "Six initial screenshots were attached. No live preview or mid-attempt feedback was available. Preview and private grading ran after the attempt.",
+  "prompt_scope": "The outer prompt referenced instruction.md, which explicitly names Hyprland. The tool trace confirms the model read that file. The clearer Hyprland-first prompt was added only after this run.",
+  "interpretation": "More uninterrupted time did not produce a saved edit for this requested model and harness. This does not establish general task difficulty or isolate the cause of the analysis loop."
+}

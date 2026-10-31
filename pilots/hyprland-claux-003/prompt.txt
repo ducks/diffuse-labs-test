@@ -1,0 +1,10 @@
+Implement instruction.md by editing only the six files under config/.
+You are visual iteration 1 of 1. The first three attached images
+are the targets in order: empty, tiled, launcher. The next three are the current
+desktop in the same order. Inspect the existing config and adjust it to match.
+The host handles VM rendering between iterations; Nix/KVM are not available in
+this editing sandbox. Do not change fixtures, helpers, targets, or VM code.
+You have 600 seconds and at most 200 model rounds. Save your
+edits and briefly describe them. There is no private grader feedback.
+Previous iteration's answer: 
+Public preview status: all three scenes captured successfully

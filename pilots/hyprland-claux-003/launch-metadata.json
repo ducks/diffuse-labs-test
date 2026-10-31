@@ -1,0 +1,18 @@
+{
+  "task_source_commit": "de2d22a6ef36a3400b9ecfa06471c499c5e6d287",
+  "runner_change": "Record the exact prompt; task and model settings otherwise unchanged except one 600-second iteration.",
+  "command": [
+    "python",
+    "scripts/pilot_hyprland_claux.py",
+    "--model",
+    "deepseek/deepseek-v4-flash-vision-exp",
+    "--binary",
+    "/home/urho/dev/claux/target/debug/claux",
+    "--rounds",
+    "1",
+    "--model-rounds",
+    "200",
+    "--seconds-per-round",
+    "600"
+  ]
+}

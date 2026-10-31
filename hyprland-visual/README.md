@@ -80,6 +80,9 @@ experiments. The first exploratory run used 12, exhausted that cap without
 edits, and does not establish task difficulty.
 The [second pilot](../pilots/hyprland-claux-002/README.md) actually used 200;
 both iterations hit their time limits without editing and failed visual grading.
+A [single ten-minute attempt](../pilots/hyprland-claux-003/README.md) also timed
+out without edits. The runner prompt now names Hyprland directly and asks for
+a saved working draft before refinement; that revised opening has not been piloted.
 
 The model ID is an explicit pilot choice, not a permanent engine default. Its
 image and tool support was checked against OpenRouter's public catalog when
