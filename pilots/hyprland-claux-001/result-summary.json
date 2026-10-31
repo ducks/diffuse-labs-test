@@ -1,0 +1,107 @@
+{
+  "status": "evaluated_failure",
+  "passed": false,
+  "reason": "Both visual iterations exhausted the configured 12-model-round cap; all six submitted files remained unchanged and private visual grading failed.",
+  "model": "deepseek/deepseek-v4-flash-vision-exp",
+  "visual_iterations": 2,
+  "max_model_rounds_per_iteration": 12,
+  "rounds": [
+    {
+      "round": 1,
+      "exit_code": 1,
+      "wall_seconds": 162.31,
+      "usage": {
+        "rounds": 12,
+        "tool_calls": 18,
+        "input_tokens": 24047,
+        "output_tokens": 9861,
+        "cache_read_tokens": 139776,
+        "cache_creation_tokens": 0,
+        "cost_usd": 0.012521491360000001,
+        "cost_source": "provider"
+      },
+      "outcome": {
+        "status": "error",
+        "message": "Turn stopped at the configured limit of 12 model rounds",
+        "failure": {
+          "kind": "other",
+          "retryable": false,
+          "attempts": 12
+        }
+      },
+      "round_budget_exhausted": true
+    },
+    {
+      "round": 2,
+      "exit_code": 1,
+      "wall_seconds": 40.65,
+      "usage": {
+        "rounds": 12,
+        "tool_calls": 15,
+        "input_tokens": 66837,
+        "output_tokens": 4115,
+        "cache_read_tokens": 47104,
+        "cache_creation_tokens": 0,
+        "cost_usd": 0.036158992,
+        "cost_source": "provider"
+      },
+      "round_budget_exhausted": true,
+      "outcome": {
+        "status": "error",
+        "message": "Turn stopped at the configured limit of 12 model rounds",
+        "failure": {
+          "kind": "other",
+          "retryable": false,
+          "attempts": 12
+        }
+      }
+    }
+  ],
+  "provider_reported_cost_usd": 0.04868048336,
+  "submitted_files_unchanged": true,
+  "submission_sha256": {
+    "foot/foot.ini": "0fe4bba47db75bf4907d5df5c12bb371d3a7ae28697d8d5fe81e29b237eb9763",
+    "hypr/hyprland.lua": "068da296218fa6591f03b34b442898ab5e09140e1cca4aab66d13f25e3c26f4f",
+    "waybar/config.jsonc": "fb0ff44b35853198d65524743005a0aa559081de13a91c78b800ec1e72f6a5af",
+    "waybar/style.css": "64c2e496399157cb2aa005291405873b5e2f214ba8380d309c73f4c4a2f413ec",
+    "wofi/config": "b591e4b403e8ab88c1457212b2858e2a5b426eaeec5843f65dc26b4ab8b10259",
+    "wofi/style.css": "141c033c0f0edf90bb2471559d7ddb226f530cc6e81e4a48c712bd376125936f"
+  },
+  "visual_region_errors": {
+    "empty/bar": 0.058201149703302375,
+    "empty/background": 0.05620915032679739,
+    "reboot-empty/bar": 0.058201149703302375,
+    "reboot-empty/background": 0.05620915032679739,
+    "tiled/bar": 0.05239420740884073,
+    "tiled/left": 0.02908650919518134,
+    "tiled/right": 0.03441577291319578,
+    "tiled/left-edge": 0.051708405170314525,
+    "tiled/right-edge": 0.07694360737089229,
+    "reboot-tiled/bar": 0.05239420740884073,
+    "reboot-tiled/left": 0.02908650919518134,
+    "reboot-tiled/right": 0.03441577291319578,
+    "reboot-tiled/left-edge": 0.051708405170314525,
+    "reboot-tiled/right-edge": 0.07694360737089229,
+    "launcher/bar": 0.05239420740884073,
+    "launcher/menu": 0.1312246916866294,
+    "launcher/outside": 0.03761274967503341,
+    "reboot-launcher/bar": 0.05239420740884073,
+    "reboot-launcher/menu": 0.1312246916866294,
+    "reboot-launcher/outside": 0.03761274967503341
+  },
+  "verifier_sha256": "739d6ab9e532a335fd590215d5aa67467a522d940bf71aac211600538b0563ce",
+  "raw_directory": "logs/pilots/hyprland-claux-20261031T000425665221",
+  "prior_transport_attempt": {
+    "directory": "logs/pilots/hyprland-claux-20261030T235848546548",
+    "classification": "unavailable: sandbox trust bundle missing",
+    "model_output_tokens": 0,
+    "tool_calls": 0,
+    "cost_known": false
+  },
+  "harness_issues": [
+    "Initial preflight used unsupported --version; no model request.",
+    "Original runner stopped after the first per-iteration model limit; manually continued only the second already-planned iteration with unchanged budget and public feedback.",
+    "Continuation helper missed a Python import during optional preview collection after model iteration two; the final six files were collected and graded independently with no additional model call."
+  ],
+  "interpretation": "Budget-limited exploratory result, not evidence of hard difficulty. Future runner default restored to Claux normal 200 model rounds with wall-clock enforcement."
+}

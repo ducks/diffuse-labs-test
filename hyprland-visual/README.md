@@ -74,6 +74,11 @@ python scripts/pilot_hyprland_claux.py \
   --binary /path/to/claux --rounds 2 --seconds-per-round 180
 ```
 
+The model-round limit defaults to Claux's normal 200; the wall-clock limit
+remains enforced. `--model-rounds` is available for explicitly named budget
+experiments. The first exploratory run used 12, exhausted that cap without
+edits, and does not establish task difficulty.
+
 The model ID is an explicit pilot choice, not a permanent engine default. Its
 image and tool support was checked against OpenRouter's public catalog when
 preparing this prototype. Future availability may change. API usage/cost is

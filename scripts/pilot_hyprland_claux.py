@@ -17,6 +17,8 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--model', required=True, help='OpenRouter model supporting images and tools.')
 parser.add_argument('--binary', type=Path, required=True)
 parser.add_argument('--rounds', type=int, default=2, choices=range(1, 4))
+parser.add_argument('--model-rounds', type=int, default=200, choices=range(1, 2001),
+                    help='Per-invocation model round limit; defaults to Claux\'s normal 200.')
 parser.add_argument('--seconds-per-round', type=int, default=180, choices=range(30, 601))
 parser.add_argument('--key-file', type=Path, default=Path.home()/'.config/claux/credentials/openrouter')
 args = parser.parse_args()
@@ -41,8 +43,7 @@ openai_api_key_env = "OPENROUTER_API_KEY"
 permission_mode = "bypass"
 native_fs_policy = "workspace_only"
 bash_fs_policy = "unrestricted"
-max_rounds = 12
-''')
+max_rounds = ''' + str(args.model_rounds) + '\n')
 artifacts = run/'agent-artifacts'
 artifacts.mkdir()
 bound = ['bwrap', '--unshare-all', '--share-net', '--die-with-parent',
@@ -59,7 +60,7 @@ for path in ['/etc/ssl', '/etc/ca-certificates', '/etc/pki', '/etc/resolv.conf',
 env = {'PATH':'/usr/bin:/bin', 'HOME':'/agent-home', 'USER':os.environ.get('USER', 'agent'),
        'OPENROUTER_API_KEY':key, 'LANG':'C.UTF-8', 'TERM':'dumb'}
 plan = {'model':args.model, 'rounds':args.rounds, 'seconds_per_round':args.seconds_per_round,
-        'max_model_rounds_per_invocation':12, 'binary_sha256':hashlib.sha256(binary.read_bytes()).hexdigest(),
+        'max_model_rounds_per_invocation':args.model_rounds, 'binary_sha256':hashlib.sha256(binary.read_bytes()).hexdigest(),
         'isolation':'Bubblewrap filesystem/PID namespaces; host home and Nix store absent; network for OpenRouter',
         'context':'Fresh Claux one-shot per visual round; configs, prior answer, and public screenshots retained',
         'grading':'Once, after all rounds; no private feedback to model', 'source_manifest':{
@@ -123,7 +124,7 @@ are the targets in order: empty, tiled, launcher. The next three are the current
 desktop in the same order. Inspect the existing config and adjust it to match.
 The host handles VM rendering between iterations; Nix/KVM are not available in
 this editing sandbox. Do not change fixtures, helpers, targets, or VM code.
-You have {args.seconds_per_round} seconds and at most 12 model rounds. Save your
+You have {args.seconds_per_round} seconds and at most {args.model_rounds} model rounds. Save your
 edits and briefly describe them. There is no private grader feedback.
 Previous iteration's answer: {previous_answer[-2500:]}
 Public preview status: {feedback or 'all three scenes captured successfully'}
@@ -135,8 +136,17 @@ Public preview status: {feedback or 'all three scenes captured successfully'}
                 if (workspace/folder/(name+'.png')).is_file():
                     command += ['--image', '/workspace/'+folder+'/'+name+'.png']
         started = time.monotonic()
-        result = subprocess.run(command, env=env, capture_output=True, text=True,
-                                timeout=args.seconds_per_round)
+        try:
+            result = subprocess.run(command, env=env, capture_output=True, text=True,
+                                    timeout=args.seconds_per_round)
+        except subprocess.TimeoutExpired:
+            record = {'round':index, 'timed_out':True, 'wall_seconds':round(time.monotonic()-started, 2)}
+            rounds.append(record)
+            previous_answer = 'Iteration reached its wall-clock limit; the saved config is retained.'
+            print(json.dumps(record), flush=True)
+            candidate, preview, feedback = nix_preview(index)
+            record['public_preview_store'] = preview
+            continue
         stdout = result.stdout.replace(key, '[REDACTED]')
         stderr = result.stderr.replace(key, '[REDACTED]')
         (run/f'round-{index}.stdout').write_text(stdout)
@@ -145,12 +155,17 @@ Public preview status: {feedback or 'all three scenes captured successfully'}
                   'wall_seconds':round(time.monotonic()-started, 2)}
         rounds.append(record)
         print(json.dumps(record), flush=True)
-        if result.returncode:
-            raise RuntimeError('Claux failed; inspect saved stderr/JSON without retrying the model')
         response = json.loads(stdout)
         previous_answer = response.get('result', '')
         record['usage'] = response.get('usage')
         record['cost'] = response.get('cost')
+        if result.returncode:
+            message = response.get('outcome', {}).get('message', '')
+            if 'configured limit' in message and 'model rounds' in message:
+                record['round_budget_exhausted'] = True
+                previous_answer = message
+            else:
+                raise RuntimeError('Claux failed; inspect saved stderr/JSON without retrying the model')
         candidate, preview, feedback = nix_preview(index)
         record['public_preview_store'] = preview
     with (run/'verifier.log').open('w') as stdout:

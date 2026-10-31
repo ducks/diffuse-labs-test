@@ -54,3 +54,10 @@ grader, no imported third-party screenshot dataset, and no Harbor integration.
 Claux vision pilot records are separate from the functional controls. A model
 attempt must see only the exported public workspace; model claims alone never
 determine its score.
+
+The [first exploratory Claux pilot](../pilots/hyprland-claux-001/README.md)
+exhausted an explicitly configured 12-model-round limit in both visual
+iterations, saved no edits, and failed visual grading. Its restrictive budget
+and fresh-context iteration design prevent a difficulty conclusion. The runner's
+future default was restored to Claux's normal 200 rounds with wall-clock limits;
+the original trial's score and recorded settings are unchanged.
