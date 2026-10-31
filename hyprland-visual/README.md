@@ -78,6 +78,8 @@ The model-round limit defaults to Claux's normal 200; the wall-clock limit
 remains enforced. `--model-rounds` is available for explicitly named budget
 experiments. The first exploratory run used 12, exhausted that cap without
 edits, and does not establish task difficulty.
+The [second pilot](../pilots/hyprland-claux-002/README.md) actually used 200;
+both iterations hit their time limits without editing and failed visual grading.
 
 The model ID is an explicit pilot choice, not a permanent engine default. Its
 image and tool support was checked against OpenRouter's public catalog when

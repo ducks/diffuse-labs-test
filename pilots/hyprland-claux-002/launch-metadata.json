@@ -1,0 +1,17 @@
+{
+  "task_source_commit": "ab49afcaac3095e39f564af26320bb377e1eef89",
+  "command": [
+    "python",
+    "scripts/pilot_hyprland_claux.py",
+    "--model",
+    "deepseek/deepseek-v4-flash-vision-exp",
+    "--binary",
+    "/home/urho/dev/claux/target/debug/claux",
+    "--rounds",
+    "2",
+    "--model-rounds",
+    "200",
+    "--seconds-per-round",
+    "180"
+  ]
+}

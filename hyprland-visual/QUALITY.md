@@ -61,3 +61,10 @@ iterations, saved no edits, and failed visual grading. Its restrictive budget
 and fresh-context iteration design prevent a difficulty conclusion. The runner's
 future default was restored to Claux's normal 200 rounds with wall-clock limits;
 the original trial's score and recorded settings are unchanged.
+
+A [fresh pilot with the actual 200-round allowance](../pilots/hyprland-claux-002/README.md)
+also saved no edits. Both iterations hit their 180-second wall-clock limit,
+with checkpoints recording 13 and 22 rounds. Functional checks passed on the
+unchanged starter, but private visual grading failed. The round limit was not
+reached. This remains a time-bounded exploratory result, not a hard-difficulty
+claim; the fresh-context screenshot loop also limits its interpretation.

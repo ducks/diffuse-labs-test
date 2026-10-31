@@ -1,0 +1,1 @@
+{"layer":"top","position":"top","height":32,"modules-left":["hyprland/workspaces"],"modules-right":["custom/lab"],"custom/lab":{"format":"VISUAL LAB"},"hyprland/workspaces":{"persistent-workspaces":{"*":[1,2,3]}}}

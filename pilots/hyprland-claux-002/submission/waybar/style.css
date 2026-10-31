@@ -1,0 +1,4 @@
+* { font-family: "DejaVu Sans Mono"; font-size: 12px; }
+window#waybar { background: #222222; color: #ffffff; }
+#workspaces button { color: #ffffff; padding: 0 10px; }
+#custom-lab { padding: 0 16px; }

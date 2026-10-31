@@ -1,0 +1,86 @@
+{
+  "status": "evaluated_failure",
+  "passed": false,
+  "rounds": [
+    {
+      "round": 1,
+      "timed_out": true,
+      "wall_seconds": 180.1,
+      "public_preview_store": "/nix/store/0igbn232v4lffgg64z4ibhq5q19p28mc-vm-test-run-hyprland-visual-preview",
+      "checkpoint_usage": {
+        "rounds": 13,
+        "tool_calls": 17,
+        "input_tokens": 50178,
+        "output_tokens": 11401,
+        "cache_read_tokens": 302848,
+        "cache_creation_tokens": 0,
+        "cost_usd": 0.041367512,
+        "cost_source": "provider"
+      },
+      "checkpoint_tool_calls": 17,
+      "tool_errors": 1,
+      "checkpoint_sha256": "c378b4a183a093204d6529323bac82e3de9dcc5b33589e89d66309d6ddbcf477"
+    },
+    {
+      "round": 2,
+      "timed_out": true,
+      "wall_seconds": 180.1,
+      "public_preview_store": "/nix/store/0igbn232v4lffgg64z4ibhq5q19p28mc-vm-test-run-hyprland-visual-preview",
+      "checkpoint_usage": {
+        "rounds": 22,
+        "tool_calls": 28,
+        "input_tokens": 35898,
+        "output_tokens": 18347,
+        "cache_read_tokens": 353536,
+        "cache_creation_tokens": 0,
+        "cost_usd": 0.02203170536,
+        "cost_source": "provider"
+      },
+      "checkpoint_tool_calls": 28,
+      "tool_errors": 0,
+      "checkpoint_sha256": "45f5ef670c56d9673e35a369d48572625960e4c3dd2420f48daefc44e47c2792"
+    }
+  ],
+  "verifier_exit_code": 1,
+  "model": "deepseek/deepseek-v4-flash-vision-exp",
+  "max_model_rounds_per_invocation": 200,
+  "seconds_per_iteration": 180,
+  "submitted_files_unchanged": true,
+  "submission_sha256": {
+    "foot/foot.ini": "0fe4bba47db75bf4907d5df5c12bb371d3a7ae28697d8d5fe81e29b237eb9763",
+    "hypr/hyprland.lua": "068da296218fa6591f03b34b442898ab5e09140e1cca4aab66d13f25e3c26f4f",
+    "waybar/config.jsonc": "fb0ff44b35853198d65524743005a0aa559081de13a91c78b800ec1e72f6a5af",
+    "waybar/style.css": "64c2e496399157cb2aa005291405873b5e2f214ba8380d309c73f4c4a2f413ec",
+    "wofi/config": "b591e4b403e8ab88c1457212b2858e2a5b426eaeec5843f65dc26b4ab8b10259",
+    "wofi/style.css": "141c033c0f0edf90bb2471559d7ddb226f530cc6e81e4a48c712bd376125936f"
+  },
+  "reason": "Both iterations reached their wall-clock limits while inspecting screenshots, without changing the six config files. Private visual grading failed.",
+  "checkpoint_reported_cost_usd": 0.06339921736000001,
+  "cost_complete": false,
+  "cost_note": "Checkpoint usage excludes any unreported in-flight request interrupted at timeout; not an exact total charge.",
+  "raw_directory": "logs/pilots/hyprland-claux-20261031T011335360929",
+  "verifier_sha256": "76ab7a47e1608a3eb2a2c3ad01b5da3f6f0548590a4570fc60aab81f66a3ab19",
+  "visual_region_errors": {
+    "empty/bar": 0.058201149703302375,
+    "empty/background": 0.05620915032679739,
+    "reboot-empty/bar": 0.058201149703302375,
+    "reboot-empty/background": 0.05620915032679739,
+    "tiled/bar": 0.05239420740884073,
+    "tiled/left": 0.02908650919518134,
+    "tiled/right": 0.03441577291319578,
+    "tiled/left-edge": 0.051708405170314525,
+    "tiled/right-edge": 0.07694360737089229,
+    "reboot-tiled/bar": 0.05239420740884073,
+    "reboot-tiled/left": 0.02908650919518134,
+    "reboot-tiled/right": 0.03441577291319578,
+    "reboot-tiled/left-edge": 0.051708405170314525,
+    "reboot-tiled/right-edge": 0.07694360737089229,
+    "launcher/bar": 0.05239420740884073,
+    "launcher/menu": 0.1312246916866294,
+    "launcher/outside": 0.03761274967503341,
+    "reboot-launcher/bar": 0.05239420740884073,
+    "reboot-launcher/menu": 0.1312246916866294,
+    "reboot-launcher/outside": 0.03761274967503341
+  },
+  "interpretation": "No 200-round exhaustion. This is a time-bounded exploratory failure with fresh contexts, not evidence of general task difficulty."
+}
