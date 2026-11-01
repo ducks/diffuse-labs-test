@@ -1,0 +1,17 @@
+Read instruction.md and implement the Terraform deployment in deployment/.
+Inspect repository/README.md and application source as needed. Only deployment/
+is submitted, and the evaluator retains its original app, images, cluster and
+private verifier. Do not modify the app or bypass the renderer. The public
+vm.nix supports development testing; it contains no private grading assertions.
+Build its driverInteractive attribute with nix-build, then run the returned
+bin/nixos-test-driver to start the cluster and exercise your deployment.
+The guest starts with the supplied deployment files at /etc/task-deployment;
+copy these to a writable directory before terraform init/apply. Create your
+own development namespace and runtime-credentials Secret, then supply the
+four documented Terraform inputs. KUBECONFIG is /etc/rancher/k3s/k3s.yaml.
+On the host, nix-shell shell.nix provides the pinned Terraform and Kubernetes
+provider for schema/validation work. Nixpkgs is at /opt/nixpkgs. This container
+has its own Nix store; no host daemon or host files are mounted. KVM is available.
+You have 900 seconds total, including development tests. Save a working first
+version before spending the remaining time validating it. Finish with a brief
+summary of what you tested. No private feedback or second attempt is available.

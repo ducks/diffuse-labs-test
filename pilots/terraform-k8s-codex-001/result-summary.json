@@ -1,0 +1,50 @@
+{
+  "container": "diffuse-terraform-pilot-001",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "timeout_seconds": 900,
+  "retries": 0,
+  "preflight_passed": true,
+  "agent_exit_code": 0,
+  "timed_out": false,
+  "agent_wall_seconds": 880.44,
+  "submission_files": {
+    ".terraform.lock.hcl": "e7085a0fffdebb93bfbf9273977f01bf66161ed8ab0c9d6d9ad596c4f8b01ec8",
+    "main.tf": "a319280106ae39f6e872cd14e398632ac4273e097bca879c081504a55f3f5b98",
+    "main.tf.json": "58cc5a51bc06cb454c1d08a525d6ec46ae00ef1a4fa1036d485a01724cc53ab3"
+  },
+  "final_message_collected": true,
+  "usage": {
+    "input_tokens": 3497981,
+    "cached_input_tokens": 3432192,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 13969,
+    "reasoning_output_tokens": 3613
+  },
+  "status": "submission_collected",
+  "source_commit": "109a8a576e479c72bfc47f456fcf6ee1a8d5b13e",
+  "agent": "codex-cli",
+  "agent_version": "0.164.0",
+  "model_attempts": 1,
+  "model_outcome": "evaluated_pass",
+  "private_verifier_exit_code": 0,
+  "private_verifier_phases": [
+    "fresh-deployment",
+    "acknowledged-worker-loss",
+    "backend-replacement",
+    "cold-boot-and-no-drift",
+    "namespace-isolation",
+    "destroy-and-volume-cleanup"
+  ],
+  "reports_checked": 9,
+  "private_test_script_seconds": 342.38,
+  "result_store_path": "/nix/store/v6zsl0afr4vpp6vaxglss1k5ybcwxrf4-vm-test-run-terraform-k8s-docmill-spike",
+  "cost_usd": null,
+  "agent_events_sha256": "fdf1233b2e69afbc9469fd05d7e0a7814d77c6834c46f1e1c46fc277ee2827ce",
+  "private_verifier_log_sha256": "9cec895b105ae4dfafb14399a8e0c1df2cd35a015e2c61c980440bb3eac31dbe",
+  "observed_completed_shell_commands": 66,
+  "private_materials_available_to_model": false,
+  "pre_model_setup_failures": 0,
+  "raw_artifacts_directory": "logs/pilots/terraform-k8s-codex-001",
+  "scope": "One exploratory native task pilot, not a solve-rate estimate, Harbor trial, or hard-difficulty claim."
+}

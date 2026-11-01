@@ -57,9 +57,9 @@ proof of replacement. These are harness/reference fixes, not model failures.
 
 ## Limits
 
-This is a native integration spike. There is no agent attempt, solve-rate
-estimate, Harbor integration, or independently calibrated suite of good/bad
-deployments. One reference pass does not establish hard difficulty or general
+This is a native integration spike. One isolated Codex pilot passed all six phases (see
+`../pilots/terraform-k8s-codex-001/`). There is no solve-rate estimate, Harbor
+integration, or independently calibrated suite of good/bad deployments. One reference pass does not establish hard difficulty or general
 reliability. Successful Nix derivations may be cached; cache reuse is not a fresh
 trial.
 

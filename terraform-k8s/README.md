@@ -76,7 +76,8 @@ this spike's Nix import.
 ## Status and limits
 
 This is a native integration spike, not a packaged Harbor task or a calibrated
-five-task submission. No model attempt or solve-rate claim is included. Keep
+five-task submission. One isolated Codex pilot passed all six phases; see
+`../pilots/terraform-k8s-codex-001/`. No solve-rate claim is made. Keep
 the verifier and reference outside a future agent's workspace. The initial
 cluster/DNS/provider smoke test and schema validation are separate from the full
 lifecycle result. See `QUALITY.md` for the actual validation scope.

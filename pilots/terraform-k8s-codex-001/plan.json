@@ -1,0 +1,12 @@
+{
+  "source_commit": "109a8a576e479c72bfc47f456fcf6ee1a8d5b13e",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "agent_timeout_seconds": 900,
+  "attempts": 1,
+  "retries": 0,
+  "container_cpus": 2,
+  "container_memory_gib": 8,
+  "isolation": "Fresh Docker container with private Nix store, KVM, public workspace only; no host home, Nix store, or daemon mounts",
+  "verification": "Frozen native private verifier; only deployment directory collected; no private feedback to agent"
+}

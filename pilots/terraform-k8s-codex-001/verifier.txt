@@ -1,0 +1,3 @@
+TERRAFORM_K8S_SPIKE_VERIFIED {"phases": ["fresh-deployment", "acknowledged-worker-loss", "backend-replacement", "cold-boot-and-no-drift", "namespace-isolation", "destroy-and-volume-cleanup"], "reports_checked": 9, "passed": true}
+Private test script: 342.38 seconds.
+Result: /nix/store/v6zsl0afr4vpp6vaxglss1k5ybcwxrf4-vm-test-run-terraform-k8s-docmill-spike
