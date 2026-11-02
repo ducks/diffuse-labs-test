@@ -1,0 +1,28 @@
+The Terraform deployment is in `deployment/app.tf`, and `main.tf.json` is unchanged. I tested it end to end in the dev VM: it deployed, served authorized jobs, re-planned clean and tore down cleanly. I didn't get to the worker-interruption, Redis-loss, VM-reboot or second-namespace scenarios.
+
+**What it creates:**
+- Four Deployments, `api`, `worker`, `postgres` and `redis`, each labelled `app=<name>`.
+- `postgres` and `redis` Services that are private to the cluster (ClusterIP), and an `api` NodePort Service on `api_node_port`.
+- Two PVCs on local-path storage: `postgres-data` mounted at `/data`, and `reports` shared by api and worker at `/reports` (`DOCMILL_STORAGE=/reports`).
+- On the api pod, a `migrate` init container that sets up the database schema before the API starts serving.
+
+**Credentials:** everything comes from the runtime Secret, with no values in source. `api-token` and `db-password` are mounted as files under `/run/credentials/`, and `PGPASSWORD` is read from the Secret.
+
+**Security and lifecycle:**
+- Every pod runs as UID/GID 1000 and refuses to run as root; writable volumes get group 1000.
+- `/tmp` is a writable scratch volume.
+- The api, worker and postgres Deployments use the Recreate strategy, so the old pod stops before the new one mounts the same volume.
+- `wait_until_bound=false` on the PVCs and `wait_for_rollout=false` on the Deployments keep Terraform from blocking while pods start up.
+
+**Tested in the dev VM**, with namespace `dev` and NodePort 30080:
+1. `terraform apply` created 9 resources and all four pods reached Running.
+2. `/health` returned ready.
+3. An authorized `POST /jobs` returned an ID, the job reached `done` with its label kept, and the SVG downloaded.
+4. A request without the token got 401.
+5. `id` inside the api pod showed UID 1000.
+6. `terraform plan -detailed-exitcode` returned 0 after apply.
+7. `terraform destroy` removed all 9 resources; afterwards the namespace showed no resources.
+
+Two things came up during testing:
+- **Copying the deployment files:** the files in `/etc/task-deployment` stay read-only after a plain `cp -r`, which caused a lock error. I had to `chmod -R u+w` the copy first.
+- **Startup log errors:** postgres logged `relation "reports" does not exist` while the worker polled before `migrate` had finished. The worker retries, so it recovered on its own.

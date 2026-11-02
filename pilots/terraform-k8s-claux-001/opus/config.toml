@@ -1,0 +1,11 @@
+model = "anthropic/claude-opus-5.5"
+openai_base_url = "https://openrouter.ai/api/v1"
+openai_provider_name = "openrouter"
+openai_protocol = "openrouter"
+openai_api_key_env = "OPENROUTER_API_KEY"
+openai_reasoning_effort = "low"
+permission_mode = "bypass"
+native_tool_filesystem_policy = "workspace_only"
+bash_filesystem_policy = "unrestricted"
+max_rounds = 200
+max_tokens = 8192

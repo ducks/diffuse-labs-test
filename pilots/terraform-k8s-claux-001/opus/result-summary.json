@@ -1,0 +1,42 @@
+{
+  "model": "anthropic/claude-opus-5.5",
+  "harness": "claux",
+  "provider": "openrouter",
+  "source_commit": "1fb4730669174e3c031dd8438341aacbbe5312e1",
+  "model_attempts": 1,
+  "task_retries": 0,
+  "provider_retries_observed": 0,
+  "model_outcome": "evaluated_fail",
+  "agent_exit_code": 0,
+  "agent_timed_out": false,
+  "agent_wall_seconds": 811.61,
+  "private_verifier_exit_code": 1,
+  "phases_passed": 3,
+  "failure_phase": "cold-boot-and-no-drift",
+  "observed_failure": "PostgreSQL rejected /data/pgdata permissions after the cold boot; API readiness timed out.",
+  "usage": {
+    "rounds": 10,
+    "tool_calls": 9,
+    "input_tokens": 147814,
+    "output_tokens": 6763,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "cost_usd": 0.726516,
+    "cost_source": "provider"
+  },
+  "cost_checkpoint_incomplete": false,
+  "cost_note": "Provider-reported cost for the completed session.",
+  "tool_trace_entries": 9,
+  "tool_errors": 1,
+  "public_inputs_match_codex_pilot": true,
+  "private_materials_available_to_model": false,
+  "submission_files": {
+    "app.tf": "e2d2319e30d9d9ac6060624b6bab6372be5f0fd259eb531db16e87d58e55073c",
+    "main.tf.json": "58cc5a51bc06cb454c1d08a525d6ec46ae00ef1a4fa1036d485a01724cc53ab3"
+  },
+  "transcript_sha256": "6d4652cda68680cc361d7227efbb0cbe43c5d9aed75a73afee327e59dc032985",
+  "verifier_log_sha256": "c9425d05075e39863bce7f70a8da0fa92f4e442b4decd20c52ec8566de55b2c7",
+  "runner_sha256": "8e0015993697fa507861f6573e13576b0af68c02cfb02f27aad0518891dc154e",
+  "binary_sha256": "796c520a214cc8a794b5ce0c11605e5146b505c27d9b93d2b4a161f3272f19ad",
+  "raw_artifacts_directory": "logs/pilots/terraform-claux-20261101T213838510689"
+}

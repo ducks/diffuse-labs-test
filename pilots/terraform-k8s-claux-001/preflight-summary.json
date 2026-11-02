@@ -1,0 +1,6 @@
+{
+  "model": "particle-ai/particle-1",
+  "status": "preflight_only",
+  "model_started": false,
+  "preflight_passed": true
+}

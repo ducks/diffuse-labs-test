@@ -1,0 +1,804 @@
+{
+  "terraform": {
+    "required_version": "= 1.15.9",
+    "required_providers": {
+      "kubernetes": {
+        "source": "hashicorp/kubernetes",
+        "version": "3.2.1"
+      }
+    }
+  },
+  "provider": {
+    "kubernetes": {
+      "config_path": "${var.kubeconfig_path}"
+    }
+  },
+  "variable": {
+    "namespace": {
+      "type": "string"
+    },
+    "kubeconfig_path": {
+      "type": "string"
+    },
+    "credential_secret_name": {
+      "type": "string",
+      "default": "runtime-credentials"
+    },
+    "api_node_port": {
+      "type": "number"
+    }
+  },
+  "locals": {
+    "app_image": "docmill-app:spike",
+    "postgres_image": "docmill-postgres:spike",
+    "redis_image": "docmill-redis:spike",
+    "storage": "/reports",
+    "database_url": "postgresql://docmill@postgres:5432/docmill",
+    "redis_url": "redis://redis:6379/0",
+    "credential_mount": "/run/credentials"
+  },
+  "resource": {
+    "kubernetes_persistent_volume_claim": {
+      "postgres_data": {
+        "metadata": {
+          "name": "postgres-data",
+          "namespace": "${var.namespace}",
+          "labels": {
+            "app": "postgres"
+          }
+        },
+        "spec": {
+          "access_modes": [
+            "ReadWriteOnce"
+          ],
+          "resources": {
+            "requests": {
+              "storage": "2Gi"
+            }
+          }
+        }
+      },
+      "reports": {
+        "metadata": {
+          "name": "docmill-reports",
+          "namespace": "${var.namespace}",
+          "labels": {
+            "app": "docmill"
+          }
+        },
+        "spec": {
+          "access_modes": [
+            "ReadWriteOnce"
+          ],
+          "resources": {
+            "requests": {
+              "storage": "1Gi"
+            }
+          }
+        }
+      }
+    },
+    "kubernetes_deployment": {
+      "postgres": {
+        "metadata": {
+          "name": "postgres",
+          "namespace": "${var.namespace}",
+          "labels": {
+            "app": "postgres"
+          }
+        },
+        "spec": {
+          "replicas": 1,
+          "strategy": {
+            "type": "Recreate"
+          },
+          "selector": {
+            "match_labels": {
+              "app": "postgres"
+            }
+          },
+          "template": {
+            "metadata": {
+              "labels": {
+                "app": "postgres"
+              }
+            },
+            "spec": {
+              "security_context": [
+                {
+                  "run_as_non_root": true,
+                  "run_as_user": "1000",
+                  "run_as_group": "1000",
+                  "fs_group": "1000",
+                  "seccomp_profile": [
+                    {
+                      "type": "RuntimeDefault"
+                    }
+                  ]
+                }
+              ],
+              "container": [
+                {
+                  "name": "postgres",
+                  "image": "${local.postgres_image}",
+                  "image_pull_policy": "Never",
+                  "command": [
+                    "postgres-entrypoint"
+                  ],
+                  "security_context": [
+                    {
+                      "allow_privilege_escalation": false,
+                      "run_as_non_root": true,
+                      "capabilities": {
+                        "drop": [
+                          "ALL"
+                        ]
+                      }
+                    }
+                  ],
+                  "port": [
+                    {
+                      "container_port": 5432,
+                      "name": "postgres"
+                    }
+                  ],
+                  "env": [
+                    {
+                      "name": "PGDATA",
+                      "value": "/data/pgdata"
+                    },
+                    {
+                      "name": "POSTGRES_PASSWORD_FILE",
+                      "value": "/run/credentials/db-password"
+                    }
+                  ],
+                  "volume_mount": [
+                    {
+                      "name": "data",
+                      "mount_path": "/data"
+                    },
+                    {
+                      "name": "credentials",
+                      "mount_path": "/run/credentials",
+                      "read_only": true
+                    }
+                  ],
+                  "readiness_probe": [
+                    {
+                      "exec": {
+                        "command": [
+                          "pg_isready",
+                          "-h",
+                          "127.0.0.1",
+                          "-U",
+                          "docmill",
+                          "-d",
+                          "docmill"
+                        ]
+                      },
+                      "initial_delay_seconds": 5,
+                      "period_seconds": 5,
+                      "failure_threshold": 30
+                    }
+                  ]
+                }
+              ],
+              "volume": [
+                {
+                  "name": "data",
+                  "persistent_volume_claim": [
+                    {
+                      "claim_name": "postgres-data"
+                    }
+                  ]
+                },
+                {
+                  "name": "credentials",
+                  "secret": [
+                    {
+                      "secret_name": "${var.credential_secret_name}",
+                      "items": [
+                        {
+                          "key": "db-password",
+                          "path": "db-password"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
+      "redis": {
+        "metadata": {
+          "name": "redis",
+          "namespace": "${var.namespace}",
+          "labels": {
+            "app": "redis"
+          }
+        },
+        "spec": {
+          "replicas": 1,
+          "selector": {
+            "match_labels": {
+              "app": "redis"
+            }
+          },
+          "template": {
+            "metadata": {
+              "labels": {
+                "app": "redis"
+              }
+            },
+            "spec": {
+              "security_context": [
+                {
+                  "run_as_non_root": true,
+                  "run_as_user": "1000",
+                  "run_as_group": "1000",
+                  "fs_group": "1000",
+                  "seccomp_profile": [
+                    {
+                      "type": "RuntimeDefault"
+                    }
+                  ]
+                }
+              ],
+              "container": [
+                {
+                  "name": "redis",
+                  "image": "${local.redis_image}",
+                  "image_pull_policy": "Never",
+                  "security_context": [
+                    {
+                      "allow_privilege_escalation": false,
+                      "run_as_non_root": true,
+                      "capabilities": {
+                        "drop": [
+                          "ALL"
+                        ]
+                      }
+                    }
+                  ],
+                  "port": [
+                    {
+                      "container_port": 6379,
+                      "name": "redis"
+                    }
+                  ],
+                  "volume_mount": [
+                    {
+                      "name": "tmp",
+                      "mount_path": "/tmp"
+                    }
+                  ],
+                  "readiness_probe": [
+                    {
+                      "exec": {
+                        "command": [
+                          "redis-cli",
+                          "-h",
+                          "127.0.0.1",
+                          "ping"
+                        ]
+                      },
+                      "initial_delay_seconds": 3,
+                      "period_seconds": 5,
+                      "failure_threshold": 30
+                    }
+                  ]
+                }
+              ],
+              "volume": [
+                {
+                  "name": "tmp",
+                  "empty_dir": [
+                    {}
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
+      "api": {
+        "metadata": {
+          "name": "api",
+          "namespace": "${var.namespace}",
+          "labels": {
+            "app": "api"
+          }
+        },
+        "spec": {
+          "replicas": 1,
+          "selector": {
+            "match_labels": {
+              "app": "api"
+            }
+          },
+          "template": {
+            "metadata": {
+              "labels": {
+                "app": "api"
+              }
+            },
+            "spec": {
+              "security_context": [
+                {
+                  "run_as_non_root": true,
+                  "run_as_user": "1000",
+                  "run_as_group": "1000",
+                  "fs_group": "1000",
+                  "seccomp_profile": [
+                    {
+                      "type": "RuntimeDefault"
+                    }
+                  ]
+                }
+              ],
+              "init_container": [
+                {
+                  "name": "migrate",
+                  "image": "${local.app_image}",
+                  "image_pull_policy": "Never",
+                  "command": [
+                    "python",
+                    "-m",
+                    "docmill",
+                    "migrate"
+                  ],
+                  "security_context": [
+                    {
+                      "allow_privilege_escalation": false,
+                      "run_as_non_root": true,
+                      "capabilities": {
+                        "drop": [
+                          "ALL"
+                        ]
+                      }
+                    }
+                  ],
+                  "env": [
+                    {
+                      "name": "DATABASE_URL",
+                      "value": "${local.database_url}"
+                    },
+                    {
+                      "name": "PGPASSWORD",
+                      "value_from": [
+                        {
+                          "secret_key_ref": [
+                            {
+                              "name": "${var.credential_secret_name}",
+                              "key": "db-password"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "container": [
+                {
+                  "name": "api",
+                  "image": "${local.app_image}",
+                  "image_pull_policy": "Never",
+                  "command": [
+                    "python",
+                    "-m",
+                    "docmill",
+                    "api"
+                  ],
+                  "security_context": [
+                    {
+                      "allow_privilege_escalation": false,
+                      "run_as_non_root": true,
+                      "capabilities": {
+                        "drop": [
+                          "ALL"
+                        ]
+                      }
+                    }
+                  ],
+                  "port": [
+                    {
+                      "container_port": 8080,
+                      "name": "http"
+                    }
+                  ],
+                  "env": [
+                    {
+                      "name": "DOCMILL_BIND",
+                      "value": "0.0.0.0"
+                    },
+                    {
+                      "name": "DOCMILL_PORT",
+                      "value": "8080"
+                    },
+                    {
+                      "name": "DOCMILL_STORAGE",
+                      "value": "${local.storage}"
+                    },
+                    {
+                      "name": "DOCMILL_TOKEN_FILE",
+                      "value": "/run/credentials/api-token"
+                    },
+                    {
+                      "name": "DATABASE_URL",
+                      "value": "${local.database_url}"
+                    },
+                    {
+                      "name": "REDIS_URL",
+                      "value": "${local.redis_url}"
+                    },
+                    {
+                      "name": "PGPASSWORD",
+                      "value_from": [
+                        {
+                          "secret_key_ref": [
+                            {
+                              "name": "${var.credential_secret_name}",
+                              "key": "db-password"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "volume_mount": [
+                    {
+                      "name": "reports",
+                      "mount_path": "${local.storage}"
+                    },
+                    {
+                      "name": "credentials",
+                      "mount_path": "/run/credentials",
+                      "read_only": true
+                    }
+                  ],
+                  "readiness_probe": [
+                    {
+                      "http_get": [
+                        {
+                          "path": "/health",
+                          "port": "http"
+                        }
+                      ],
+                      "initial_delay_seconds": 5,
+                      "period_seconds": 5,
+                      "failure_threshold": 30
+                    }
+                  ]
+                }
+              ],
+              "volume": [
+                {
+                  "name": "reports",
+                  "persistent_volume_claim": [
+                    {
+                      "claim_name": "docmill-reports"
+                    }
+                  ]
+                },
+                {
+                  "name": "credentials",
+                  "secret": [
+                    {
+                      "secret_name": "${var.credential_secret_name}",
+                      "items": [
+                        {
+                          "key": "api-token",
+                          "path": "api-token"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
+      "worker": {
+        "metadata": {
+          "name": "worker",
+          "namespace": "${var.namespace}",
+          "labels": {
+            "app": "worker"
+          }
+        },
+        "spec": {
+          "replicas": 1,
+          "selector": {
+            "match_labels": {
+              "app": "worker"
+            }
+          },
+          "template": {
+            "metadata": {
+              "labels": {
+                "app": "worker"
+              }
+            },
+            "spec": {
+              "security_context": [
+                {
+                  "run_as_non_root": true,
+                  "run_as_user": "1000",
+                  "run_as_group": "1000",
+                  "fs_group": "1000",
+                  "seccomp_profile": [
+                    {
+                      "type": "RuntimeDefault"
+                    }
+                  ]
+                }
+              ],
+              "init_container": [
+                {
+                  "name": "migrate",
+                  "image": "${local.app_image}",
+                  "image_pull_policy": "Never",
+                  "command": [
+                    "python",
+                    "-m",
+                    "docmill",
+                    "migrate"
+                  ],
+                  "security_context": [
+                    {
+                      "allow_privilege_escalation": false,
+                      "run_as_non_root": true,
+                      "capabilities": {
+                        "drop": [
+                          "ALL"
+                        ]
+                      }
+                    }
+                  ],
+                  "env": [
+                    {
+                      "name": "DATABASE_URL",
+                      "value": "${local.database_url}"
+                    },
+                    {
+                      "name": "PGPASSWORD",
+                      "value_from": [
+                        {
+                          "secret_key_ref": [
+                            {
+                              "name": "${var.credential_secret_name}",
+                              "key": "db-password"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "container": [
+                {
+                  "name": "worker",
+                  "image": "${local.app_image}",
+                  "image_pull_policy": "Never",
+                  "command": [
+                    "python",
+                    "-m",
+                    "docmill",
+                    "worker"
+                  ],
+                  "security_context": [
+                    {
+                      "allow_privilege_escalation": false,
+                      "run_as_non_root": true,
+                      "capabilities": {
+                        "drop": [
+                          "ALL"
+                        ]
+                      }
+                    }
+                  ],
+                  "env": [
+                    {
+                      "name": "DOCMILL_STORAGE",
+                      "value": "${local.storage}"
+                    },
+                    {
+                      "name": "DATABASE_URL",
+                      "value": "${local.database_url}"
+                    },
+                    {
+                      "name": "REDIS_URL",
+                      "value": "${local.redis_url}"
+                    },
+                    {
+                      "name": "PGPASSWORD",
+                      "value_from": [
+                        {
+                          "secret_key_ref": [
+                            {
+                              "name": "${var.credential_secret_name}",
+                              "key": "db-password"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "volume_mount": [
+                    {
+                      "name": "reports",
+                      "mount_path": "${local.storage}"
+                    }
+                  ]
+                }
+              ],
+              "volume": [
+                {
+                  "name": "reports",
+                  "persistent_volume_claim": [
+                    {
+                      "claim_name": "docmill-reports"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "kubernetes_service": {
+      "postgres": {
+        "metadata": {
+          "name": "postgres",
+          "namespace": "${var.namespace}",
+          "labels": {
+            "app": "postgres"
+          }
+        },
+        "spec": {
+          "type": "ClusterIP",
+          "selector": {
+            "app": "postgres"
+          },
+          "port": [
+            {
+              "name": "postgres",
+              "port": 5432,
+              "target_port": "postgres"
+            }
+          ]
+        }
+      },
+      "redis": {
+        "metadata": {
+          "name": "redis",
+          "namespace": "${var.namespace}",
+          "labels": {
+            "app": "redis"
+          }
+        },
+        "spec": {
+          "type": "ClusterIP",
+          "selector": {
+            "app": "redis"
+          },
+          "port": [
+            {
+              "name": "redis",
+              "port": 6379,
+              "target_port": "redis"
+            }
+          ]
+        }
+      },
+      "api": {
+        "metadata": {
+          "name": "api",
+          "namespace": "${var.namespace}",
+          "labels": {
+            "app": "api"
+          }
+        },
+        "spec": {
+          "type": "NodePort",
+          "selector": {
+            "app": "api"
+          },
+          "port": [
+            {
+              "name": "http",
+              "port": 8080,
+              "target_port": "http",
+              "node_port": "${var.api_node_port}"
+            }
+          ]
+        }
+      }
+    },
+    "kubernetes_job": {
+      "migrate": {
+        "metadata": {
+          "name": "docmill-migrate",
+          "namespace": "${var.namespace}",
+          "labels": {
+            "app": "api"
+          }
+        },
+        "spec": {
+          "backoff_limit": 30,
+          "template": {
+            "metadata": {
+              "labels": {
+                "job": "docmill-migrate"
+              }
+            },
+            "spec": {
+              "restart_policy": "OnFailure",
+              "security_context": [
+                {
+                  "run_as_non_root": true,
+                  "run_as_user": "1000",
+                  "run_as_group": "1000",
+                  "seccomp_profile": [
+                    {
+                      "type": "RuntimeDefault"
+                    }
+                  ]
+                }
+              ],
+              "container": [
+                {
+                  "name": "migrate",
+                  "image": "${local.app_image}",
+                  "image_pull_policy": "Never",
+                  "command": [
+                    "python",
+                    "-m",
+                    "docmill",
+                    "migrate"
+                  ],
+                  "security_context": [
+                    {
+                      "allow_privilege_escalation": false,
+                      "run_as_non_root": true,
+                      "capabilities": {
+                        "drop": [
+                          "ALL"
+                        ]
+                      }
+                    }
+                  ],
+                  "env": [
+                    {
+                      "name": "DATABASE_URL",
+                      "value": "${local.database_url}"
+                    },
+                    {
+                      "name": "PGPASSWORD",
+                      "value_from": [
+                        {
+                          "secret_key_ref": [
+                            {
+                              "name": "${var.credential_secret_name}",
+                              "key": "db-password"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

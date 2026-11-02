@@ -77,7 +77,9 @@ this spike's Nix import.
 
 This is a native integration spike, not a packaged Harbor task or a calibrated
 five-task submission. One isolated Codex pilot passed all six phases; see
-`../pilots/terraform-k8s-codex-001/`. No solve-rate claim is made. Keep
+`../pilots/terraform-k8s-codex-001/`. Subsequent Claux/OpenRouter pilots of
+Particle-1 and Opus failed at fresh deployment and cold boot respectively; see
+`../pilots/terraform-k8s-claux-001/`. No solve-rate claim is made. Keep
 the verifier and reference outside a future agent's workspace. The initial
 cluster/DNS/provider smoke test and schema validation are separate from the full
 lifecycle result. See `QUALITY.md` for the actual validation scope.

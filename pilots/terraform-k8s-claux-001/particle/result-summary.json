@@ -1,0 +1,42 @@
+{
+  "model": "particle-ai/particle-1",
+  "harness": "claux",
+  "provider": "openrouter",
+  "source_commit": "1fb4730669174e3c031dd8438341aacbbe5312e1",
+  "model_attempts": 1,
+  "task_retries": 0,
+  "provider_retries_observed": 0,
+  "model_outcome": "evaluated_fail",
+  "agent_exit_code": null,
+  "agent_timed_out": true,
+  "agent_wall_seconds": 900.02,
+  "private_verifier_exit_code": 1,
+  "phases_passed": 0,
+  "failure_phase": "fresh-deployment",
+  "observed_failure": "PostgreSQL could not create /tmp/.s.PGSQL.5432.lock: Permission denied.",
+  "usage": {
+    "rounds": 12,
+    "tool_calls": 16,
+    "input_tokens": 115305,
+    "output_tokens": 14772,
+    "cache_read_tokens": 92672,
+    "cache_creation_tokens": 0,
+    "cost_usd": 0.013429265999999999,
+    "cost_source": "provider"
+  },
+  "cost_checkpoint_incomplete": true,
+  "cost_note": "Checkpoint only; final billing including any in-flight work is not established.",
+  "tool_trace_entries": 16,
+  "tool_errors": 0,
+  "public_inputs_match_codex_pilot": true,
+  "private_materials_available_to_model": false,
+  "submission_files": {
+    ".terraform.lock.hcl": "e7085a0fffdebb93bfbf9273977f01bf66161ed8ab0c9d6d9ad596c4f8b01ec8",
+    "main.tf.json": "cbc399b67c121c48909cea320543b49c82c95dfc53cc3d90f61d1368b496e697"
+  },
+  "transcript_sha256": "ca657c923bc091b721161b9881b7bba951219826db39b37f26a1a9da2b8b710c",
+  "verifier_log_sha256": "98d8c6f525cd7a435acf03ee47636c273c9c1724b76ca77bf8bec93d9e6aa5a2",
+  "runner_sha256": "8e0015993697fa507861f6573e13576b0af68c02cfb02f27aad0518891dc154e",
+  "binary_sha256": "796c520a214cc8a794b5ce0c11605e5146b505c27d9b93d2b4a161f3272f19ad",
+  "raw_artifacts_directory": "logs/pilots/terraform-claux-20261101T204342926607"
+}

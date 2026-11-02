@@ -1,0 +1,3 @@
+subtest: offline cluster and fresh Terraform deployment
+!!! Test "offline cluster and fresh Terraform deployment" failed with error: "command `terraform -chdir=/root/docmill-alpha apply -auto-approve -input=false -no-color > /root/docmill-alpha/apply.log 2>&1` failed (exit code 1)"
+[pod/postgres-6cdcd9df88-tjb97/postgres] 2026-11-01 21:06:06.996 UTC [1] FATAL:  could not create lock file "/tmp/.s.PGSQL.5432.lock": Permission denied

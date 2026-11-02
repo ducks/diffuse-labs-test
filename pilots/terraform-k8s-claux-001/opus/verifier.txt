@@ -1,0 +1,9 @@
+subtest: offline cluster and fresh Terraform deployment
+(finished: subtest: offline cluster and fresh Terraform deployment, in 75.96 seconds)
+subtest: worker is replaced at an acknowledged render barrier
+(finished: subtest: worker is replaced at an acknowledged render barrier, in 5.77 seconds)
+subtest: database and cache pod replacement retains reports
+(finished: subtest: database and cache pod replacement retains reports, in 11.93 seconds)
+subtest: cold boot retains data and Terraform converges without drift
+!!! Test "cold boot retains data and Terraform converges without drift" failed with error: "Timed out: API readiness"
+[pod/postgres-59c95fc8c6-gp7dg/postgres] 2026-11-01 21:59:07.162 UTC [1] FATAL:  data directory "/data/pgdata" has invalid permissions
