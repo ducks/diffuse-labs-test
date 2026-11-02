@@ -1,0 +1,5 @@
+canonical: PASS; all six phases
+alternate-init-containers: PASS; all six phases
+no-op: FAIL as expected; fresh-deployment
+volatile-postgres: FAIL as expected; backend-replacement
+reboot-permissions: FAIL as expected; cold-boot-and-no-drift

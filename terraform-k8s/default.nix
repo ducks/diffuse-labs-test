@@ -1,9 +1,9 @@
-{ deploymentDir ? ./deployment }:
+{ deploymentDir ? ./deployment, runName ? "terraform-k8s-docmill-spike" }:
 let
   tools = import ./toolchain.nix;
   images = import ./images.nix;
 in tools.pkgs.testers.runNixOSTest {
-  name = "terraform-k8s-docmill-spike";
+  name = runName;
   enableOCR = false;
   skipTypeCheck = true;
   skipLint = true;

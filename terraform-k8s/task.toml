@@ -1,0 +1,31 @@
+schema_version = "1.4"
+
+[task]
+name = "diffuse-labs-test/terraform-k8s"
+description = "Deploy and recover a durable report pipeline with Terraform and Kubernetes."
+authors = [{ name = "Jake Goldsborough" }]
+
+[metadata]
+author_name = "Jake Goldsborough"
+difficulty = "medium"
+category = "infrastructure"
+tags = ["terraform", "kubernetes", "postgresql", "persistence", "recovery"]
+
+[[artifacts]]
+source = "/workspace/deployment"
+destination = "deployment"
+exclude = [".terraform", "*.tfstate", "*.tfstate.backup", "*.tfplan", ".terraform.tfstate.lock.info"]
+
+[verifier]
+timeout_sec = 1800.0
+environment_mode = "separate"
+
+[agent]
+timeout_sec = 1800.0
+
+[environment]
+docker_image = "diffuse-terraform-harbor:v1"
+build_timeout_sec = 1800.0
+cpus = 2
+memory_mb = 8192
+storage_mb = 16384

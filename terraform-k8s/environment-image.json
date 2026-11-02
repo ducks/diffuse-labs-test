@@ -1,0 +1,27 @@
+{
+  "image": "diffuse-terraform-harbor:v1",
+  "image_id": "sha256:1f9ec2bb7e1b0d28872ff7a405bcaa0d5af43e04500396b153c4ef1bae60726f",
+  "public_manifest": {
+    "base.nix": "624020c6abca2b06f1cdc1637808556dfc76fde4f06d9df9766d14f48930e14e",
+    "deployment/.terraform.lock.hcl": "e7085a0fffdebb93bfbf9273977f01bf66161ed8ab0c9d6d9ad596c4f8b01ec8",
+    "deployment/main.tf.json": "58cc5a51bc06cb454c1d08a525d6ec46ae00ef1a4fa1036d485a01724cc53ab3",
+    "images.nix": "7413d1f1c0d68d81a7c28056e06021cba83b52a88d32fd7db7d5c88cd5179d75",
+    "instruction.md": "6a393c62f4b1fe014a7413c5faea28c0356bcb6712112bc947ce0a5403ecf218",
+    "nixpkgs.nix": "cd3b830f19c897d207c383b4618bb1422fa92e50ace47dba4ae2f1c52cd58c4b",
+    "repository/README.md": "e324dc287621b451fa3b51bb75de880073b37602d525fcc4203e1523ec7dce0e",
+    "repository/docmill/__init__.py": "1fdaca9489799c32621a012816b5ff6b53fc19260ec2359f5510f7c820e61477",
+    "repository/docmill/__main__.py": "8ba1cad6b1ea708f20a7c115cf1aeaffc75188f30a8b71141713bfc949ca30ff",
+    "repository/docmill/schema.sql": "deb23ef55248d292c16210d2c43cfbd03e7c5cd359034a6b48d0e53465751035",
+    "repository/nixpkgs.nix": "cd3b830f19c897d207c383b4618bb1422fa92e50ace47dba4ae2f1c52cd58c4b",
+    "repository/requirements.txt": "0f0bd6c7b8ad35cde17e34147774bfcdcde314c0947774654af4d91426891683",
+    "repository/shell.nix": "adad29737a3fa4833d92e7c90ccbd4b83dd1f298365652b80626e51371d1a121",
+    "shell.nix": "03ddb59b4076c74b7078ff9bd621b3dc3e18b86c672cfe89bd7fe80a3b8e9b15",
+    "toolchain.nix": "0e18c20756a2ebea3e1cef93ea2fa2333c0e4aff887090e5b65508b4b8d788c0",
+    "vm.nix": "8489fd451096e345c4bb66ef8f9fe45ea8089cbaf7be8fd3b39f764a441db356"
+  },
+  "no_tests_or_solution_in_agent_image": true,
+  "base_image_archive": "/nix/store/s56s7d6fx09n9n84jw5cv4jwczv66b80-docker-image-diffuse-terraform-pilot.tar",
+  "base_recipe_sha256": "b64fbc5ec4281037877b9935bcf55247db75330ef503884ebbfddadbaaf9c277",
+  "base_recipe_verified_from_public_export": true,
+  "base_recipe_result_cached": true
+}

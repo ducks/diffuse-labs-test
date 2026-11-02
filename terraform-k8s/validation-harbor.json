@@ -1,0 +1,46 @@
+[
+  {
+    "agent": "oracle",
+    "reward": 1.0,
+    "errors": 0,
+    "result": "logs/harbor/terraform-k8s-oracle-20261102T032013585927/result.json",
+    "verifier_result": {
+      "phases": [
+        "fresh-deployment",
+        "acknowledged-worker-loss",
+        "backend-replacement",
+        "cold-boot-and-no-drift",
+        "namespace-isolation",
+        "destroy-and-volume-cleanup"
+      ],
+      "reports_checked": 9,
+      "passed": true
+    },
+    "job_result_sha256": "fb6c279257d154fc38700dd7de4d2a456fb3deaea51e5f90480910f360460528",
+    "verifier_log_sha256": "734b7852147bd4a78d74d64e9312d4055900b5cce53522a1f75afc379ed6d372",
+    "verifier_environment": "separate fresh Docker container with KVM",
+    "artifacts_collected": [
+      ".terraform.lock.hcl",
+      "main.tf.json"
+    ]
+  },
+  {
+    "agent": "nop",
+    "reward": 0.0,
+    "errors": 0,
+    "result": "logs/harbor/terraform-k8s-nop-20261102T032013585927/result.json",
+    "verifier_result": {
+      "phases": [],
+      "reports_checked": 0,
+      "passed": false,
+      "error": "command `kubectl -n docmill-alpha get deployments api worker postgres redis -o name` failed (exit code 1)"
+    },
+    "job_result_sha256": "5e5fc172ff839aa248cbfc46d2246d1e572f3521993283598df99ecfb100c119",
+    "verifier_log_sha256": "089552db0db79408956c23b5359f9ced9b93c5970557d73176498e8b58da3d2e",
+    "verifier_environment": "separate fresh Docker container with KVM",
+    "artifacts_collected": [
+      ".terraform.lock.hcl",
+      "main.tf.json"
+    ]
+  }
+]

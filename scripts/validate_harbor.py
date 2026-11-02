@@ -7,7 +7,7 @@ import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser()
-parser.add_argument("--task", choices=["session-recovery", "streaming-gateway", "persistent-tools", "dataset-containment"],
+parser.add_argument("--task", choices=["session-recovery", "streaming-gateway", "persistent-tools", "dataset-containment", "terraform-k8s"],
                     default="session-recovery")
 args = parser.parse_args()
 stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%f")

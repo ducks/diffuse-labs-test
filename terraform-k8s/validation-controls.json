@@ -1,0 +1,134 @@
+{
+  "controls": [
+    {
+      "control": "canonical",
+      "expected_pass": true,
+      "exit_code": 0,
+      "expected_failure_phase": null,
+      "submission_files": {
+        ".terraform.lock.hcl": "e7085a0fffdebb93bfbf9273977f01bf66161ed8ab0c9d6d9ad596c4f8b01ec8",
+        "main.tf.json": "45fb76ca0f546fd19be1a12862c5ca857ef9f195dbe6857c7cbba0a16fdc9774"
+      },
+      "log": "logs/terraform-k8s/controls-20261102T023021120272/canonical.log",
+      "passed": true,
+      "failure_phase": null,
+      "result": {
+        "phases": [
+          "fresh-deployment",
+          "acknowledged-worker-loss",
+          "backend-replacement",
+          "cold-boot-and-no-drift",
+          "namespace-isolation",
+          "destroy-and-volume-cleanup"
+        ],
+        "reports_checked": 9,
+        "passed": true
+      },
+      "expectation_met": true,
+      "result_store_path": "/nix/store/0j1599m7vlvwknyw40phknskq65z8c5a-vm-test-run-terraform-control-canonical-20261102t023021120272"
+    },
+    {
+      "control": "alternate-init-containers",
+      "expected_pass": true,
+      "exit_code": 0,
+      "expected_failure_phase": null,
+      "submission_files": {
+        ".terraform.lock.hcl": "e7085a0fffdebb93bfbf9273977f01bf66161ed8ab0c9d6d9ad596c4f8b01ec8",
+        "main.tf": "a319280106ae39f6e872cd14e398632ac4273e097bca879c081504a55f3f5b98",
+        "main.tf.json": "58cc5a51bc06cb454c1d08a525d6ec46ae00ef1a4fa1036d485a01724cc53ab3"
+      },
+      "log": "logs/terraform-k8s/controls-20261102T023021120272/alternate-init-containers.log",
+      "passed": true,
+      "failure_phase": null,
+      "result": {
+        "phases": [
+          "fresh-deployment",
+          "acknowledged-worker-loss",
+          "backend-replacement",
+          "cold-boot-and-no-drift",
+          "namespace-isolation",
+          "destroy-and-volume-cleanup"
+        ],
+        "reports_checked": 9,
+        "passed": true
+      },
+      "expectation_met": true,
+      "result_store_path": "/nix/store/5mcr7lkidibqyasws5mr0pgvig5gdpc1-vm-test-run-terraform-control-alternate-init-containers-20261102t023021120272"
+    },
+    {
+      "control": "no-op",
+      "expected_pass": false,
+      "exit_code": 1,
+      "expected_failure_phase": "fresh-deployment",
+      "submission_files": {
+        ".terraform.lock.hcl": "e7085a0fffdebb93bfbf9273977f01bf66161ed8ab0c9d6d9ad596c4f8b01ec8",
+        "main.tf.json": "58cc5a51bc06cb454c1d08a525d6ec46ae00ef1a4fa1036d485a01724cc53ab3"
+      },
+      "log": "logs/terraform-k8s/controls-20261102T023021120272/no-op.log",
+      "passed": false,
+      "failure_phase": "fresh-deployment",
+      "result": {
+        "phases": [],
+        "reports_checked": 0,
+        "passed": false,
+        "error": "command `kubectl -n docmill-alpha get deployments api worker postgres redis -o name` failed (exit code 1)"
+      },
+      "expectation_met": true
+    },
+    {
+      "control": "volatile-postgres",
+      "expected_pass": false,
+      "exit_code": 1,
+      "expected_failure_phase": "backend-replacement",
+      "submission_files": {
+        ".terraform.lock.hcl": "e7085a0fffdebb93bfbf9273977f01bf66161ed8ab0c9d6d9ad596c4f8b01ec8",
+        "main.tf.json": "dcf488ca615547c3ac9c73ae54bed724a5c636839e757f97c1121e03ccdcab42"
+      },
+      "log": "logs/terraform-k8s/controls-20261102T023021120272/volatile-postgres.log",
+      "passed": false,
+      "failure_phase": "backend-replacement",
+      "result": {
+        "phases": [
+          "fresh-deployment",
+          "acknowledged-worker-loss"
+        ],
+        "reports_checked": 4,
+        "passed": false,
+        "error": "Timed out: API readiness"
+      },
+      "expectation_met": true
+    },
+    {
+      "control": "reboot-permissions",
+      "expected_pass": false,
+      "exit_code": 1,
+      "expected_failure_phase": "cold-boot-and-no-drift",
+      "submission_files": {
+        "app.tf": "e2d2319e30d9d9ac6060624b6bab6372be5f0fd259eb531db16e87d58e55073c",
+        "main.tf.json": "58cc5a51bc06cb454c1d08a525d6ec46ae00ef1a4fa1036d485a01724cc53ab3"
+      },
+      "log": "logs/terraform-k8s/controls-20261102T023021120272/reboot-permissions.log",
+      "passed": false,
+      "failure_phase": "cold-boot-and-no-drift",
+      "result": {
+        "phases": [
+          "fresh-deployment",
+          "acknowledged-worker-loss",
+          "backend-replacement"
+        ],
+        "reports_checked": 6,
+        "passed": false,
+        "error": "Timed out: API readiness"
+      },
+      "expectation_met": true
+    }
+  ],
+  "fresh_native_runs": 5,
+  "model_calls": 0,
+  "verifier_hashes": {
+    "default.nix": "94d81fd5dca9458e7a4d91df6f8ecab18ef21ed0f98639c6db242195509c5813",
+    "tests/verify.py": "5728b9bc1b952d7aae7b0d74b1a345729544685926b2f4876a029564ebc4972e"
+  },
+  "source_snapshot": "logs/terraform-k8s/controls-20261102T023021120272/task",
+  "scope": "Canonical and distinct init-container implementation accepted; no-op and two plausible broken deployments rejected at the intended phases. Not a comprehensive adversarial calibration."
+}

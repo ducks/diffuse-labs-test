@@ -73,13 +73,20 @@ provides the same CLI and Kubernetes plugin. It does not point at a host cluster
 or create cloud resources. The Terraform package's license is enabled only in
 this spike's Nix import.
 
-## Status and limits
+## Harbor and quality controls
 
-This is a native integration spike, not a packaged Harbor task or a calibrated
-five-task submission. One isolated Codex pilot passed all six phases; see
-`../pilots/terraform-k8s-codex-001/`. Subsequent Claux/OpenRouter pilots of
-Particle-1 and Opus failed at fresh deployment and cold boot respectively; see
-`../pilots/terraform-k8s-claux-001/`. No solve-rate claim is made. Keep
-the verifier and reference outside a future agent's workspace. The initial
-cluster/DNS/provider smoke test and schema validation are separate from the full
-lifecycle result. See `QUALITY.md` for the actual validation scope.
+[HARBOR.md](HARBOR.md) describes the Docker package, separate verifier container,
+image preparation and Linux/KVM requirement. Prepare local images with
+`python3 scripts/prepare_terraform_harbor.py`; then use the repository's pinned
+Harbor to run the task. No image is published by these commands.
+
+`python3 scripts/validate_terraform.py` runs five fresh native controls: the
+canonical solution and a different init-container implementation pass; no-op,
+volatile database storage and a real reboot-permissions near-miss fail at their
+intended phases. See `validation-controls.json` and `QUALITY.md`.
+
+Model pilots are retained separately: Codex/GPT-6.1 Sol passed all phases;
+Claux/OpenRouter Particle-1 failed fresh deployment and Opus failed cold boot.
+See `../pilots/terraform-k8s-codex-001/` and
+`../pilots/terraform-k8s-claux-001/`. These single attempts do not establish a
+solve rate or hard difficulty.

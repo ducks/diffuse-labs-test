@@ -55,15 +55,40 @@ application image; the verifier now uses Python's pathlib. Replacement checks
 wait for distinct ready pod identities instead of treating a delete request as
 proof of replacement. These are harness/reference fixes, not model failures.
 
+## Targeted controls and Harbor validation
+
+Five fresh native control trials matched their expected outcomes. The canonical
+migration-Job solution and an alternate API/worker init-container migration
+solution both passed all six phases. The no-op starter failed first deployment;
+a reference-derived volatile PostgreSQL volume failed after backend replacement;
+the unmodified Opus near-miss passed three phases and failed cold boot. These
+controls exercise operational faults rather than only invalid syntax. Exact
+submission hashes, failure phases and result paths are recorded in
+`validation-controls.json`; raw logs remain under its recorded log directory.
+
+The Harbor 0.25.0 Docker oracle earned reward **1.0** with all phases passing.
+The no-op earned **0.0** after the required deployments were absent. Both jobs
+completed with zero infrastructure errors, as checked from Harbor's result
+JSON rather than its CLI exit status. See `validation-harbor.json` for job paths,
+result/log hashes and the transferred deployment files. A separate-container
+adapter preflight also rejected an invalid symlink submission with reward 0.
+
+Harbor transfers only deployment artifacts into a separate fresh container;
+the app, images, Nix helpers and verifier remain original. Missing KVM and native
+build/VM failures without an evaluated result marker do not produce a model
+reward. Unique run names force new native verification runs instead of reusing
+previously successful Nix derivations. The image passed a public-files-only and
+KVM preflight; its ID and public source manifest are in `environment-image.json`.
+
 ## Limits
 
-This is a native integration spike. One isolated Codex pilot passed all six phases (see
-`../pilots/terraform-k8s-codex-001/`). Two later Claux/OpenRouter attempts failed
-(Particle at first deployment; Opus after three successful phases, on cold boot).
-See `../pilots/terraform-k8s-claux-001/`. There is no solve-rate estimate, Harbor
-integration, or independently calibrated suite of good/bad deployments. One reference pass does not establish hard difficulty or general
-reliability. Successful Nix derivations may be cached; cache reuse is not a fresh
-trial.
+The task now has targeted controls and a working Harbor Docker package. It
+requires x86_64 Linux/KVM and local image preparation as documented in
+`HARBOR.md`; other Harbor providers were not tested. This is not a solve-rate
+estimate or a comprehensive adversarial calibration. Previous single-attempt
+model pilots remain separate evidence: Codex/GPT-6.1 Sol passed all phases;
+Claux/OpenRouter Particle failed fresh deployment and Opus failed cold boot.
+Earlier frozen pilot artifacts are not rewritten by these packaging changes.
 
 Terraform owns the application resources, not the cluster. The cluster has one
 node and the reference has one replica per role. Shared ReadWriteOnce report

@@ -71,3 +71,15 @@ It does not require high availability during an outage, production sizing,
 multi-node storage, a cloud load balancer, or a Helm chart. Exact scheduling,
 generated pod names, and startup order beyond functional dependencies are not
 graded. This is an integration task, not a claim of hard model difficulty.
+
+## Development tools in the Harbor environment
+
+The working directory is `/workspace`. `nix-shell shell.nix` supplies the pinned
+Terraform CLI/provider for validation. For a live development cluster, build
+`vm.nix -A driverInteractive` with `nix-build` and run the resulting
+`bin/nixos-test-driver`. Copy `/etc/task-deployment/.` inside the guest to a
+writable directory before running Terraform; the source under `/etc` is backed
+by the read-only Nix store. Create a development namespace and Secret, then
+set the documented Terraform variables. KVM is available on supported Linux
+hosts. No host Docker socket, host home or host Nix store is exposed. Only the
+files in `/workspace/deployment` are submitted to a fresh verifier environment.

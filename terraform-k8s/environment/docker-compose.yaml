@@ -1,0 +1,6 @@
+services:
+  main:
+    devices:
+      - /dev/kvm:/dev/kvm
+    security_opt:
+      - no-new-privileges:true

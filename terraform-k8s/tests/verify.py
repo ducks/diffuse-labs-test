@@ -46,6 +46,7 @@ def provision(namespace, port):
     cluster.succeed('printf %s ' + shlex.quote(json.dumps(env)) + ' > ' + directory + '/terraform.tfvars.json')
     cluster.succeed('terraform -chdir=' + directory + ' init -input=false -no-color > ' + directory + '/init.log 2>&1')
     cluster.succeed('terraform -chdir=' + directory + ' apply -auto-approve -input=false -no-color > ' + directory + '/apply.log 2>&1')
+    kube(namespace, 'get deployments api worker postgres redis -o name')
     return {'namespace': namespace, 'port': port, 'token': api_token, 'directory': directory}
 
 
@@ -189,7 +190,9 @@ try:
     result['passed'] = True
     (Path(os.environ['out']) / 'result.json').write_text(json.dumps(result, indent=2) + '\n')
     print('TERRAFORM_K8S_SPIKE_VERIFIED ' + json.dumps(result))
-except Exception:
+except Exception as error:
+    result.update(passed=False, error=str(error))
+    print('TERRAFORM_K8S_SPIKE_FAILED ' + json.dumps(result), flush=True)
     print(cluster.succeed('kubectl get pods,pvc,services -A -o wide || true'))
     print(cluster.succeed('kubectl get events -A --sort-by=.metadata.creationTimestamp | tail -n 35 || true'))
     print(cluster.succeed("find /root/docmill-* -maxdepth 1 -name '*.log' -exec tail -n 40 {} + 2>/dev/null || true"))

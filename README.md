@@ -1,8 +1,9 @@
 # Diffuse Labs take-home
 
-Five tasks are requested for the assignment. Three implemented tasks are
+Five tasks are requested for the assignment. Four implemented tasks are
 currently selected: interrupted agent-session recovery, streaming inference
-failover, and dataset-worker incident containment. The assignment is incomplete.
+failover, dataset-worker incident containment, and Terraform/Kubernetes deployment.
+The assignment is incomplete.
 
 The earlier `persistent-tools` prototype and its successful model pilot are
 retained for reference, but are set aside from the selected task set.
@@ -23,13 +24,15 @@ The [Terraform/Kubernetes spike](terraform-k8s/README.md) reuses Docmill in an
 offline single-node K3s VM. Terraform deploys the application stack; native
 lifecycle checks exercise an acknowledged worker interruption, cache loss,
 persistence, namespace isolation, no-drift planning, and resource cleanup.
-It is an integration prototype, not a calibrated model task or Harbor package.
+It has targeted good/bad controls and a separate-verifier Harbor Docker package
+requiring Linux/KVM and local image preparation. See [the package guide](terraform-k8s/HARBOR.md).
 
 | Task | Capability assessed | Failure modes | Success checks | Quality controls |
 | --- | --- | --- | --- | --- |
 | `session-recovery` | Recover durable agent state across crashes and external effects | Duplicate actions, lost calls/history, cross-session reuse | Independent receipts, transcript pairing, explicit crash boundaries | Canonical and alternate solutions; baseline and incorrect fixes |
 | `streaming-gateway` | Safe provider failover and async resource ownership | Mixed-provider output, capacity leaks, buffering, oversubscription | 16 tests including real localhost HTTP | Two valid solutions; baseline and four incorrect fixes |
 | `dataset-containment` | Contain a credential/file-boundary incident while retaining service and output correctness | Refresh-based access, recurring exports, duplicate outputs, lost backlog, collateral outages | Live HTTP traffic, independent ledgers and publication provenance, lost acknowledgements, actual worker restarts | Canonical and code-level loader-policy repairs; baseline and eight partial/incorrect repairs |
+| `terraform-k8s` | Deploy a durable service stack with Terraform/Kubernetes | Lost accepted work, pod/boot persistence faults, state or credential crossover, incomplete cleanup | Fresh K3s VM, acknowledged worker loss, backend replacement, cold boot, namespace isolation, no-drift plan, destroy/PV cleanup | Canonical and different init-container implementation; no-op, volatile DB, reboot-permissions controls |
 
 ## Local development
 
