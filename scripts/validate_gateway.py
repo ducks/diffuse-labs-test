@@ -59,7 +59,8 @@ buffered = reference.replace('                async for chunk in response:',
 controls = [("canonical", reference, True), ("alternative-prime-stream", alternate, True),
             ("no-op", baseline, False), ("retry-partial", retry_partial, False),
             ("disable-failover", no_failover, False), ("leak-capacity", leak, False),
-            ("buffer-response", buffered, False)]
+            ("buffer-response", buffered, False),
+            ("exit-zero-during-import", "import os\nos._exit(0)\n", False)]
 results = []
 logs = ROOT / "logs/streaming-gateway"
 logs.mkdir(parents=True, exist_ok=True)
@@ -69,7 +70,7 @@ with tempfile.TemporaryDirectory() as scratch:
         candidate.write_text(code)
         env = dict(os.environ, GATEWAY_PATH=str(candidate),
                    SERVICE_DIR=str(TASK / "environment/service"))
-        command = [sys.executable, str(TASK / "tests/verify.py")]
+        command = [sys.executable, str(TASK / "tests/run_verifier.py")]
         if args.container:
             command = ["docker", "run", "--rm", "--network", "none",
                        "-v", f"{TASK / 'tests'}:/tests:ro",

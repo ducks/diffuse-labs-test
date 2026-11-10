@@ -1,0 +1,74 @@
+{
+  "benchmarks": [
+    {
+      "id": "checkout",
+      "version": "1",
+      "cohort": "development",
+      "manifest": {
+        "cases": [
+          "routing",
+          "queue"
+        ],
+        "revision": "a"
+      }
+    },
+    {
+      "id": "checkout",
+      "version": "1",
+      "cohort": "held-out",
+      "manifest": {
+        "cases": [
+          "routing",
+          "queue"
+        ],
+        "revision": "a"
+      }
+    }
+  ],
+  "results": [
+    {
+      "event_id": "event-0",
+      "trial_id": "routing",
+      "model": "candidate-v2",
+      "harness": "agent-1",
+      "benchmark_id": "checkout",
+      "benchmark_version": "1",
+      "cohort": "development",
+      "attempt": 1,
+      "status": "passed"
+    },
+    {
+      "event_id": "event-1",
+      "trial_id": "routing",
+      "model": "candidate-v2",
+      "harness": "agent-1",
+      "benchmark_id": "checkout",
+      "benchmark_version": "1",
+      "cohort": "held-out",
+      "attempt": 1,
+      "status": "failed"
+    },
+    {
+      "event_id": "event-2",
+      "trial_id": "routing",
+      "model": "candidate-v2",
+      "harness": "agent-1",
+      "benchmark_id": "checkout",
+      "benchmark_version": "1",
+      "cohort": "held-out",
+      "attempt": 2,
+      "status": "passed"
+    },
+    {
+      "event_id": "event-3",
+      "trial_id": "queue",
+      "model": "candidate-v2",
+      "harness": "agent-1",
+      "benchmark_id": "checkout",
+      "benchmark_version": "1",
+      "cohort": "held-out",
+      "attempt": 1,
+      "status": "interrupted"
+    }
+  ]
+}

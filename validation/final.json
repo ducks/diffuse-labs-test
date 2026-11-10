@@ -1,0 +1,1252 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-11-10T17:45:06.452623+00:00",
+  "base_commit": "40a1fa57e7e99bf9ee9ed5145c4972191a131e6e",
+  "scope": "Selected final clean validation set; development attempts are retained separately, not pooled. No live model attempts.",
+  "summary": {
+    "tasks": 5,
+    "clean_rounds_per_task": 2,
+    "control_executions": 82,
+    "control_expectations_met": 82,
+    "harbor_trials": 20,
+    "oracle_reward_1": 10,
+    "baseline_reward_0": 10,
+    "final_harbor_infrastructure_errors": 0,
+    "agent_image_isolation_checks": 5
+  },
+  "controls": [
+    {
+      "task": "session-recovery",
+      "round": 1,
+      "source": "logs/final-validation/20261110T025435964108/session-recovery-1.json",
+      "source_sha256": "d876da873d731c0f1adefc0aab2535b1f77045f229dc266b2ee8f2dd900b5e24",
+      "controls": [
+        {
+          "control": "canonical",
+          "expected_pass": true,
+          "passed": true,
+          "expectation_met": true
+        },
+        {
+          "control": "alternative-idempotent-replay",
+          "expected_pass": true,
+          "passed": true,
+          "expectation_met": true
+        },
+        {
+          "control": "no-op-original-bug",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "shortcut-skip-pending",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "shortcut-restart-plan",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        }
+      ]
+    },
+    {
+      "task": "session-recovery",
+      "round": 2,
+      "source": "logs/final-validation/20261110T025435964108/session-recovery-2.json",
+      "source_sha256": "d876da873d731c0f1adefc0aab2535b1f77045f229dc266b2ee8f2dd900b5e24",
+      "controls": [
+        {
+          "control": "canonical",
+          "expected_pass": true,
+          "passed": true,
+          "expectation_met": true
+        },
+        {
+          "control": "alternative-idempotent-replay",
+          "expected_pass": true,
+          "passed": true,
+          "expectation_met": true
+        },
+        {
+          "control": "no-op-original-bug",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "shortcut-skip-pending",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "shortcut-restart-plan",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        }
+      ]
+    },
+    {
+      "task": "streaming-gateway",
+      "round": 1,
+      "source": "logs/final-validation/20261110T025435964108/streaming-gateway-1.json",
+      "source_sha256": "af1bea743537340f18c1c71d245fbf79bf79cc2928813ad760b068b0c94ca89b",
+      "controls": [
+        {
+          "control": "canonical",
+          "expected_pass": true,
+          "passed": true,
+          "expectation_met": true
+        },
+        {
+          "control": "alternative-prime-stream",
+          "expected_pass": true,
+          "passed": true,
+          "expectation_met": true
+        },
+        {
+          "control": "no-op",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "retry-partial",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "disable-failover",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "leak-capacity",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "buffer-response",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "exit-zero-during-import",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        }
+      ]
+    },
+    {
+      "task": "streaming-gateway",
+      "round": 2,
+      "source": "logs/final-validation/20261110T025435964108/streaming-gateway-2.json",
+      "source_sha256": "af1bea743537340f18c1c71d245fbf79bf79cc2928813ad760b068b0c94ca89b",
+      "controls": [
+        {
+          "control": "canonical",
+          "expected_pass": true,
+          "passed": true,
+          "expectation_met": true
+        },
+        {
+          "control": "alternative-prime-stream",
+          "expected_pass": true,
+          "passed": true,
+          "expectation_met": true
+        },
+        {
+          "control": "no-op",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "retry-partial",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "disable-failover",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "leak-capacity",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "buffer-response",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "exit-zero-during-import",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        }
+      ]
+    },
+    {
+      "task": "dataset-containment",
+      "round": 1,
+      "source": "logs/final-validation/20261110T025435964108/dataset-containment-1.json",
+      "source_sha256": "260a9b6c91798308462116a4f05fde4f62bfeb18e27b5b924beacc02f6284e27",
+      "controls": [
+        {
+          "control": "canonical",
+          "expected_pass": true,
+          "passed": true,
+          "expectation_met": true
+        },
+        {
+          "control": "alternative-loader-policy",
+          "expected_pass": true,
+          "passed": true,
+          "expectation_met": true
+        },
+        {
+          "control": "restart-only",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "access-only-rotation",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "boundary-left-open",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "unauthorized-schedule-left",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "disable-all-scheduling",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "revoke-unrelated-client",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "ignore-interrupted-jobs",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "blind-republish",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "delete-audit-evidence",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        }
+      ]
+    },
+    {
+      "task": "dataset-containment",
+      "round": 2,
+      "source": "logs/final-validation/20261110T025435964108/dataset-containment-2.json",
+      "source_sha256": "260a9b6c91798308462116a4f05fde4f62bfeb18e27b5b924beacc02f6284e27",
+      "controls": [
+        {
+          "control": "canonical",
+          "expected_pass": true,
+          "passed": true,
+          "expectation_met": true
+        },
+        {
+          "control": "alternative-loader-policy",
+          "expected_pass": true,
+          "passed": true,
+          "expectation_met": true
+        },
+        {
+          "control": "restart-only",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "access-only-rotation",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "boundary-left-open",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "unauthorized-schedule-left",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "disable-all-scheduling",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "revoke-unrelated-client",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "ignore-interrupted-jobs",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "blind-republish",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "delete-audit-evidence",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        }
+      ]
+    },
+    {
+      "task": "terraform-k8s",
+      "round": 1,
+      "source": "logs/terraform-k8s/controls-20261110T025944732523/summary.json",
+      "source_sha256": "6104aa2273aded0e9a78d58d4abda044210ba63ebc7a2fcd36f22e4e25a02341",
+      "controls": [
+        {
+          "control": "canonical",
+          "expected_pass": true,
+          "passed": true,
+          "expectation_met": true,
+          "failure_phase": null
+        },
+        {
+          "control": "alternate-init-containers",
+          "expected_pass": true,
+          "passed": true,
+          "expectation_met": true,
+          "failure_phase": null
+        },
+        {
+          "control": "no-op",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true,
+          "failure_phase": "fresh-deployment"
+        },
+        {
+          "control": "volatile-postgres",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true,
+          "failure_phase": "backend-replacement"
+        },
+        {
+          "control": "reboot-permissions",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true,
+          "failure_phase": "cold-boot-and-no-drift"
+        }
+      ]
+    },
+    {
+      "task": "terraform-k8s",
+      "round": 2,
+      "source": "logs/terraform-k8s/controls-20261110T053452675126/summary.json",
+      "source_sha256": "195890ea7e24a355acae808e8c80254cec7c938ba0cc33976ebeaa0c9e99b31e",
+      "controls": [
+        {
+          "control": "canonical",
+          "expected_pass": true,
+          "passed": true,
+          "expectation_met": true,
+          "failure_phase": null
+        },
+        {
+          "control": "alternate-init-containers",
+          "expected_pass": true,
+          "passed": true,
+          "expectation_met": true,
+          "failure_phase": null
+        },
+        {
+          "control": "no-op",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true,
+          "failure_phase": "fresh-deployment"
+        },
+        {
+          "control": "volatile-postgres",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true,
+          "failure_phase": "backend-replacement"
+        },
+        {
+          "control": "reboot-permissions",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true,
+          "failure_phase": "cold-boot-and-no-drift"
+        }
+      ]
+    },
+    {
+      "task": "evaluation-integrity",
+      "round": 1,
+      "source": "logs/evaluation-integrity/20261110T053456276078/validation.json",
+      "source_sha256": "aead2fb3bff2d765c003b389077e1828280deaf1f80dcf821cea54b54e33b711",
+      "controls": [
+        {
+          "control": "canonical",
+          "expected_pass": true,
+          "passed": true,
+          "expectation_met": true
+        },
+        {
+          "control": "isolation-probe",
+          "expected_pass": true,
+          "passed": true,
+          "expectation_met": true
+        },
+        {
+          "control": "alternate-sqlite",
+          "expected_pass": true,
+          "passed": true,
+          "expectation_met": true
+        },
+        {
+          "control": "no-op",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "drop-failures",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "merge-cohorts",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "hardcode-sample",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "mutable-identity",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "ignore-extra-fields",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "symlink-output",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "exit-zero",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "forge-reward",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        }
+      ]
+    },
+    {
+      "task": "evaluation-integrity",
+      "round": 2,
+      "source": "logs/evaluation-integrity/20261110T053456276078/validation.json",
+      "source_sha256": "aead2fb3bff2d765c003b389077e1828280deaf1f80dcf821cea54b54e33b711",
+      "controls": [
+        {
+          "control": "canonical",
+          "expected_pass": true,
+          "passed": true,
+          "expectation_met": true
+        },
+        {
+          "control": "isolation-probe",
+          "expected_pass": true,
+          "passed": true,
+          "expectation_met": true
+        },
+        {
+          "control": "alternate-sqlite",
+          "expected_pass": true,
+          "passed": true,
+          "expectation_met": true
+        },
+        {
+          "control": "no-op",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "drop-failures",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "merge-cohorts",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "hardcode-sample",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "mutable-identity",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "ignore-extra-fields",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "symlink-output",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "exit-zero",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        },
+        {
+          "control": "forge-reward",
+          "expected_pass": false,
+          "passed": false,
+          "expectation_met": true
+        }
+      ]
+    }
+  ],
+  "harbor": [
+    {
+      "task": "session-recovery",
+      "round": 1,
+      "agent": "oracle",
+      "reward": 1.0,
+      "errors": 0,
+      "result": "logs/harbor/session-recovery-oracle-20261110T030010725887/result.json",
+      "result_sha256": "861dd3946d7ceca3d1f9b8409b0b8e9fdf813814ad897be41ff0311fe897896a"
+    },
+    {
+      "task": "session-recovery",
+      "round": 1,
+      "agent": "nop",
+      "reward": 0.0,
+      "errors": 0,
+      "result": "logs/harbor/session-recovery-nop-20261110T030010725887/result.json",
+      "result_sha256": "3beeb3fcba6fbd5526167a618e1576c4b337d278c8e4795f124e2cef080e5934"
+    },
+    {
+      "task": "streaming-gateway",
+      "round": 1,
+      "agent": "oracle",
+      "reward": 1.0,
+      "errors": 0,
+      "result": "logs/harbor/streaming-gateway-oracle-20261110T030101665965/result.json",
+      "result_sha256": "6f74dd26dff89e73812459d8353ca771f69b56955e34098d9ee39dfa5ad92486"
+    },
+    {
+      "task": "streaming-gateway",
+      "round": 1,
+      "agent": "nop",
+      "reward": 0.0,
+      "errors": 0,
+      "result": "logs/harbor/streaming-gateway-nop-20261110T030101665965/result.json",
+      "result_sha256": "f2fa2293f1d4af8d459e0228fb07961f01bbde73718ddbb0f25d6de3735e0da6"
+    },
+    {
+      "task": "dataset-containment",
+      "round": 1,
+      "agent": "oracle",
+      "reward": 1.0,
+      "errors": 0,
+      "result": "logs/harbor/dataset-containment-oracle-20261110T030254557349/result.json",
+      "result_sha256": "9ea2f9312bd1e064220bb08694ac74279fb5076bfad6f6457c69b016573c2581"
+    },
+    {
+      "task": "dataset-containment",
+      "round": 1,
+      "agent": "nop",
+      "reward": 0.0,
+      "errors": 0,
+      "result": "logs/harbor/dataset-containment-nop-20261110T030254557349/result.json",
+      "result_sha256": "7f0d41789a93f963b1859b0eb7d5637e4341aa3598bd40fe6573fb0a59541ff6"
+    },
+    {
+      "task": "session-recovery",
+      "round": 2,
+      "agent": "oracle",
+      "reward": 1.0,
+      "errors": 0,
+      "result": "logs/harbor/session-recovery-oracle-20261110T030445906736/result.json",
+      "result_sha256": "665b1e5353b923651c43f50181ab7f119727cfb89e27fe276c8e2a881a2a107c"
+    },
+    {
+      "task": "session-recovery",
+      "round": 2,
+      "agent": "nop",
+      "reward": 0.0,
+      "errors": 0,
+      "result": "logs/harbor/session-recovery-nop-20261110T030445906736/result.json",
+      "result_sha256": "0482bd5e3d49f178db2ea7b792fb074eab6b5b61b64e9f060f932163237e9033"
+    },
+    {
+      "task": "streaming-gateway",
+      "round": 2,
+      "agent": "oracle",
+      "reward": 1.0,
+      "errors": 0,
+      "result": "logs/harbor/streaming-gateway-oracle-20261110T030530230847/result.json",
+      "result_sha256": "38ad3cf12e9065f60a92efc7da4190f8bcae6d4674711c03cbd48856196f6ee5"
+    },
+    {
+      "task": "streaming-gateway",
+      "round": 2,
+      "agent": "nop",
+      "reward": 0.0,
+      "errors": 0,
+      "result": "logs/harbor/streaming-gateway-nop-20261110T030530230847/result.json",
+      "result_sha256": "359e847e2f1eba46b5b5004dbb5fe178ca87b0ec7d83b2de73b109f0b1f6c252"
+    },
+    {
+      "task": "dataset-containment",
+      "round": 2,
+      "agent": "oracle",
+      "reward": 1.0,
+      "errors": 0,
+      "result": "logs/harbor/dataset-containment-oracle-20261110T030607293260/result.json",
+      "result_sha256": "4257aa4871a6af62cbfc23701055a2738f24ec27b68d49b4e5a9bb348c8919d9"
+    },
+    {
+      "task": "dataset-containment",
+      "round": 2,
+      "agent": "nop",
+      "reward": 0.0,
+      "errors": 0,
+      "result": "logs/harbor/dataset-containment-nop-20261110T030607293260/result.json",
+      "result_sha256": "47be2a650e338d687a13e270c8c6a78ae3bde96c6aa96ba29fc40087dbf6ec72"
+    },
+    {
+      "task": "evaluation-integrity",
+      "round": 1,
+      "agent": "oracle",
+      "reward": 1.0,
+      "errors": 0,
+      "result": "logs/harbor/evaluation-integrity-oracle-20261110T053554953127/result.json",
+      "result_sha256": "8eda1ac7df9f67dbcf2b78392f4c41d88af87d8fe5bfbce2d30fb6fef92da00b"
+    },
+    {
+      "task": "evaluation-integrity",
+      "round": 1,
+      "agent": "nop",
+      "reward": 0.0,
+      "errors": 0,
+      "result": "logs/harbor/evaluation-integrity-nop-20261110T053554953127/result.json",
+      "result_sha256": "ae99a2ed5814ffc974a3e8840b9b15ac2813db66e4e04576533fe25b33ff1ebc"
+    },
+    {
+      "task": "evaluation-integrity",
+      "round": 2,
+      "agent": "oracle",
+      "reward": 1.0,
+      "errors": 0,
+      "result": "logs/harbor/evaluation-integrity-oracle-20261110T053709589413/result.json",
+      "result_sha256": "4d0320addc71997b0ac28cd449bb38d6589bae5f464364ac1258a36d737ec713"
+    },
+    {
+      "task": "evaluation-integrity",
+      "round": 2,
+      "agent": "nop",
+      "reward": 0.0,
+      "errors": 0,
+      "result": "logs/harbor/evaluation-integrity-nop-20261110T053709589413/result.json",
+      "result_sha256": "b7a2f5392797da762c0d4cb12f22b2e86642862ca320f17b8375672aed5d0bef"
+    },
+    {
+      "task": "terraform-k8s",
+      "round": 1,
+      "agent": "oracle",
+      "reward": 1.0,
+      "errors": 0,
+      "result": "logs/harbor/terraform-k8s-oracle-20261110T153228029182/result.json",
+      "result_sha256": "c2d35e7ffd1f415c4f8ae02f541a6c57c6848e5e438b872ff40bf6fb649a04eb"
+    },
+    {
+      "task": "terraform-k8s",
+      "round": 1,
+      "agent": "nop",
+      "reward": 0.0,
+      "errors": 0,
+      "result": "logs/harbor/terraform-k8s-nop-20261110T153228029182/result.json",
+      "result_sha256": "51966f7f5723a0a0569bf2e87ca185943638e7725d85d988151cc7c8a3727f70"
+    },
+    {
+      "task": "terraform-k8s",
+      "round": 2,
+      "agent": "oracle",
+      "reward": 1.0,
+      "errors": 0,
+      "result": "logs/harbor/terraform-k8s-oracle-20261110T154405761495/result.json",
+      "result_sha256": "560744721c4aa690a246cee8f8e3d63c42d82287dccd4db6ed584e2197792bee"
+    },
+    {
+      "task": "terraform-k8s",
+      "round": 2,
+      "agent": "nop",
+      "reward": 0.0,
+      "errors": 0,
+      "result": "logs/harbor/terraform-k8s-nop-20261110T154405761495/result.json",
+      "result_sha256": "ddcd7ca149ca2f718583be1416e65dc88bef9096da02888248a7733f04a00ac3"
+    }
+  ],
+  "agent_images": [
+    {
+      "task": "session-recovery",
+      "image": "diffuse-session-recovery:local",
+      "image_id": "sha256:bcea0e2be7de772e7dbe6dd45457578ed0a0f3bef8ae875253fdf9c7221a180a",
+      "protected_paths_absent": true,
+      "exit_code": 0
+    },
+    {
+      "task": "streaming-gateway",
+      "image": "diffuse-streaming-gateway:local",
+      "image_id": "sha256:c5fe24fb5579b5dddc26b4c8834d7029f5d4ff8241aa438c80de8061a6b33208",
+      "protected_paths_absent": true,
+      "exit_code": 0
+    },
+    {
+      "task": "dataset-containment",
+      "image": "diffuse-dataset-containment:local",
+      "image_id": "sha256:6fb488b993ef312c248c1eb9bc6e3cacb3502d181a66fbda188b8aa720408b45",
+      "protected_paths_absent": true,
+      "exit_code": 0
+    },
+    {
+      "task": "terraform-k8s",
+      "image": "diffuse-terraform-harbor:v1",
+      "image_id": "sha256:1f9ec2bb7e1b0d28872ff7a405bcaa0d5af43e04500396b153c4ef1bae60726f",
+      "protected_paths_absent": true,
+      "exit_code": 0
+    },
+    {
+      "task": "evaluation-integrity",
+      "image": "diffuse-evaluation-integrity:local",
+      "image_id": "sha256:ca1812d1031656c5a19e88f31a63dbff1ed60e3bae1eb7fa32fceb87558e0186",
+      "protected_paths_absent": true,
+      "exit_code": 0
+    }
+  ],
+  "retained_infrastructure_failure": {
+    "source": "logs/terraform-k8s/controls-20261110T052310324834/summary.json",
+    "sha256": "302537d910e9cca579a9ddf76adf888288e6dc1683d1d45f825203eb6f0b6d54",
+    "description": "Unexpected canonical repeat after guest root vda block-write errors. Historical result retained; not counted as a valid deployment verdict. New classifier unit-tested and exercised by final Harbor runs.",
+    "log": "logs/terraform-k8s/controls-20261110T052310324834/canonical.log",
+    "log_sha256": "bc5577c712cb60997fb1867149a2908a7f1002a5ac7f7ecd23f6728e8e773c20"
+  },
+  "source_files": [
+    {
+      "path": "session-recovery/QUALITY.md",
+      "sha256": "ed5fa11ebcdb455b5a8623c9917c0f31baf1d088a3d11e24adba194208f94315"
+    },
+    {
+      "path": "session-recovery/environment/.dockerignore",
+      "sha256": "7005035559143cd2bd47bc85eb46c85fce7ad7faea64763b371bde62c08ddb02"
+    },
+    {
+      "path": "session-recovery/environment/Dockerfile",
+      "sha256": "1e2911f05b7033f41b9f7749c5010e69b21897d68c0a41efeaad323922b5b341"
+    },
+    {
+      "path": "session-recovery/environment/app/plan.json",
+      "sha256": "8c8b0e9c8197cd740c54513b448da1e26273bf9c7e5ff17290460d9307c28efa"
+    },
+    {
+      "path": "session-recovery/environment/app/runner.py",
+      "sha256": "3058efda5aeef014edc07afbc9eb2a5c01fa57c2961cfa09e24416bee9ec3741"
+    },
+    {
+      "path": "session-recovery/environment/service/tool_service.py",
+      "sha256": "7d8063a9c482f123a21fedc83b3618c2a07765349abb6f7d50568116f8f56ecd"
+    },
+    {
+      "path": "session-recovery/instruction.md",
+      "sha256": "1e23aafb183507fbc9a8e66230b2e5dbc01832a2de987749fd1f8bd7a0ad27f8"
+    },
+    {
+      "path": "session-recovery/solution/runner.py",
+      "sha256": "d8786eaa168a53020649e0bd7efe20d33d3394528887969e60f150d886b9403e"
+    },
+    {
+      "path": "session-recovery/solution/solve.sh",
+      "sha256": "d20da95f664c292fad0a1c26ca9b97e046f610d6e346a4bca1e3a43478d2cc13"
+    },
+    {
+      "path": "session-recovery/task.toml",
+      "sha256": "222c2c36f3ea6782f71b3c1d2627349876be07c31bd76b92548d5569031b7078"
+    },
+    {
+      "path": "session-recovery/tests/test.sh",
+      "sha256": "6d08de59661c3fbbad3977911451db6410015adec722f6cff840c16627ac2ced"
+    },
+    {
+      "path": "session-recovery/tests/verify.py",
+      "sha256": "28945494f659b9af882f31b10811124008615a16a2009cc00a3e4817f089234f"
+    },
+    {
+      "path": "streaming-gateway/QUALITY.md",
+      "sha256": "485a21c9f4ad5296466149cb3dff0d6d3d7277b24ed6a7ab5dbbcf27330f6e02"
+    },
+    {
+      "path": "streaming-gateway/environment/.dockerignore",
+      "sha256": "cf9143fdfce145f9234e589317912e7c9fad341276064294f22da3946d23758e"
+    },
+    {
+      "path": "streaming-gateway/environment/Dockerfile",
+      "sha256": "1e2911f05b7033f41b9f7749c5010e69b21897d68c0a41efeaad323922b5b341"
+    },
+    {
+      "path": "streaming-gateway/environment/app/gateway.py",
+      "sha256": "c3a02549856851e4bfc27924760fa0603d9aa59f6b5e4d091966e94b6d3d1bee"
+    },
+    {
+      "path": "streaming-gateway/environment/service/transport.py",
+      "sha256": "2c9c283da1c124d41f0322c34aac0e57f5c6c8f3b198d6a37a57ef76bd8098aa"
+    },
+    {
+      "path": "streaming-gateway/instruction.md",
+      "sha256": "2df6530d7cb7f63c57a67e254dfe2800f900d2c16231eac54a18a703598948b7"
+    },
+    {
+      "path": "streaming-gateway/solution/gateway.py",
+      "sha256": "ad3ab89faaf90622d7cf749858e47cbb06a6d031f2a8d2d5e28098e7bc544c3a"
+    },
+    {
+      "path": "streaming-gateway/solution/solve.sh",
+      "sha256": "d6af5f5ea34a6c8e843827c6e8e05b44d5e9b5f6c35b73fdb778fde786f2b238"
+    },
+    {
+      "path": "streaming-gateway/task.toml",
+      "sha256": "56bc60066819b1341ca049a8d694a2c712ccf2f30fec070d2828929214c93c0e"
+    },
+    {
+      "path": "streaming-gateway/tests/run_verifier.py",
+      "sha256": "7a8e9bdd97837219f70bcac9bce1c17a4dd612a2f87805b15e14136475dd36ef"
+    },
+    {
+      "path": "streaming-gateway/tests/test.sh",
+      "sha256": "8a7ceed72b219c52d2241610ba1613090af02eaf10582098ead7769f857aad69"
+    },
+    {
+      "path": "streaming-gateway/tests/verify.py",
+      "sha256": "620c18697efe3c1dad54f95982a4a3cd87673c99d16621f95f8a76eaf6177c74"
+    },
+    {
+      "path": "dataset-containment/LICENSE",
+      "sha256": "7d4a5e88922277c4081ac0b9a652fa1485c574eb087b1359b25f7ba607aced4f"
+    },
+    {
+      "path": "dataset-containment/PROVENANCE.md",
+      "sha256": "fef394876b19df9c0711a909eaa9106130875366622b2cba5e01070430084426"
+    },
+    {
+      "path": "dataset-containment/QUALITY.md",
+      "sha256": "d16e48f0ef7314c1602587e17da5ef5884636d99312da01814c283c5bf922840"
+    },
+    {
+      "path": "dataset-containment/environment/.dockerignore",
+      "sha256": "7005035559143cd2bd47bc85eb46c85fce7ad7faea64763b371bde62c08ddb02"
+    },
+    {
+      "path": "dataset-containment/environment/Dockerfile",
+      "sha256": "1e2911f05b7033f41b9f7749c5010e69b21897d68c0a41efeaad323922b5b341"
+    },
+    {
+      "path": "dataset-containment/environment/app/repair.py",
+      "sha256": "99138c7cc49c026c42e2ea128e3951ae8ba5d66d411563c76eb42a447e533063"
+    },
+    {
+      "path": "dataset-containment/environment/app/service.py",
+      "sha256": "1be549656e8e09b425b08e4411c68d1140211bbb43eb189285c3a6a6d247f848"
+    },
+    {
+      "path": "dataset-containment/environment/service/platform_runtime.py",
+      "sha256": "38d4fe1f1fb3c9cc843bf3a2da614f8ad80999a472b9f9bbf1ad3127d82503e2"
+    },
+    {
+      "path": "dataset-containment/environment/service/platform_service.py",
+      "sha256": "1be549656e8e09b425b08e4411c68d1140211bbb43eb189285c3a6a6d247f848"
+    },
+    {
+      "path": "dataset-containment/environment/service/provision.py",
+      "sha256": "9c4197eca4c18fbacec0d8263cc9bcf35e4b5d65d07a6fb0584e1bc80337b575"
+    },
+    {
+      "path": "dataset-containment/instruction.md",
+      "sha256": "bc9d0c83ade5cde52f9d3f8ca5e11d73d2030b4bc003f884a860c6e34c93822d"
+    },
+    {
+      "path": "dataset-containment/solution/repair.py",
+      "sha256": "c662a22292f22181c2e3653cb2b335e376dfeab7ff0a14ae7c99fefe6181f860"
+    },
+    {
+      "path": "dataset-containment/solution/service.py",
+      "sha256": "8e0a6749a29c99a901f414cfab842c1658d368e7e32b4c35411b74e2abf0e37b"
+    },
+    {
+      "path": "dataset-containment/solution/solve.sh",
+      "sha256": "86ac63b75358358653885a3abaee0aff6c07017ed85cef925f82e8e258bea56d"
+    },
+    {
+      "path": "dataset-containment/task.toml",
+      "sha256": "d3a428284a5afe69aad45bfaae44d09491b3c82d76b24ff2f020e167a4bd7fb6"
+    },
+    {
+      "path": "dataset-containment/tests/lifecycle.py",
+      "sha256": "ece6743049850a9f39bf25ec651c0f688d5418e10870b24afa3b8c4867debe1f"
+    },
+    {
+      "path": "dataset-containment/tests/run_repair.py",
+      "sha256": "ea116984fa6aaadbbced6126494242c934a4441bf9a9c90ab70614ee734b7c3a"
+    },
+    {
+      "path": "dataset-containment/tests/test.sh",
+      "sha256": "6d08de59661c3fbbad3977911451db6410015adec722f6cff840c16627ac2ced"
+    },
+    {
+      "path": "dataset-containment/tests/traffic.py",
+      "sha256": "58d524cd908865b9fbd3a616816e1c30bdd3576e5bedd7c6acd5f648f941293f"
+    },
+    {
+      "path": "dataset-containment/tests/verify.py",
+      "sha256": "fd218a84349a943b1521cb6fc799b21367de641189b42586b895b96a5acfba78"
+    },
+    {
+      "path": "terraform-k8s/.gitignore",
+      "sha256": "7b0654d033df63ae52ad1b534c6bafa5ded3db8358a986c1d637f2b8ddef4563"
+    },
+    {
+      "path": "terraform-k8s/HARBOR.md",
+      "sha256": "a6fd75117da2438867876cef5a860cf064aab187e8e9dfaa9a579b72d5e013c6"
+    },
+    {
+      "path": "terraform-k8s/PROVENANCE.md",
+      "sha256": "add35a26932abca884daabd1b3080cc1e57dc59bdfac74d561508608b15e62c3"
+    },
+    {
+      "path": "terraform-k8s/QUALITY.md",
+      "sha256": "debda0d3bd641180c2fda445b06c39227e4b332182d1b9f3b61b8443e3196b8a"
+    },
+    {
+      "path": "terraform-k8s/README.md",
+      "sha256": "8d519a129021efd14af6c6c0bd24295f7a3f01f1458dc25298ea92eba7915e02"
+    },
+    {
+      "path": "terraform-k8s/base.nix",
+      "sha256": "624020c6abca2b06f1cdc1637808556dfc76fde4f06d9df9766d14f48930e14e"
+    },
+    {
+      "path": "terraform-k8s/default.nix",
+      "sha256": "94d81fd5dca9458e7a4d91df6f8ecab18ef21ed0f98639c6db242195509c5813"
+    },
+    {
+      "path": "terraform-k8s/deployment/.terraform.lock.hcl",
+      "sha256": "e7085a0fffdebb93bfbf9273977f01bf66161ed8ab0c9d6d9ad596c4f8b01ec8"
+    },
+    {
+      "path": "terraform-k8s/deployment/main.tf.json",
+      "sha256": "58cc5a51bc06cb454c1d08a525d6ec46ae00ef1a4fa1036d485a01724cc53ab3"
+    },
+    {
+      "path": "terraform-k8s/environment/Dockerfile",
+      "sha256": "9067dcc55b333f94ab33e802af0da55eda6e599cf8e63cdb5c09bee17f89e45c"
+    },
+    {
+      "path": "terraform-k8s/environment/base-image.nix",
+      "sha256": "b64fbc5ec4281037877b9935bcf55247db75330ef503884ebbfddadbaaf9c277"
+    },
+    {
+      "path": "terraform-k8s/environment/docker-compose.yaml",
+      "sha256": "3dabc80526972734ca6c1a5e9a6cc2dc236d371d4c345be1f4ccff7725aae99f"
+    },
+    {
+      "path": "terraform-k8s/environment-image.json",
+      "sha256": "8e45246d58166f749ee0db1b15cf3e5608933894855a73b6b206c60aec37bd13"
+    },
+    {
+      "path": "terraform-k8s/images.nix",
+      "sha256": "7413d1f1c0d68d81a7c28056e06021cba83b52a88d32fd7db7d5c88cd5179d75"
+    },
+    {
+      "path": "terraform-k8s/instruction.md",
+      "sha256": "6a393c62f4b1fe014a7413c5faea28c0356bcb6712112bc947ce0a5403ecf218"
+    },
+    {
+      "path": "terraform-k8s/nixpkgs.nix",
+      "sha256": "cd3b830f19c897d207c383b4618bb1422fa92e50ace47dba4ae2f1c52cd58c4b"
+    },
+    {
+      "path": "terraform-k8s/repository/README.md",
+      "sha256": "e324dc287621b451fa3b51bb75de880073b37602d525fcc4203e1523ec7dce0e"
+    },
+    {
+      "path": "terraform-k8s/repository/docmill/__init__.py",
+      "sha256": "1fdaca9489799c32621a012816b5ff6b53fc19260ec2359f5510f7c820e61477"
+    },
+    {
+      "path": "terraform-k8s/repository/docmill/__main__.py",
+      "sha256": "8ba1cad6b1ea708f20a7c115cf1aeaffc75188f30a8b71141713bfc949ca30ff"
+    },
+    {
+      "path": "terraform-k8s/repository/docmill/schema.sql",
+      "sha256": "deb23ef55248d292c16210d2c43cfbd03e7c5cd359034a6b48d0e53465751035"
+    },
+    {
+      "path": "terraform-k8s/repository/nixpkgs.nix",
+      "sha256": "cd3b830f19c897d207c383b4618bb1422fa92e50ace47dba4ae2f1c52cd58c4b"
+    },
+    {
+      "path": "terraform-k8s/repository/requirements.txt",
+      "sha256": "0f0bd6c7b8ad35cde17e34147774bfcdcde314c0947774654af4d91426891683"
+    },
+    {
+      "path": "terraform-k8s/repository/shell.nix",
+      "sha256": "adad29737a3fa4833d92e7c90ccbd4b83dd1f298365652b80626e51371d1a121"
+    },
+    {
+      "path": "terraform-k8s/shell.nix",
+      "sha256": "03ddb59b4076c74b7078ff9bd621b3dc3e18b86c672cfe89bd7fe80a3b8e9b15"
+    },
+    {
+      "path": "terraform-k8s/solution/.terraform.lock.hcl",
+      "sha256": "e7085a0fffdebb93bfbf9273977f01bf66161ed8ab0c9d6d9ad596c4f8b01ec8"
+    },
+    {
+      "path": "terraform-k8s/solution/main.tf.json",
+      "sha256": "45fb76ca0f546fd19be1a12862c5ca857ef9f195dbe6857c7cbba0a16fdc9774"
+    },
+    {
+      "path": "terraform-k8s/solution/solve.sh",
+      "sha256": "234ead9877ea8987209e911bf52136d258b976a858f46420ac7af8127bdd7773"
+    },
+    {
+      "path": "terraform-k8s/task.toml",
+      "sha256": "30dd3e1fa4d207bc0ea538bf5ec842eadfe593683f773a62e4e89f2bfd09ebc8"
+    },
+    {
+      "path": "terraform-k8s/tests/default.nix",
+      "sha256": "94d81fd5dca9458e7a4d91df6f8ecab18ef21ed0f98639c6db242195509c5813"
+    },
+    {
+      "path": "terraform-k8s/tests/infrastructure.py",
+      "sha256": "f95d5f270025e73d87458fa9fbe443a43f651a737856aa947886179b1bf5111b"
+    },
+    {
+      "path": "terraform-k8s/tests/run_verifier.py",
+      "sha256": "1f0d6a6fc29a863a4db98fd27d168c33263ecfb7f910799a176555f908571490"
+    },
+    {
+      "path": "terraform-k8s/tests/test.sh",
+      "sha256": "efb5e2af31bea1e27444b3283b7732fdfb260ea8a8c836375de2f72a36ca83c7"
+    },
+    {
+      "path": "terraform-k8s/tests/verify.py",
+      "sha256": "5728b9bc1b952d7aae7b0d74b1a345729544685926b2f4876a029564ebc4972e"
+    },
+    {
+      "path": "terraform-k8s/toolchain.nix",
+      "sha256": "0e18c20756a2ebea3e1cef93ea2fa2333c0e4aff887090e5b65508b4b8d788c0"
+    },
+    {
+      "path": "terraform-k8s/validation-controls.json",
+      "sha256": "a07300a76389778e8e993f2d85e6ab88f56f728cc428142b615daf88a58747bd"
+    },
+    {
+      "path": "terraform-k8s/validation-harbor.json",
+      "sha256": "98c799aa4a557511a2177b4bc2babca88c492bcc1a0408ee5cc5512b765f14bb"
+    },
+    {
+      "path": "terraform-k8s/validation.json",
+      "sha256": "47082fbe9a789b2df8a4524d8a9701c0e836c7fd3327562e35117bfaf88015e8"
+    },
+    {
+      "path": "terraform-k8s/verification-controls.txt",
+      "sha256": "8bb29b28898b2355aee6eefa247dcd5343c4d2d5759234ec8fe8ab45358f8d4b"
+    },
+    {
+      "path": "terraform-k8s/verification.txt",
+      "sha256": "0fbb43f7989ea350e5604511ec01b1ff5421bf9e7b19a88ffeb41b4c98f055d9"
+    },
+    {
+      "path": "terraform-k8s/vm.nix",
+      "sha256": "8489fd451096e345c4bb66ef8f9fe45ea8089cbaf7be8fd3b39f764a441db356"
+    },
+    {
+      "path": "evaluation-integrity/PROVENANCE.md",
+      "sha256": "a68df9824316ef3061d5f41647346253d0be7e3e00034b7625a950afb7c48bd9"
+    },
+    {
+      "path": "evaluation-integrity/QUALITY.md",
+      "sha256": "e9d15c978605ca7406820f616e0c498b1d30e1b67afb5ac6bfd2e3578a5e7aea"
+    },
+    {
+      "path": "evaluation-integrity/environment/Dockerfile",
+      "sha256": "8793de9a446cc6eba2756eb77c23e7157c6e10ca6250e8eb4f494197a8d9203e"
+    },
+    {
+      "path": "evaluation-integrity/environment/app/pipeline.py",
+      "sha256": "e2c61fd710ce48eec34bd4957551ff1b2b7e742e2998620457dafbb3c80530f1"
+    },
+    {
+      "path": "evaluation-integrity/environment/app/sample.json",
+      "sha256": "c37a4cac01352be384df6c2c10483aea48d2303b55c808280c4af5ed3da4ee42"
+    },
+    {
+      "path": "evaluation-integrity/instruction.md",
+      "sha256": "8f525dad48dc2f4455efac51e56c02940a99b7e0433312a781ece8d6a7a01960"
+    },
+    {
+      "path": "evaluation-integrity/solution/pipeline.py",
+      "sha256": "1ce8a3cca6f1b2dd32bb12dc5915b07e924116cb297dfca759f4101c058d6a4a"
+    },
+    {
+      "path": "evaluation-integrity/solution/pipeline_sqlite.py",
+      "sha256": "9df5fe2fb2489af89c5fb7f3de92463cac5b3a3a50ca72bb348c01df7be5e7ca"
+    },
+    {
+      "path": "evaluation-integrity/solution/solve.sh",
+      "sha256": "a1462e3822a8099a957923f25af4be830ec730a2947af6db9b7c6c43844e9cac"
+    },
+    {
+      "path": "evaluation-integrity/task.toml",
+      "sha256": "2f2f64054557f24f6d73ce600f4ffd5307e3390c461a7c0d21fb8b4deec3a08d"
+    },
+    {
+      "path": "evaluation-integrity/tests/test.sh",
+      "sha256": "e3702d5dfe896b5ab74b82bf04603f86ad57697fc9d44e74326ea2d5a4f95f9d"
+    },
+    {
+      "path": "evaluation-integrity/tests/verify.py",
+      "sha256": "2d59d3edfe54f75171e46b2148c19ab91e2df7e041118e5079ce24db62256394"
+    },
+    {
+      "path": "scripts/validate.py",
+      "sha256": "379426aab57839e89b66ab148b6c5f4e0bc9d0aa6415d80bc0a902e18f5385e2"
+    },
+    {
+      "path": "scripts/validate_gateway.py",
+      "sha256": "b7d6008c86ee8e21c7de11c93e9900586510f0137c2dc1322441b8a9c5c55875"
+    },
+    {
+      "path": "scripts/validate_containment.py",
+      "sha256": "6c3e193ee3f842ca81385c3f1bfb832e3c4f4de4d79f3ab3575ec2cdfdfa5d4c"
+    },
+    {
+      "path": "scripts/validate_terraform.py",
+      "sha256": "fe34a61a757da5a2858ef54eaa5e96127da58eaa63fb6ef423785313996905d7"
+    },
+    {
+      "path": "scripts/validate_integrity.py",
+      "sha256": "36add2c0547036c028ff752659ed5d7ab4e18171efe7276e4c169d038b27742c"
+    },
+    {
+      "path": "scripts/validate_harbor.py",
+      "sha256": "9b38b2733c3435228fd813fe6d39fa3313f912a40b76208cd7190d90cc1ce010"
+    },
+    {
+      "path": "scripts/validate_submission.py",
+      "sha256": "ea7e60c82710cab9656b348b7a17eaa3ee6f23f6009eaf57e52a63a1c311f6c4"
+    },
+    {
+      "path": "scripts/test_terraform_infrastructure.py",
+      "sha256": "7bd0bba14e1cdb1881bbeae563c857aa7ceac6d1590a8924f962f4680e25b688"
+    }
+  ],
+  "limitations": [
+    "Legacy shared Python tasks are not hostile-code sandboxes during grading. Gateway completion protocol does not prove arbitrary in-process/protocol-forgery resistance.",
+    "Integrity candidate UID boundary is not full hostile-process containment.",
+    "Native Nix daemon build storage needs adequate free space; client build-dir override was ignored and removed.",
+    "No live fifth-task model pilot or general difficulty claim.",
+    "Raw logs are local and gitignored; hashes are an evidence index, not a substitute for distributing raw artifacts if requested."
+  ]
+}

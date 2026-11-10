@@ -2,6 +2,7 @@
 import copy
 from datetime import datetime, timezone
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import shutil
@@ -9,6 +10,8 @@ import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 TASK = ROOT/'terraform-k8s'
+spec=importlib.util.spec_from_file_location('terraform_infrastructure',TASK/'tests/infrastructure.py')
+infra=importlib.util.module_from_spec(spec);spec.loader.exec_module(infra)
 assert (TASK/'default.nix').read_bytes() == (TASK/'tests/default.nix').read_bytes(), 'Native and Harbor verifier expressions must match'
 stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%f')
 run = ROOT/'logs/terraform-k8s'/('controls-'+stamp)
@@ -55,7 +58,9 @@ for name, source, expected, failed_phase in controls:
               'submission_files': {str(p.relative_to(candidate)): hashlib.sha256(p.read_bytes()).hexdigest()
                                    for p in sorted(candidate.rglob('*')) if p.is_file()},
               'log': str(log.relative_to(ROOT))}
-    if not messages:
+    if infra.root_disk_failure(text):
+        record.update(expectation_met=False, infrastructure_error='Harness root disk I/O failure; no evaluated outcome')
+    elif not messages:
         record.update(expectation_met=False, infrastructure_error='No task result marker; inspect build/VM failure')
     else:
         result = json.loads(messages[-1]); passed = proc.returncode == 0 and result.get('passed') is True

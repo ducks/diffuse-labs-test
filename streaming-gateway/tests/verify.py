@@ -2,6 +2,7 @@
 import asyncio
 import copy
 import importlib.util
+import json
 import os
 from pathlib import Path
 import sys
@@ -284,4 +285,13 @@ class GatewayTests(unittest.IsolatedAsyncioTestCase):
 
 
 if __name__ == "__main__":
-    unittest.main(verbosity=2)
+    result = unittest.main(verbosity=2, exit=False).result
+    # The outer runner requires evidence that the full suite finished. A zero
+    # exit from imported candidate code is not evidence of successful tests.
+    print("GATEWAY_VERIFIER_RESULT " + json.dumps({
+        "tests_run": result.testsRun,
+        "failures": len(result.failures),
+        "errors": len(result.errors),
+        "skipped": len(result.skipped),
+    }), flush=True)
+    raise SystemExit(0 if result.wasSuccessful() else 1)

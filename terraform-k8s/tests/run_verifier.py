@@ -1,5 +1,6 @@
 """Separate-container Harbor adapter for the native K3s lifecycle verifier."""
 import fcntl
+from infrastructure import root_disk_failure
 import json
 from pathlib import Path
 import shutil
@@ -58,6 +59,8 @@ with tempfile.TemporaryDirectory(prefix='terraform-verifier-') as scratch:
             '--no-out-link', '--max-jobs', '1', '--cores', '2'],
             stdout=output, stderr=subprocess.STDOUT, timeout=1650)
     text = log.read_text()
+    if root_disk_failure(text):
+        raise RuntimeError('Harness root disk I/O failure; no model reward emitted')
     if proc.returncode == 0:
         store = next(line for line in reversed(text.splitlines()) if line.startswith('/nix/store/'))
         result = json.loads((Path(store)/'result.json').read_text())

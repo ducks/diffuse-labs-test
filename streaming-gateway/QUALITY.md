@@ -61,3 +61,31 @@ Functional controls establish task validity, not model solve difficulty. The
 
 Detailed logs are gitignored under `logs/streaming-gateway/`; full Harbor trials
 are under `logs/harbor/`. Nothing is uploaded by the validation scripts.
+
+## Confirmed early-exit verifier defect and correction (2026-11-09)
+
+Adversarial reproduction: a candidate consisting only of `import os; os._exit(0)`
+caused the original verifier to exit zero while importing the candidate, before
+running any tests. The original shell entry point then published reward 1.
+This was reproduced directly against the native verifier (exit 0, no output),
+not inferred from a hypothetical attack.
+
+The entry point now calls a trusted parent runner that never imports submitted
+code. It requires a successful child exit **and** exactly one structured suite
+completion record showing every test ran, without failures, errors or skips.
+The expected count is derived from the protected test source, not supplied by
+the candidate. The child emits that record only after unittest completes.
+The early-exit control now fails; canonical and alternate solutions still pass.
+
+`python3 scripts/validate_gateway.py` executed all eight controls after this
+correction: both positive controls passed, and all six negative controls failed,
+including the reproduced early-exit exploit. This statement is native validation;
+Docker and Harbor outcomes must be taken from their separately recorded runs.
+
+This is a fail-closed completion check, **not** a security sandbox for arbitrary
+hostile in-process Python. A candidate that deliberately tampers with unittest,
+forges the child-result protocol, or attacks the shared container is outside the
+protection established here. Tests and solutions are absent during the agent
+turn, but importing a library in the grading subprocess does not make its code
+an untrusted-code isolation boundary. Do not describe this fix as proving that
+protected grading material is inaccessible to malicious code during grading.

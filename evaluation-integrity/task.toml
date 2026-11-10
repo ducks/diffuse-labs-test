@@ -1,0 +1,23 @@
+schema_version = "1.4"
+[task]
+name = "diffuse-labs-test/evaluation-integrity"
+description = "Repair immutable evaluation accounting, cohort isolation, attribution and retry aggregation."
+authors = [{ name = "Jake Goldsborough" }]
+[metadata]
+author_name = "Jake Goldsborough"
+difficulty = "medium"
+category = "software-engineering"
+tags = ["evaluation", "data-integrity", "python", "reproducibility"]
+[[artifacts]]
+source = "/app/pipeline.py"
+destination = "pipeline.py"
+[verifier]
+timeout_sec = 120.0
+environment_mode = "separate"
+[agent]
+timeout_sec = 1800.0
+[environment]
+build_timeout_sec = 600.0
+cpus = 2
+memory_mb = 2048
+storage_mb = 4096

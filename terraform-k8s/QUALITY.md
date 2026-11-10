@@ -97,3 +97,22 @@ TLS ingress, load testing, rolling upgrade, or high-availability claim is made.
 The renderer is pure and may be retried; only visible durable outputs are checked
 for duplication. Fault acknowledgement makes the queued-work interruption
 observable without depending on exact pod scheduling or a lucky sleep.
+
+
+## Final-submission infrastructure regression
+
+A repeated canonical control encountered virtual root-disk write errors after
+cold boot and later failed an API/namespace assertion. The retained failed run
+is not counted as a valid deployment verdict. Root virtual-device I/O failures
+are now recognized by `tests/infrastructure.py` in the Harbor adapter and native
+control driver before interpreting task markers. They produce an infrastructure
+error, not model reward 0; three deterministic tests preserve ordinary application
+failures as evaluated failures. This changes no workload, reference deployment,
+lifecycle assertion or expected negative-control phase. The source/runtime hashes
+and final repeated checks are indexed in the root validation report.
+
+Native host Nix builds may use a small RAM-backed temporary filesystem. The
+attempted client `build-dir` override was ignored because the user is not trusted
+by the daemon, so it was removed. No global Nix settings were changed. Operators
+must ensure adequate daemon build space; the Harbor package instead uses its own
+container filesystem and private store. Raw storage-failure evidence is retained.
