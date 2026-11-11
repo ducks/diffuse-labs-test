@@ -14,6 +14,26 @@ controls; earlier pilots are retained under `pilots/`.
 | `terraform-k8s` | Deploy and recover a durable service stack | Lost accepted work, volatile database, cold-boot permissions, crossed namespace state, incomplete teardown | Fresh offline K3s VM; six phases including acknowledged worker loss, pod replacement, reboot, no-drift plan, isolation and destroy | Canonical and init-container alternate; no-op, volatile PostgreSQL and reboot-permissions controls |
 | `evaluation-integrity` | Repair trustworthy benchmark accounting | Cohort leakage, model/harness misattribution, duplicate retries, mutable benchmark definitions | Protected unseen datasets; explicit interrupted/unavailable rules; retained history; deterministic incremental imports; atomic rejection | Dictionary and SQLite aggregation; isolation probe; no-op, dropped failures, merged cohorts, hardcoded sample, mutable identities, invalid fields, device-symlink outputs, early exit and forged reward controls |
 
+## Live model pilots
+
+All five tasks have had live coding-agent pilots. Session recovery, streaming
+gateway and dataset containment passed two Codex attempts each.
+[Earlier pilot results](pilots/round-001/README.md)
+
+Terraform/Kubernetes had a passing Codex attempt and additional Claux attempts.
+[Codex results](pilots/terraform-k8s-codex-001/README.md) · [Claux results](pilots/terraform-k8s-claux-001/README.md)
+
+Evaluation integrity earned full reward in **3/3 fresh attempts**.
+
+| Harness | Model | Attempt | Reward | Agent time | Reported cost |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Codex 0.164.0 via Harbor 0.25.0 | `openai/gpt-6.1-sol` | 1 | 1.0 | 84.64 s | USD 0.0537 |
+| Codex 0.164.0 via Harbor 0.25.0 | `openai/gpt-6.1-sol` | 2 | 1.0 | 77.40 s | USD 0.0513 |
+| Claux via OpenRouter | `particle-ai/particle-1` | 1 | 1.0 | 92.75 s | USD 0.0092 |
+
+The sample establishes solvability for the tested configurations.
+[Evaluation integrity pilot report](pilots/evaluation-integrity-001/README.md)
+
 ## Reproduce
 
 Requires Linux, a running accessible Docker Engine, Nix and `/dev/kvm`.

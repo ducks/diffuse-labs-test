@@ -106,8 +106,8 @@ remain available. They are not pooled with the final accepted control results.
 
 ## Limits
 
-- No live coding-model pilot was run for task five. Difficulty is uncalibrated;
-  reference/control success establishes grading feasibility, not hard difficulty.
+- Difficulty remains uncalibrated. See the separate
+  [live pilot results](pilots/evaluation-integrity-001/README.md).
 - The three older shared Python tasks are not general hostile-code sandboxes
   during grading. Gateway's completion protocol blocks the confirmed premature-
   exit exploit but does not prove resistance to arbitrary protocol forgery or

@@ -1,0 +1,41 @@
+{
+  "source_commit": "f29477c8fc7295bd0f2704c44767335b6f3ad8b4",
+  "reasoning": "low",
+  "runs": [
+    {
+      "harness": "Codex 0.164.0 via Harbor 0.25.0",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 1,
+      "seconds": 84.64,
+      "reward": 1.0,
+      "cost": 0.0537248,
+      "cost_source": "Harbor estimate",
+      "submission_sha256": "99e144a7d179f760eea34d9af20534098a4f92104150165fb6b88c0d95fc7f89",
+      "result_sha256": "fc626d5f3c891fe80282c532a2ac647d7c2cfe245ad02b05421bd3445a96cd76"
+    },
+    {
+      "harness": "Codex 0.164.0 via Harbor 0.25.0",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 2,
+      "seconds": 77.4,
+      "reward": 1.0,
+      "cost": 0.051294000000000006,
+      "cost_source": "Harbor estimate",
+      "submission_sha256": "4c85b3d5c2b3db7377e058fce57847ccdf00f963881f8ee31548b6f9b5a73491",
+      "result_sha256": "388b526f3d4a7316e2ef0d0780d2da4a36ea65181d3d969931a005c56847d73a"
+    },
+    {
+      "harness": "Claux via OpenRouter",
+      "model": "particle-ai/particle-1",
+      "attempt": 1,
+      "seconds": 92.75,
+      "reward": 1.0,
+      "cost": 0.00915138,
+      "cost_source": "OpenRouter reported",
+      "submission_sha256": "4d69e6fb5c86643e493481941ffb663140dee02b839e49f8370bbb4ca18dd8df",
+      "result_sha256": "07e875556cb00cd7160f27a78a903bc3b744a36197c5156ce07b5299e0f02e9b",
+      "runner_sha256": "cedbda0a0f5a85b1f8f52c582c802bb53604d11e02670fc84b673109caf37611",
+      "binary_sha256": "7a7268af30cfdde78542c29ab70be603b042854b850f76308fb8bfaaf3002288"
+    }
+  ]
+}
