@@ -16,23 +16,40 @@ controls; earlier pilots are retained under `pilots/`.
 
 ## Live model pilots
 
-All five tasks have had live coding-agent pilots. Session recovery, streaming
-gateway and dataset containment passed two Codex attempts each.
-[Earlier pilot results](pilots/round-001/README.md)
+All five selected tasks have been attempted by coding agents. The table summarizes
+one recorded two-attempt round for the first three tasks and the retained pilots
+for Terraform/Kubernetes and evaluation integrity. Earlier exploratory attempts
+are documented in the linked reports.
 
-Terraform/Kubernetes had a passing Codex attempt and additional Claux attempts.
-[Codex results](pilots/terraform-k8s-codex-001/README.md) · [Claux results](pilots/terraform-k8s-claux-001/README.md)
+| Task | Model | Harness | Passed / attempts | Agent execution times | Observed outcome |
+| --- | --- | --- | ---: | --- | --- |
+| Session recovery | GPT-6.1 Sol | Codex 0.164.0 / Harbor | 2/2 | 43.02 s, 41.44 s | Recovery, external receipts and transcript checks passed |
+| Streaming gateway | GPT-6.1 Sol | Codex 0.164.0 / Harbor | 2/2 | 50.60 s, 40.11 s | Failover, stream isolation and cleanup checks passed |
+| Dataset containment | GPT-6.1 Sol | Codex 0.164.0 / Harbor | 2/2 | 80.19 s, 42.03 s | Containment, retained outputs and restart checks passed |
+| Terraform/Kubernetes | GPT-6.1 Sol | Codex 0.164.0 | 1/1 | 880.44 s | All six private lifecycle phases passed |
+| Terraform/Kubernetes | Particle-1 | Claux / OpenRouter | 0/1 | 900.02 s, timed out | Submitted deployment failed PostgreSQL startup permissions |
+| Terraform/Kubernetes | Claude Opus 5.5 | Claux / OpenRouter | 0/1 | 811.61 s | First three phases passed, then cold boot exposed PostgreSQL permissions failure |
+| Evaluation integrity | GPT-6.1 Sol | Codex 0.164.0 / Harbor | 2/2 | 84.64 s, 77.40 s | All five protected verification tests passed |
+| Evaluation integrity | Particle-1 | Claux / OpenRouter | 1/1 | 92.75 s | All five protected verification tests passed |
 
-Evaluation integrity earned full reward in **3/3 fresh attempts**.
+All listed attempts used low reasoning effort. The first three tasks used a
+600-second agent limit, Terraform/Kubernetes used 900 seconds, Codex evaluation
+integrity used the task's 1,800-second limit, and its Claux pilot used 600 seconds.
+Agent times exclude image preparation and private grading. Terraform agent times
+include development builds and VM tests. The task versions, harnesses and budgets
+vary across these small samples, so difficulty remains uncalibrated.
 
-| Harness | Model | Attempt | Reward | Agent time | Reported cost |
-| --- | --- | ---: | ---: | ---: | ---: |
-| Codex 0.164.0 via Harbor 0.25.0 | `openai/gpt-6.1-sol` | 1 | 1.0 | 84.64 s | USD 0.0537 |
-| Codex 0.164.0 via Harbor 0.25.0 | `openai/gpt-6.1-sol` | 2 | 1.0 | 77.40 s | USD 0.0513 |
-| Claux via OpenRouter | `particle-ai/particle-1` | 1 | 1.0 | 92.75 s | USD 0.0092 |
+The first three tasks' six-attempt round reported USD 0.297814 in Harbor-estimated
+usage. Evaluation integrity reported USD 0.0537248 and USD 0.0512940 for the Codex
+attempts, and USD 0.00915138 from OpenRouter for Particle. Terraform's Codex cost
+was unmeasured. Its Particle checkpoint reported USD 0.013429266 before timeout,
+and Opus reported USD 0.726516.
 
-The sample establishes solvability for the tested configurations.
-[Evaluation integrity pilot report](pilots/evaluation-integrity-001/README.md)
+Detailed settings, submissions and verifier evidence are in the
+[first three tasks' pilot report](pilots/round-001/README.md),
+[Terraform Codex report](pilots/terraform-k8s-codex-001/README.md),
+[Terraform Claux report](pilots/terraform-k8s-claux-001/README.md), and
+[evaluation-integrity report](pilots/evaluation-integrity-001/README.md).
 
 ## Reproduce
 
